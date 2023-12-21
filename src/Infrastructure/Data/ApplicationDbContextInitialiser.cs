@@ -106,6 +106,21 @@ public class ApplicationDbContextInitialiser
             await _context.SaveChangesAsync();
         }
 
+        if (!_context.Languages.Any())
+        {
+            _context.Languages.Add(new Languages
+            {
+                 LanuagesType = "English",
+            });
+
+            _context.Languages.Add(new Languages
+            {
+                LanuagesType = "Tamil",
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
         if (!_context.BatchTimings.Any())
         {
             List<BatchTimings> BatchTimings = new List<BatchTimings>();

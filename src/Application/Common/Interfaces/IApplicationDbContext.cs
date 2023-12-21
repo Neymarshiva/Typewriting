@@ -9,6 +9,7 @@ public interface IApplicationDbContext
     DbSet<TodoItem> TodoItems { get; }
     DbSet<Machines> Machines { get; }
     DbSet<BatchTimings> BatchTimings { get; }
+    DbSet<Languages> Languages { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

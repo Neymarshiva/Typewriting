@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TypeWriting.Domain.Entities;
 
 namespace TypeWriting.Infrastructure.Data.Configurations;
-public class MachinesConfiguration : IEntityTypeConfiguration<Machines>
+public class LanguagesConfiguration : IEntityTypeConfiguration<Languages>
 {
-    public void Configure(EntityTypeBuilder<Machines> builder)
-    {
-
-        builder.Property(t => t.MachineNumber)
+    public void Configure(EntityTypeBuilder<Languages> builder)
+    {  
+        builder.Property(t => t.LanuagesType)
             .HasMaxLength(50)
-            .IsRequired(); 
+            .IsRequired();
     }
 }
