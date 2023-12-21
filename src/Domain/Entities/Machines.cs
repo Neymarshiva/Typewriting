@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 namespace TypeWriting.Domain.Entities;
 public class Machines : BaseAuditableEntity
 {
-    public int BatchTimingId { get; set; }
     public string MachineNumber { get; set; } = string.Empty;
     public string Language { get; set; } = string.Empty;
-    public BatchTimings BatchTiming { get; set; } = null!;
 }

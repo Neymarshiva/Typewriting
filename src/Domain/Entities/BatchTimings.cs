@@ -8,6 +8,4 @@ namespace TypeWriting.Domain.Entities;
 public class BatchTimings : BaseAuditableEntity
 {
     public string Timings { get; set; } = string.Empty;
-
-    public IList<Machines> Machines { get; private set; } = new List<Machines>();
 }
