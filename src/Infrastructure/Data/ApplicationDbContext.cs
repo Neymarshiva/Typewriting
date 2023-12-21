@@ -17,6 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Machines> Machines => Set<Machines>();
     public DbSet<BatchTimings> BatchTimings => Set<BatchTimings>();
     public DbSet<Languages> Languages => Set<Languages>();
+    public DbSet<Students> Students => Set<Students>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

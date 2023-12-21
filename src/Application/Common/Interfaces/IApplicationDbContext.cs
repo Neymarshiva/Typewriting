@@ -10,6 +10,7 @@ public interface IApplicationDbContext
     DbSet<Machines> Machines { get; }
     DbSet<BatchTimings> BatchTimings { get; }
     DbSet<Languages> Languages { get; }
+    DbSet<Students> Students { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

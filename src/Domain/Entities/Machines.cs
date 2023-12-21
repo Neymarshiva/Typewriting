@@ -10,4 +10,5 @@ public class Machines : BaseAuditableEntity
     public string MachineNumber { get; set; } = string.Empty;
     public int LanguagesId { get; set; }
     public Languages Languages { get; set; } = null!;
+    public IList<Students> Students { get; private set; } = new List<Students>();
 }
