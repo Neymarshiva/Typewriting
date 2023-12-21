@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     public DbSet<Machines> Machines => Set<Machines>();
+    public DbSet<BatchTimings> BatchTimings => Set<BatchTimings>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

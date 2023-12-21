@@ -83,7 +83,7 @@ public class ApplicationDbContextInitialiser
             await _userManager.CreateAsync(administrator, "Administrator1!");
             if (!string.IsNullOrWhiteSpace(administratorRole.Name))
             {
-                await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
+                await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
             }
         }
 
@@ -102,6 +102,40 @@ public class ApplicationDbContextInitialiser
                     new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
                 }
             });
+
+            await _context.SaveChangesAsync();
+        }
+
+        if (!_context.BatchTimings.Any())
+        {
+            List<BatchTimings> BatchTimings = new List<BatchTimings>();
+
+            BatchTimings.Add(new BatchTimings { Timings = "12-1" });
+            BatchTimings.Add(new BatchTimings { Timings = "1-2" });
+            BatchTimings.Add(new BatchTimings { Timings = "2-3" });
+            BatchTimings.Add(new BatchTimings { Timings = "3-4" });
+            BatchTimings.Add(new BatchTimings { Timings = "4-5" });
+            BatchTimings.Add(new BatchTimings { Timings = "5-6" });
+            BatchTimings.Add(new BatchTimings { Timings = "6-7" });
+            BatchTimings.Add(new BatchTimings { Timings = "7-8" });
+            BatchTimings.Add(new BatchTimings { Timings = "8-9" });
+            BatchTimings.Add(new BatchTimings { Timings = "9-10" });
+            BatchTimings.Add(new BatchTimings { Timings = "10-11" });
+            BatchTimings.Add(new BatchTimings { Timings = "11-12" });
+            BatchTimings.Add(new BatchTimings { Timings = "12-13" });
+            BatchTimings.Add(new BatchTimings { Timings = "13-14" });
+            BatchTimings.Add(new BatchTimings { Timings = "14-15" });
+            BatchTimings.Add(new BatchTimings { Timings = "15-16" });
+            BatchTimings.Add(new BatchTimings { Timings = "16-17" });
+            BatchTimings.Add(new BatchTimings { Timings = "17-18" });
+            BatchTimings.Add(new BatchTimings { Timings = "18-19" });
+            BatchTimings.Add(new BatchTimings { Timings = "19-20" });
+            BatchTimings.Add(new BatchTimings { Timings = "20-21" });
+            BatchTimings.Add(new BatchTimings { Timings = "21-22" });
+            BatchTimings.Add(new BatchTimings { Timings = "22-23" });
+            BatchTimings.Add(new BatchTimings { Timings = "23-24" });
+
+            _context.BatchTimings.AddRange(BatchTimings);
 
             await _context.SaveChangesAsync();
         }
