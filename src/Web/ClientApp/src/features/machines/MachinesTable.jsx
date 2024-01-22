@@ -7,11 +7,11 @@ function MachineTable() {
     
     return (
         <>
-            <Table columns="0.7fr 2fr 2fr">
-                <Table.Header>
-                    <div>SI NO</div>
+            <Table columns="2fr 2fr 2fr">
+                <Table.Header> 
                     <div>Machine Number</div>
                     <div>Language</div>
+                    <div></div>
                 </Table.Header> 
                 <Table.Body
                     data={machines}

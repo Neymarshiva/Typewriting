@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Table from "../../ui/Table";
-
+import Modal from "../../ui/Modal.jsx";
+import Menus from "../../ui/Menus.jsx";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 
 const MachineNumber = styled.div`
   font-family: "Sono";
@@ -14,9 +16,9 @@ const LanguageId = styled.div`
 `;
 
 
-function MachineRow({ machine }) { 
-    debugger;
+function MachineRow({ machine }) {    
     const {
+        id: machineId,
         machineNumber,
         languagesId
     } = machine;
@@ -24,13 +26,33 @@ function MachineRow({ machine }) {
     return (
 
         <Table.Row>
-            <div>1</div>
             <MachineNumber>
-                {machineNumber}
+                {machineNumber} 
             </MachineNumber>
             <LanguageId>
                 {languagesId}
             </LanguageId>
+            <div>
+                <Modal>
+                    {/* <Menus.Menu>
+                        <Menus.Toggle id={machineId} />
+                        <Menus.List id={machineId}>
+                            <Menus.Button
+                                icon={<HiSquare2Stack />}  >
+                                Duplicate
+                            </Menus.Button>
+
+                            <Modal.Open opens="edit">
+                                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                            </Modal.Open>
+
+                            <Modal.Open opens="delete">
+                                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                            </Modal.Open>
+                        </Menus.List>
+                    </Menus.Menu> */}
+                </Modal>
+            </div>
         </Table.Row>
     );
 }
