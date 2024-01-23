@@ -12,12 +12,14 @@ public class MachinesDto
     public int Id { get; init; }
     public string MachineNumber { get; init; } = string.Empty;
     public int LanguagesId { get; init; }
+    public string LanuagesType { get; set; } = string.Empty;
 
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Machines, MachinesDto>();
+            CreateMap<Machines, MachinesDto>()
+                .ForMember(d => d.LanuagesType, opt => opt.MapFrom(src => src.Languages.LanuagesType)); ;
         }
     }
 }

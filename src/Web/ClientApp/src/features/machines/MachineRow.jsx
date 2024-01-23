@@ -9,10 +9,9 @@ const MachineNumber = styled.div`
   font-weight: 600;
 `;
 
-const LanguageId = styled.div`
+const LanguageType = styled.div`
   font-family: "Sono";
   font-weight: 500;
-  color: var(--color-green-700);
 `;
 
 
@@ -20,7 +19,8 @@ function MachineRow({ machine }) {
     const {
         id: machineId,
         machineNumber,
-        languagesId
+        languagesId,
+        lanuagesType
     } = machine;
 
     return (
@@ -29,9 +29,9 @@ function MachineRow({ machine }) {
             <MachineNumber>
                 {machineNumber} 
             </MachineNumber>
-            <LanguageId>
-                {languagesId}
-            </LanguageId>
+            <LanguageType>
+                {lanuagesType}
+            </LanguageType>
             <div>
                 <Modal>
                     {/* <Menus.Menu>

@@ -18,9 +18,11 @@ public class GetMachinesQueryHandler : IRequestHandler<GetMachinesQuery, List<Ma
     }
 
     public async Task<List<MachinesDto>> Handle(GetMachinesQuery request, CancellationToken cancellationToken)
-    {
-        return await _context.Machines 
-           .ProjectTo<MachinesDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken); 
+    { 
+        return await _context.Machines
+            .Include(x => x.Languages)
+            .AsNoTracking()
+            .ProjectTo<MachinesDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }
 }
 

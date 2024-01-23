@@ -584,6 +584,9 @@
           "languagesId": {
             "type": "integer",
             "format": "int32"
+          },
+          "lanuagesType": {
+            "type": "string"
           }
         }
       },

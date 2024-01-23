@@ -1,9 +1,10 @@
+import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Select from "../../ui/Select";
 
-function CreateMachines() {
+function CreateMachines({ onCloseModal }) {
 
     function handleChange(e) {
 
@@ -11,7 +12,7 @@ function CreateMachines() {
 
     return (
         <div>
-            <Form>
+            <Form type={onCloseModal ? "modal" : "regular"}>
                 <FormRow label="Machine Number">
                     <Input
                         type="number"
@@ -28,6 +29,19 @@ function CreateMachines() {
                         value=""
                         onChange={handleChange}
                     />
+                </FormRow>
+                <FormRow>
+                    {/* type is an HTML attribute! */}
+                    <Button
+                        variation="secondary"
+                        type="reset"
+                        onClick={() => onCloseModal?.()}
+                    >
+                        Cancel
+                    </Button>
+                    <Button>
+                        Create new cabin
+                    </Button>
                 </FormRow>
 
             </Form>

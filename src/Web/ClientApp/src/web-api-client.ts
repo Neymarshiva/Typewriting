@@ -764,6 +764,7 @@ export class MachinesDto implements IMachinesDto {
     id?: number;
     machineNumber?: string;
     languagesId?: number;
+    lanuagesType?: string;
 
     constructor(data?: IMachinesDto) {
         if (data) {
@@ -779,6 +780,7 @@ export class MachinesDto implements IMachinesDto {
             this.id = _data["id"];
             this.machineNumber = _data["machineNumber"];
             this.languagesId = _data["languagesId"];
+            this.lanuagesType = _data["lanuagesType"];
         }
     }
 
@@ -794,6 +796,7 @@ export class MachinesDto implements IMachinesDto {
         data["id"] = this.id;
         data["machineNumber"] = this.machineNumber;
         data["languagesId"] = this.languagesId;
+        data["lanuagesType"] = this.lanuagesType;
         return data;
     }
 }
@@ -802,6 +805,7 @@ export interface IMachinesDto {
     id?: number;
     machineNumber?: string;
     languagesId?: number;
+    lanuagesType?: string;
 }
 
 export class CreateMachinesCommand implements ICreateMachinesCommand {

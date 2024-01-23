@@ -56,43 +56,45 @@ const Button = styled.button`
 const ModalContext = createContext();
 
 function Modal({ children }) {
-    const [openName, setOpenName] = useState("");
 
-    const close = () => setOpenName("");
-    const open = setOpenName;
+  
+  const [openName, setOpenName] = useState("");
 
-    return (
-        <ModalContext.Provider value={{ openName, close, open }}>
-            {children}
-        </ModalContext.Provider>
-    );
+  const close = () => setOpenName("");
+  const open = setOpenName;
+
+  return (
+      <ModalContext.Provider value={{ openName, close, open }}>
+          {children}
+      </ModalContext.Provider>
+  );
 }
 
 
 function Open({ children, opens: opensWindowName }) {
-    const { open } = useContext(ModalContext);
+  const { open } = useContext(ModalContext);
 
-    return cloneElement(children, { onClick: () => open(opensWindowName) });
+  return cloneElement(children, { onClick: () => open(opensWindowName) });
 }
 
 function Window({ children, name }) {
-    const { openName, close } = useContext(ModalContext);
-    //const ref = useOutsideClick(close);
-    const ref = "";
-    if (name !== openName) return null;
+  const { openName, close } = useContext(ModalContext);
+  //const ref = useOutsideClick(close);
+  const ref = "";
+  if (name !== openName) return null;
 
-    return createPortal(
-        <Overlay>
-            <StyledModal ref={ref}>
-                <Button onClick={close}>
-                    <HiXMark />
-                </Button>
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={close}>
+          <HiXMark />
+        </Button>
 
-                <div>{cloneElement(children, { onCloseModal: close })}</div>
-            </StyledModal>
-        </Overlay>,
-        document.body
-    );
+        <div>{cloneElement(children, { onCloseModal: close })}</div>
+      </StyledModal>
+    </Overlay>,
+    document.body
+  );
 }
 
 Modal.Open = Open;
