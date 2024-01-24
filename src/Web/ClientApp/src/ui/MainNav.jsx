@@ -4,9 +4,8 @@ import {
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
-  HiOutlineHomeModern,
-  HiOutlineUsers,
 } from "react-icons/hi2";
+import { PiStudent,PiClockLight  } from "react-icons/pi";
 
 const NavList = styled.ul`
   display: flex;
@@ -71,13 +70,13 @@ function MainNav() {
         </li>
         <li>
           <StyledNavLink to="/students">
-            <HiOutlineHomeModern />
+            <PiStudent />
             <span>Students</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/timings">
-            <HiOutlineUsers />
+            <PiClockLight />
             <span>Timings</span>
           </StyledNavLink>
         </li>
