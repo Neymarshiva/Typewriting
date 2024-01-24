@@ -3,6 +3,7 @@ import Table from "../../ui/Table";
 import Modal from "../../ui/Modal.jsx";
 import Menus from "../../ui/Menus.jsx";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import CreateMachines from "./CreateMachines.jsx";
 
 const MachineNumber = styled.div`
   font-family: "Sono";
@@ -15,7 +16,7 @@ const LanguageType = styled.div`
 `;
 
 
-function MachineRow({ machine }) {    
+function MachineRow({ machine }) {
     const {
         id: machineId,
         machineNumber,
@@ -27,14 +28,14 @@ function MachineRow({ machine }) {
 
         <Table.Row>
             <MachineNumber>
-                {machineNumber} 
+                {machineNumber}
             </MachineNumber>
             <LanguageType>
                 {lanuagesType}
             </LanguageType>
             <div>
                 <Modal>
-                    {/* <Menus.Menu>
+                    <Menus.Menu>
                         <Menus.Toggle id={machineId} />
                         <Menus.List id={machineId}>
                             <Menus.Button
@@ -50,7 +51,11 @@ function MachineRow({ machine }) {
                                 <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
                             </Modal.Open>
                         </Menus.List>
-                    </Menus.Menu> */}
+                        <Modal.Window name="edit">
+                            <CreateMachines/>
+                        </Modal.Window>
+
+                    </Menus.Menu>
                 </Modal>
             </div>
         </Table.Row>
