@@ -19,3 +19,9 @@ export async function EditMachines(id, machines) {
   const data = await client.updateMachines(id, machines);
   return data;
 }
+
+export async function DeleteMachines(id) { 
+  let client = new MachinesClient();
+  const data = await client.deleteMachines(id);
+  return data;
+}

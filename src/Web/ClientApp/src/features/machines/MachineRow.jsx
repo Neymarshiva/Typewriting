@@ -4,6 +4,8 @@ import Modal from "../../ui/Modal.jsx";
 import Menus from "../../ui/Menus.jsx";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import CreateMachines from "./CreateMachines.jsx";
+import { useDeleteMachines } from "./useDeleteMachines.js";
+import ConfirmDelete from "../../ui/ConfirmDelete.jsx";
 
 const MachineNumber = styled.div`
   font-family: "Sono";
@@ -16,14 +18,14 @@ const LanguageType = styled.div`
 `;
 
 
-function MachineRow({ machine }) {   
+function MachineRow({ machine }) {
     const {
         id: machineId,
         machineNumber,
         languagesId,
         lanuagesType
     } = machine;
-
+    const { isDeleting, deleteMachine } = useDeleteMachines();
     return (
 
         <Table.Row>
@@ -37,11 +39,7 @@ function MachineRow({ machine }) {
                 <Modal>
                     <Menus.Menu>
                         <Menus.Toggle id={machineId} />
-                        <Menus.List id={machineId}>
-                            <Menus.Button
-                                icon={<HiSquare2Stack />}  >
-                                Duplicate
-                            </Menus.Button>
+                        <Menus.List id={machineId}> 
 
                             <Modal.Open opens="edit">
                                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
@@ -53,6 +51,14 @@ function MachineRow({ machine }) {
                         </Menus.List>
                         <Modal.Window name="edit">
                             <CreateMachines machineToEdit={machine} />
+                        </Modal.Window>
+
+                        <Modal.Window name="delete">
+                            <ConfirmDelete
+                                resourceName={"machine number  " + machineNumber}
+                                disabled={isDeleting}
+                                onConfirm={() => deleteMachine(machineId)}
+                            />
                         </Modal.Window>
 
                     </Menus.Menu>
