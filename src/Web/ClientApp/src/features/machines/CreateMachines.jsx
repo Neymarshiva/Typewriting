@@ -5,12 +5,21 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Select from "../../ui/Select";
 import { useEffect } from "react";
-import { useCreateMachines } from "./useCreateMachines"; 
+import { useCreateMachines } from "./useCreateMachines";
+import { useEditMachines } from "./useEditMachines";
 
-function CreateMachines({ onCloseModal }) {
+function CreateMachines({ machineToEdit = {}, onCloseModal }) {
 
-    const { register, handleSubmit, watch, reset, formState } = useForm();
+
+    const { id: editId, ...editValues } = machineToEdit;
+    const isEditSession = Boolean(editId);
+    const { register, handleSubmit, watch, reset, formState } = useForm({
+        defaultValues: isEditSession ? editValues : {},
+    });
     const { isCreating, createMachines } = useCreateMachines();
+    const { isEditing, editMachines } = useEditMachines();
+
+    const isWorking = isCreating || isEditing;
 
     const watchMysel = watch("languageId");
     const { errors } = formState;
@@ -25,14 +34,25 @@ function CreateMachines({ onCloseModal }) {
 
 
     function onSubmit(data) {
-         
-        createMachines(data,
-            {
-                onSuccess: (data) => {
-                    reset();
-                    onCloseModal?.();
-                },
-            });
+
+        if (isEditSession)
+            editMachines(
+                { newMachineData: data, id: editId },
+                {
+                    onSuccess: (data) => {
+                        reset();
+                        onCloseModal?.();
+                    },
+                }
+            );
+        else
+            createMachines(data,
+                {
+                    onSuccess: (data) => {
+                        reset();
+                        onCloseModal?.();
+                    },
+                });
     }
     function onError(errors) {
         console.log(errors);
@@ -45,7 +65,7 @@ function CreateMachines({ onCloseModal }) {
                     <Input
                         type="number"
                         id="machineNumber"
-                        disabled={isCreating}
+                        disabled={isWorking}
                         {...register("machineNumber", {
                             required: "This field is required",
                         })}
@@ -56,7 +76,7 @@ function CreateMachines({ onCloseModal }) {
 
                     <select
                         defaultValue="0"
-                        disabled={isCreating}
+                        disabled={isWorking}
                         {...register("languageId", { validate: (value) => value !== "0" || "This field is required" })}
                     >
                         <option value="0">---Select---</option>
@@ -77,15 +97,15 @@ function CreateMachines({ onCloseModal }) {
                 </FormRow>
                 <FormRow>
                     {/* type is an HTML attribute! */}
-                    <Button
+                    <Button disabled={isWorking}
                         variation="secondary"
                         type="reset"
                         onClick={() => onCloseModal?.()}
                     >
                         Cancel
                     </Button>
-                    <Button>
-                        Create new cabin
+                    <Button disabled={isWorking}>
+                        {isEditSession ? "Edit machine" : "Create new machine"}
                     </Button>
                 </FormRow>
 

@@ -763,7 +763,7 @@ export class WeatherForecastsClient {
 export class MachinesDto implements IMachinesDto {
     id?: number;
     machineNumber?: string;
-    languagesId?: number;
+    languageId?: number;
     lanuagesType?: string;
 
     constructor(data?: IMachinesDto) {
@@ -779,7 +779,7 @@ export class MachinesDto implements IMachinesDto {
         if (_data) {
             this.id = _data["id"];
             this.machineNumber = _data["machineNumber"];
-            this.languagesId = _data["languagesId"];
+            this.languageId = _data["languageId"];
             this.lanuagesType = _data["lanuagesType"];
         }
     }
@@ -795,7 +795,7 @@ export class MachinesDto implements IMachinesDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["machineNumber"] = this.machineNumber;
-        data["languagesId"] = this.languagesId;
+        data["languageId"] = this.languageId;
         data["lanuagesType"] = this.lanuagesType;
         return data;
     }
@@ -804,7 +804,7 @@ export class MachinesDto implements IMachinesDto {
 export interface IMachinesDto {
     id?: number;
     machineNumber?: string;
-    languagesId?: number;
+    languageId?: number;
     lanuagesType?: string;
 }
 

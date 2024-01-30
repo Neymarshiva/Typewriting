@@ -11,7 +11,7 @@ public class MachinesDto
 {
     public int Id { get; init; }
     public string MachineNumber { get; init; } = string.Empty;
-    public int LanguagesId { get; init; }
+    public int LanguageId { get; init; }
     public string LanuagesType { get; set; } = string.Empty;
 
     private class Mapping : Profile
@@ -19,7 +19,8 @@ public class MachinesDto
         public Mapping()
         {
             CreateMap<Machines, MachinesDto>()
-                .ForMember(d => d.LanuagesType, opt => opt.MapFrom(src => src.Languages.LanuagesType)); ;
+                .ForMember(d => d.LanuagesType, opt => opt.MapFrom(src => src.Languages.LanuagesType))
+                .ForMember(d => d.LanguageId, opt => opt.MapFrom(src => src.LanguagesId));
         }
     }
 }

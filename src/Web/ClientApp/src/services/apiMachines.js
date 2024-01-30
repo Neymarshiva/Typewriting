@@ -8,8 +8,14 @@ export async function getMachines() {
 }
 
 export async function CreateMachines(machines) {
-  debugger;
   let client = new MachinesClient();
-  const data = await client.createMachines(machines); 
+  const data = await client.createMachines(machines);
+  return data;
+}
+
+export async function EditMachines(id, machines) { 
+  machines = { ...machines, id };
+  let client = new MachinesClient();
+  const data = await client.updateMachines(id, machines);
   return data;
 }

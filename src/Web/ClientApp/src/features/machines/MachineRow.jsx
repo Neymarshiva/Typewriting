@@ -16,7 +16,7 @@ const LanguageType = styled.div`
 `;
 
 
-function MachineRow({ machine }) {
+function MachineRow({ machine }) {   
     const {
         id: machineId,
         machineNumber,
@@ -52,7 +52,7 @@ function MachineRow({ machine }) {
                             </Modal.Open>
                         </Menus.List>
                         <Modal.Window name="edit">
-                            <CreateMachines/>
+                            <CreateMachines machineToEdit={machine} />
                         </Modal.Window>
 
                     </Menus.Menu>

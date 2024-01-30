@@ -581,7 +581,7 @@
           "machineNumber": {
             "type": "string"
           },
-          "languagesId": {
+          "languageId": {
             "type": "integer",
             "format": "int32"
           },
