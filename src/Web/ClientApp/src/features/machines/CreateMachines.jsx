@@ -7,6 +7,21 @@ import Select from "../../ui/Select";
 import { useEffect } from "react";
 import { useCreateMachines } from "./useCreateMachines";
 import { useEditMachines } from "./useEditMachines";
+import styled from "styled-components";
+
+const StyledSelect = styled.select`
+  font-size: 1.4rem;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid
+    ${(props) =>
+        props.type === "white"
+            ? "var(--color-grey-100)"
+            : "var(--color-grey-300)"};
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-grey-0);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+`;
 
 function CreateMachines({ machineToEdit = {}, onCloseModal }) {
 
@@ -74,7 +89,7 @@ function CreateMachines({ machineToEdit = {}, onCloseModal }) {
 
                 <FormRow label="Language" error={errors?.languageId?.message}>
 
-                    <select
+                    <StyledSelect
                         defaultValue="0"
                         disabled={isWorking}
                         {...register("languageId", { validate: (value) => value !== "0" || "This field is required" })}
@@ -82,7 +97,7 @@ function CreateMachines({ machineToEdit = {}, onCloseModal }) {
                         <option value="0">---Select---</option>
                         <option value="1">English</option>
                         <option value="2">Tamil</option>
-                    </select>
+                    </StyledSelect>
 
                     {/* <Select
                         defaultValue="0"
