@@ -9,6 +9,7 @@ import Textarea from "../../ui/Textarea";
 import Button from "../../ui/Button";
 import { useBatchTimmings } from "../batchtimmings/useBatchTimmings";
 import { useMachines } from "../machines/useMachines";
+import { useCreateStudents } from "./useCreateStudents";
 
 const StyledSelect = styled.select`
   font-size: 1.4rem;
@@ -30,6 +31,8 @@ function CreateStudent({ onCloseModal }) {
     const { isLoading, batchTimmings } = useBatchTimmings();
     const { isMachineLoading, machines } = useMachines();
 
+    const { isCreating, createStudents } = useCreateStudents();
+
     const { register, handleSubmit, watch, reset, formState } = useForm({
         // defaultValues: isEditSession ? editValues : {},
     });
@@ -37,7 +40,19 @@ function CreateStudent({ onCloseModal }) {
 
     const { errors } = formState;
 
-    function onSubmit() {
+    function onSubmit(data) {
+        debugger;
+       
+        data.gender = parseInt(data.gender);
+        
+
+        createStudents(data,
+            {
+                onSuccess: (data) => {
+                    reset();
+                    onCloseModal?.();
+                },
+            });
 
     }
 
@@ -77,7 +92,7 @@ function CreateStudent({ onCloseModal }) {
                 </FormRow>
                 <FormRow label="Mobile Number" error={errors?.mobileNumber?.message}>
                     <Input
-                        type="text"
+                        type="number"
                         id="mobileNumber"
                         {...register("mobileNumber", {
                             required: "This field is required",
@@ -109,7 +124,7 @@ function CreateStudent({ onCloseModal }) {
                         defaultValue="0"
                         {...register("machinesId", { validate: (value) => value !== "0" || "This field is required" })}
                     >
-                       {machines?.map((machine) => (
+                        {machines?.map((machine) => (
                             <option value={machine.id} key={machine.id}>
                                 {machine.machineNumber}
                             </option>
@@ -121,7 +136,7 @@ function CreateStudent({ onCloseModal }) {
                         defaultValue="0"
                         {...register("batchTimingsId", { validate: (value) => value !== "0" || "This field is required" })}
                     >
-                         {batchTimmings?.map((batchtime) => (
+                        {batchTimmings?.map((batchtime) => (
                             <option value={batchtime.id} key={batchtime.id}>
                                 {batchtime.timings}
                             </option>

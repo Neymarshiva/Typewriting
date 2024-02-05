@@ -1,8 +1,7 @@
 import Input from "./Input";
 
 
-function RadioGroup({ name, items, value, onChange }) {
-    debugger;
+function RadioGroup({ name, items, value, onChange }) {   
     return (
         <>
 

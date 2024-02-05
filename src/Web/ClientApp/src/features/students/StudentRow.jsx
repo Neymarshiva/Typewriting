@@ -32,7 +32,6 @@ const Amount = styled.div`
 
 
 function StudentRow({ student }) {
-debugger;
     const {
         id,
         machinesId,

@@ -8,3 +8,9 @@ export async function getStudents() {
     return data;
   }
   
+
+  export async function CreateStudents(students) {
+    let client = new StudentsClient();
+    const data = await client.createStudents(students);
+    return data;
+  }
