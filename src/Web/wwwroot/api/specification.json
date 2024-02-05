@@ -6,6 +6,29 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/BatchTimmings": {
+      "get": {
+        "tags": [
+          "BatchTimmings"
+        ],
+        "operationId": "GetBatchTimmings",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BatchTimmingsDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Machines": {
       "get": {
         "tags": [
@@ -570,6 +593,19 @@
   },
   "components": {
     "schemas": {
+      "BatchTimmingsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "timings": {
+            "type": "string"
+          }
+        }
+      },
       "MachinesDto": {
         "type": "object",
         "additionalProperties": false,

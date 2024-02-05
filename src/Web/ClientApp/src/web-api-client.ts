@@ -10,6 +10,59 @@
 
 import followIfLoginRedirect from './components/api-authorization/followIfLoginRedirect';
 
+export class BatchTimmingsClient {
+    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
+        this.http = http ? http : window as any;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    getBatchTimmings(): Promise<BatchTimmingsDto[]> {
+        let url_ = this.baseUrl + "/api/BatchTimmings";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetBatchTimmings(_response);
+        });
+    }
+
+    protected processGetBatchTimmings(response: Response): Promise<BatchTimmingsDto[]> {
+        followIfLoginRedirect(response);
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(BatchTimmingsDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<BatchTimmingsDto[]>(null as any);
+    }
+}
+
 export class MachinesClient {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
@@ -758,6 +811,46 @@ export class WeatherForecastsClient {
         }
         return Promise.resolve<WeatherForecast[]>(null as any);
     }
+}
+
+export class BatchTimmingsDto implements IBatchTimmingsDto {
+    id?: number;
+    timings?: string;
+
+    constructor(data?: IBatchTimmingsDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.timings = _data["timings"];
+        }
+    }
+
+    static fromJS(data: any): BatchTimmingsDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BatchTimmingsDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["timings"] = this.timings;
+        return data;
+    }
+}
+
+export interface IBatchTimmingsDto {
+    id?: number;
+    timings?: string;
 }
 
 export class MachinesDto implements IMachinesDto {

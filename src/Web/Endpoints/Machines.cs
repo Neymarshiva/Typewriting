@@ -26,7 +26,6 @@ public class Machines : EndpointGroupBase
     {
         return await sender.Send(new GetMachinesQuery());
     }
-
     public async Task<int> CreateMachines(ISender sender, CreateMachinesCommand command)
     {
         return await sender.Send(command);
