@@ -1052,7 +1052,9 @@ export interface IPaginatedListOfStudentsBriefDto {
 export class StudentsBriefDto implements IStudentsBriefDto {
     id?: number;
     machinesId?: number;
+    machinesNumber?: string | undefined;
     batchTimingsId?: number;
+    timings?: string | undefined;
     firstName?: string | undefined;
     lastName?: string | undefined;
     email?: string | undefined;
@@ -1073,7 +1075,9 @@ export class StudentsBriefDto implements IStudentsBriefDto {
         if (_data) {
             this.id = _data["id"];
             this.machinesId = _data["machinesId"];
+            this.machinesNumber = _data["machinesNumber"];
             this.batchTimingsId = _data["batchTimingsId"];
+            this.timings = _data["timings"];
             this.firstName = _data["firstName"];
             this.lastName = _data["lastName"];
             this.email = _data["email"];
@@ -1094,7 +1098,9 @@ export class StudentsBriefDto implements IStudentsBriefDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["machinesId"] = this.machinesId;
+        data["machinesNumber"] = this.machinesNumber;
         data["batchTimingsId"] = this.batchTimingsId;
+        data["timings"] = this.timings;
         data["firstName"] = this.firstName;
         data["lastName"] = this.lastName;
         data["email"] = this.email;
@@ -1108,7 +1114,9 @@ export class StudentsBriefDto implements IStudentsBriefDto {
 export interface IStudentsBriefDto {
     id?: number;
     machinesId?: number;
+    machinesNumber?: string | undefined;
     batchTimingsId?: number;
+    timings?: string | undefined;
     firstName?: string | undefined;
     lastName?: string | undefined;
     email?: string | undefined;

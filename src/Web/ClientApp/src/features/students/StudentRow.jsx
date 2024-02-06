@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import Table from "../../ui/Table";
+import Modal from "../../ui/Modal";
+import Menus from "../../ui/Menus";
+import { HiPencil, HiTrash } from "react-icons/hi2";
+import CreateStudent from "./CreateStudent";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDeleteStudents } from "./useDeleteStudents";
 
 
 const Student = styled.div`
@@ -32,33 +38,64 @@ const Amount = styled.div`
 
 
 function StudentRow({ student }) {
-    const {
-        id,
-        machinesId,
-        batchTimingsId,
-        firstName,
-        lastName,
-        email,
-        mobileNumber,
-        gender,
-        address
-    } = student;
+  const {
+    id,
+    machinesId,
+    machinesNumber,
+    batchTimingsId,
+    timings,
+    firstName,
+    lastName,
+    email,
+    mobileNumber,
+    gender,
+    address
+  } = student;
+
+  const { isDeleting, deleteStudents } = useDeleteStudents();
+
+  return (
+    <Table.Row>
+      <Student>{firstName + " " + lastName}</Student>
+      <Stacked> {email}</Stacked>
+      <Stacked> {mobileNumber}</Stacked>
+      <Stacked> {gender}</Stacked>
+      <Stacked> {address}</Stacked>
+      <Stacked> {machinesNumber}</Stacked>
+      <Stacked> {timings}</Stacked>
+      <div>
+        <Modal>
+          <Menus.Menu>
+            <Menus.Toggle id={id} />
+            <Menus.List id={id}>
+
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
+
+              <Modal.Open opens="delete">
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+            <Modal.Window name="edit">
+              <CreateStudent studentToEdit={student} />
+            </Modal.Window>
+
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName={firstName + " " + lastName}
+                disabled={isDeleting}
+                onConfirm={() => deleteStudents(id)}
+              />
+            </Modal.Window>
+
+          </Menus.Menu>
+        </Modal>
+      </div>
+    </Table.Row>
 
 
-    return (
-        <Table.Row>
-            <Student>{firstName + " " + lastName}</Student>
-            <Stacked> {email}</Stacked>
-            <Stacked> {mobileNumber}</Stacked>
-            <Stacked> {gender}</Stacked>
-            <Stacked> {address}</Stacked>
-            <Stacked> {machinesId}</Stacked>
-            <Stacked> {batchTimingsId}</Stacked>
-            <div></div>
-        </Table.Row>
-
-
-    )
+  )
 
 }
 

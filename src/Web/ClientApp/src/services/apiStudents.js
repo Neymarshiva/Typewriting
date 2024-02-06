@@ -14,3 +14,16 @@ export async function getStudents() {
     const data = await client.createStudents(students);
     return data;
   }
+
+  export async function EditStudents(id, students) { 
+    students = { ...students, id };
+    let client = new StudentsClient();
+    const data = await client.updateStudents(id, students);
+    return data;
+  }
+
+  export async function DeleteStudents(id) { 
+    let client = new StudentsClient();
+    const data = await client.deleteStudents(id);
+    return data;
+  }

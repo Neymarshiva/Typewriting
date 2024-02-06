@@ -10,6 +10,7 @@ import Button from "../../ui/Button";
 import { useBatchTimmings } from "../batchtimmings/useBatchTimmings";
 import { useMachines } from "../machines/useMachines";
 import { useCreateStudents } from "./useCreateStudents";
+import { useEditStudents } from "./useEditStudents";
 
 const StyledSelect = styled.select`
   font-size: 1.4rem;
@@ -26,33 +27,47 @@ const StyledSelect = styled.select`
 `;
 
 
-function CreateStudent({ onCloseModal }) {
+function CreateStudent({ studentToEdit = {}, onCloseModal }) {
+
+    const { id: editId, ...editValues } = studentToEdit;
+    const isEditSession = Boolean(editId);
 
     const { isLoading, batchTimmings } = useBatchTimmings();
     const { isMachineLoading, machines } = useMachines();
 
     const { isCreating, createStudents } = useCreateStudents();
+    const { isEditing, editStudents } = useEditStudents();
+
+    const isWorking = isCreating || isEditing;
 
     const { register, handleSubmit, watch, reset, formState } = useForm({
-        // defaultValues: isEditSession ? editValues : {},
+        defaultValues: isEditSession ? editValues : {},
     });
 
 
     const { errors } = formState;
 
     function onSubmit(data) {
-        debugger;
-       
         data.gender = parseInt(data.gender);
-        
 
-        createStudents(data,
-            {
-                onSuccess: (data) => {
-                    reset();
-                    onCloseModal?.();
-                },
-            });
+        if (isEditSession)
+            editStudents(
+                { newStudentData: data, id: editId },
+                {
+                    onSuccess: (data) => {
+                        reset();
+                        onCloseModal?.();
+                    },
+                }
+            );
+        else
+            createStudents(data,
+                {
+                    onSuccess: (data) => {
+                        reset();
+                        onCloseModal?.();
+                    },
+                });
 
     }
 
@@ -67,6 +82,7 @@ function CreateStudent({ onCloseModal }) {
                     <Input
                         type="text"
                         id="firstName"
+                        disabled={isWorking}
                         {...register("firstName", {
                             required: "This field is required",
                         })}
@@ -76,6 +92,7 @@ function CreateStudent({ onCloseModal }) {
                     <Input
                         type="text"
                         id="lastName"
+                        disabled={isWorking}
                         {...register("lastName", {
                             required: "This field is required",
                         })}
@@ -85,6 +102,7 @@ function CreateStudent({ onCloseModal }) {
                     <Input
                         type="text"
                         id="email"
+                        disabled={isWorking}
                         {...register("email", {
                             required: "This field is required",
                         })}
@@ -94,6 +112,7 @@ function CreateStudent({ onCloseModal }) {
                     <Input
                         type="number"
                         id="mobileNumber"
+                        disabled={isWorking}
                         {...register("mobileNumber", {
                             required: "This field is required",
                         })}
@@ -102,6 +121,7 @@ function CreateStudent({ onCloseModal }) {
                 <FormRow label="Gender" error={errors?.gender?.message}>
                     <StyledSelect
                         defaultValue="0"
+                        disabled={isWorking}
                         {...register("gender", { validate: (value) => value !== "0" || "This field is required" })}
                     >
                         <option value="0">---Select---</option>
@@ -114,6 +134,7 @@ function CreateStudent({ onCloseModal }) {
                         type="number"
                         id="address"
                         defaultValue=""
+                        disabled={isWorking}
                         {...register("address", {
                             required: "This field is required",
                         })}
@@ -122,6 +143,7 @@ function CreateStudent({ onCloseModal }) {
                 <FormRow label="Machine Number" error={errors?.machinesId?.message}>
                     <StyledSelect
                         defaultValue="0"
+                        disabled={isWorking}
                         {...register("machinesId", { validate: (value) => value !== "0" || "This field is required" })}
                     >
                         {machines?.map((machine) => (
@@ -134,6 +156,7 @@ function CreateStudent({ onCloseModal }) {
                 <FormRow label="Batch Timming" error={errors?.batchTimingsId?.message}>
                     <StyledSelect
                         defaultValue="0"
+                        disabled={isWorking}
                         {...register("batchTimingsId", { validate: (value) => value !== "0" || "This field is required" })}
                     >
                         {batchTimmings?.map((batchtime) => (
@@ -144,15 +167,15 @@ function CreateStudent({ onCloseModal }) {
                     </StyledSelect>
                 </FormRow>
                 <FormRow>
-                    <Button
+                    <Button  disabled={isWorking}
                         variation="secondary"
                         type="reset"
                         onClick={() => onCloseModal?.()}
                     >
                         Cancel
                     </Button>
-                    <Button>
-                        Create Student
+                    <Button  disabled={isWorking}>
+                        {isEditSession ? "Edit student" : "Create student"}
                     </Button>
                 </FormRow>
             </Form>

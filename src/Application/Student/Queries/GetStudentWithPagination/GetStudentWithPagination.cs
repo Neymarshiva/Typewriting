@@ -10,7 +10,7 @@ using TypeWriting.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 namespace TypeWriting.Application.Student.Queries.GetStudentWithPagination;
 public record GetStudentWithPaginationQuery : IRequest<PaginatedList<StudentsBriefDto>>
-{ 
+{
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }
@@ -30,8 +30,11 @@ public class GetStudentWithPaginationQueryHandler : IRequestHandler<GetStudentWi
     public async Task<PaginatedList<StudentsBriefDto>> Handle(GetStudentWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.Students
+            .Include(x => x.Machines)
+            .Include(x => x.BatchTimings)
             .OrderBy(x => x.FirstName)
             .ThenBy(x => x.LastName)
+            .AsNoTracking()
             .ProjectTo<StudentsBriefDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }

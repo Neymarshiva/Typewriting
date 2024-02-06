@@ -698,9 +698,17 @@
             "type": "integer",
             "format": "int32"
           },
+          "machinesNumber": {
+            "type": "string",
+            "nullable": true
+          },
           "batchTimingsId": {
             "type": "integer",
             "format": "int32"
+          },
+          "timings": {
+            "type": "string",
+            "nullable": true
           },
           "firstName": {
             "type": "string",

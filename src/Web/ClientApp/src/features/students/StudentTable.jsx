@@ -13,7 +13,7 @@ function StudentTable() {
     return (
         <>
             <Menus>
-                <Table columns="2fr 2fr 3fr 2fr 3fr 3fr  3fr 1fr">
+                <Table columns="3fr 5fr 4fr 2fr 4fr 4fr  3fr 1fr">
                     <Table.Header>
                         <div>Name</div>
                         <div>Email</div>
