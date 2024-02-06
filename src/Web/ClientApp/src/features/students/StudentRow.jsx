@@ -6,6 +6,7 @@ import { HiPencil, HiTrash } from "react-icons/hi2";
 import CreateStudent from "./CreateStudent";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteStudents } from "./useDeleteStudents";
+import { GenderEnum } from "../../enums/globalEnum";
 
 
 const Student = styled.div`
@@ -59,7 +60,7 @@ function StudentRow({ student }) {
       <Student>{firstName + " " + lastName}</Student>
       <Stacked> {email}</Stacked>
       <Stacked> {mobileNumber}</Stacked>
-      <Stacked> {gender}</Stacked>
+      <Stacked> {GenderEnum(gender)}</Stacked>
       <Stacked> {address}</Stacked>
       <Stacked> {machinesNumber}</Stacked>
       <Stacked> {timings}</Stacked>

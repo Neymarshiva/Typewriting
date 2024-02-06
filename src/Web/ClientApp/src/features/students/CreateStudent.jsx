@@ -127,6 +127,7 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         <option value="0">---Select---</option>
                         <option value="1">Male</option>
                         <option value="2">Female</option>
+                        <option value="3">Others</option>
                     </StyledSelect>
                 </FormRow>
                 <FormRow label="Address" error={errors?.address?.message}>
