@@ -740,11 +740,13 @@
         "description": "",
         "x-enumNames": [
           "Male",
-          "Female"
+          "Female",
+          "Others"
         ],
         "enum": [
           1,
-          2
+          2,
+          3
         ]
       },
       "CreateStudentCommand": {
