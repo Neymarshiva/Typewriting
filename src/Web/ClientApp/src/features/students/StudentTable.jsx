@@ -1,4 +1,5 @@
 import Menus from "../../ui/Menus";
+import Pagination from "../../ui/Pagination";
 import Table from "../../ui/Table";
 import StudentRow from "./StudentRow";
 import { useStudents } from "./useStudents";
@@ -28,6 +29,9 @@ function StudentTable() {
                         data={students.items}
                         render={(student) => <StudentRow student={student} key={student.id} />}
                     />
+                    <Table.Footer>
+                        <Pagination count={students?.totalCount} />
+                    </Table.Footer>
                 </Table >
             </Menus>
         </>
