@@ -24,19 +24,19 @@ export function useStudents() {
   });
 
   // PRE-FETCHING
-  const pageCount =  Math.ceil(students?.totalCount/ PAGE_SIZE);
+  const pageCount = Math.ceil(students?.totalCount / PAGE_SIZE);
 
   if (pageNumber < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ["students", pageNumber, pageSize + 1],
+      queryKey: ["students", pageNumber + 1, pageSize],
       queryFn: () => getStudents({ pageNumber: pageNumber + 1, pageSize }),
     });
 
   if (pageNumber > 1)
-  queryClient.prefetchQuery({
-    queryKey: ["students", pageNumber, pageSize - 1],
-    queryFn: () => getStudents({ pageNumber: pageNumber - 1, pageSize }),
-  });
+    queryClient.prefetchQuery({
+      queryKey: ["students", pageNumber - 1, pageSize],
+      queryFn: () => getStudents({ pageNumber: pageNumber - 1, pageSize }),
+    });
 
   return { isLoading, error, students };
 }
