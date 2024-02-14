@@ -103,8 +103,12 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         type="text"
                         id="email"
                         disabled={isWorking}
-                        {...register("email", {
-                            required: "This field is required",
+                        {...register('email', {
+                            required: 'This field is required',
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: 'Invalid email address'
+                            }
                         })}
                     />
                 </FormRow>
@@ -113,9 +117,13 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         type="number"
                         id="mobileNumber"
                         disabled={isWorking}
-                        {...register("mobileNumber", {
-                            required: "This field is required",
-                        })}
+                        {...register('mobileNumber', {
+                            required: 'Mobile number is required',
+                            pattern: {
+                              value: /^[0-9]{10}$/,
+                              message: 'Mobile number must be 10 digits'
+                            }
+                          })}
                     />
                 </FormRow>
                 <FormRow label="Gender" error={errors?.gender?.message}>
@@ -168,14 +176,14 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                     </StyledSelect>
                 </FormRow>
                 <FormRow>
-                    <Button  disabled={isWorking}
+                    <Button disabled={isWorking}
                         variation="secondary"
                         type="reset"
                         onClick={() => onCloseModal?.()}
                     >
                         Cancel
                     </Button>
-                    <Button  disabled={isWorking}>
+                    <Button disabled={isWorking}>
                         {isEditSession ? "Edit student" : "Create student"}
                     </Button>
                 </FormRow>
