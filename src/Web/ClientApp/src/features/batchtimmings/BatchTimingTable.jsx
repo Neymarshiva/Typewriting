@@ -1,4 +1,5 @@
 import Menus from "../../ui/Menus";
+import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import BatchTimingRow from "./BatchTimingRow";
 import { useBatchTimmings } from "./useBatchTimmings";
@@ -7,7 +8,7 @@ import { useBatchTimmings } from "./useBatchTimmings";
 
 function BatchTimingTable() {
     const { isLoading, batchTimmings } = useBatchTimmings();
-    if (isLoading) return "Loading";
+    if (isLoading) return <Spinner />;
 
     return (
         <>

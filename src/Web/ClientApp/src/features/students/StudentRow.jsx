@@ -7,7 +7,8 @@ import CreateStudent from "./CreateStudent";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteStudents } from "./useDeleteStudents";
 import { GenderEnum } from "../../enums/globalEnum";
-
+import { MdOutlineMail } from "react-icons/md";
+import { ImMobile } from "react-icons/im";
 
 const Student = styled.div`
   font-size: 1.6rem;
@@ -27,13 +28,24 @@ const Stacked = styled.div`
 
   & span:last-child {
     color: var(--color-grey-500);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 `;
 
 const Amount = styled.div`
   font-family: "Sono";
   font-weight: 500;
+`;
+
+const StackedIcon = styled.div`
+  display:flex;
+  margin-top:0.25rem;
+  & span {
+    margin-left:0.3rem;
+  }
+  & svg{
+    margin-top:0.4rem;
+  }
 `;
 
 
@@ -57,9 +69,19 @@ function StudentRow({ student }) {
 
   return (
     <Table.Row>
-      <Student>{firstName + " " + lastName}</Student>
-      <Stacked> {email}</Stacked>
-      <Stacked> {mobileNumber}</Stacked>
+      <Student>
+        {firstName + " " + lastName}
+        <Stacked>
+          <StackedIcon>
+            <MdOutlineMail /> <span>{email}</span>
+          </StackedIcon>
+          <StackedIcon>
+            <ImMobile /><span>{mobileNumber}</span>
+          </StackedIcon>
+
+        </Stacked>
+      </Student>
+
       <Stacked> {GenderEnum(gender)}</Stacked>
       <Stacked> {address}</Stacked>
       <Stacked> {machinesNumber}</Stacked>

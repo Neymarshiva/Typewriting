@@ -2,9 +2,10 @@ import Table from "../../ui/Table.jsx";
 import { useMachines } from "./useMachines.js";
 import MachineRow from "./MachineRow.jsx";
 import Menus from "../../ui/Menus.jsx";
+import Spinner from "../../ui/Spinner.jsx";
 function MachineTable() {
     const { isLoading, machines } = useMachines();
-    if (isLoading) return "Loading";
+    if (isLoading) return <Spinner />;
 
     return (
         <>

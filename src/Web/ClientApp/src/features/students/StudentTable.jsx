@@ -1,5 +1,6 @@
 import Menus from "../../ui/Menus";
 import Pagination from "../../ui/Pagination";
+import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import StudentRow from "./StudentRow";
 import { useStudents } from "./useStudents";
@@ -10,15 +11,13 @@ import { useStudents } from "./useStudents";
 
 function StudentTable() {
     const { isLoading, students } = useStudents();
-    if (isLoading) return "Loading";
+    if (isLoading) return <Spinner />;
     return (
         <>
             <Menus>
-                <Table columns="3fr 5fr 4fr 2fr 4fr 4fr  3fr 1fr">
+                <Table columns="5fr 2fr 4fr 3fr  3fr 1fr">
                     <Table.Header>
-                        <div>Name</div>
-                        <div>Email</div>
-                        <div>Mobile Number</div>
+                        <div>Student</div> 
                         <div>Gender</div>
                         <div>Address</div>
                         <div>Machine Number</div>
