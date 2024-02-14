@@ -15,9 +15,10 @@ function StudentTable() {
     return (
         <>
             <Menus>
-                <Table columns="5fr 2fr 4fr 3fr  3fr 1fr">
+                <Table columns="5fr 4fr 2fr 4fr 3fr  3fr 1fr">
                     <Table.Header>
                         <div>Student</div> 
+                        <div>Mobile Number</div> 
                         <div>Gender</div>
                         <div>Address</div>
                         <div>Machine Number</div>

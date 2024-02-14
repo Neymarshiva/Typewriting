@@ -75,13 +75,11 @@ function StudentRow({ student }) {
           <StackedIcon>
             <MdOutlineMail /> <span>{email}</span>
           </StackedIcon>
-          <StackedIcon>
-            <ImMobile /><span>{mobileNumber}</span>
-          </StackedIcon>
-
         </Stacked>
       </Student>
-
+      <StackedIcon>
+        <ImMobile /><span>{mobileNumber}</span>
+      </StackedIcon>
       <Stacked> {GenderEnum(gender)}</Stacked>
       <Stacked> {address}</Stacked>
       <Stacked> {machinesNumber}</Stacked>
