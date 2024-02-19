@@ -1,11 +1,21 @@
 import { StudentsClient } from "../web-api-client.ts";
 
-export async function getStudents({ filterByGender, pageNumber, pageSize }) {
+export async function getStudents({
+  pageNumber,
+  pageSize,
+  filterByGender,
+  filterByMachineNumber,
+  filterByBatchTimings,
+  searchTerm,
+}) {
   let client = new StudentsClient();
   const data = await client.getStudentsWithPagination(
     pageNumber,
     pageSize,
-    filterByGender
+    filterByGender,
+    filterByBatchTimings,
+    filterByMachineNumber,
+    searchTerm
   );
 
   return data;

@@ -15,7 +15,10 @@ public record GetStudentWithPaginationQuery : IRequest<PaginatedList<StudentsBri
 {
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
-    public int Gender { get; init; } = 0;
+    public int? Gender { get; init; } = 0;
+    public int? BatchTimingsId { get; init; }
+    public int? MachinesId { get; init; }
+    public string? SearchTerm { get; init; }
 }
 
 
@@ -38,6 +41,23 @@ public class GetStudentWithPaginationQueryHandler : IRequestHandler<GetStudentWi
         {
             var gender = (Gender)request.Gender;
             query = query.Where(x => x.Gender == gender);
+        }
+        if (request.MachinesId > 0)
+        {
+            query = query.Where(x => x.MachinesId == request.MachinesId);
+        }
+        if (request.BatchTimingsId > 0)
+        {
+            query = query.Where(x => x.BatchTimingsId == request.BatchTimingsId);
+        }
+        if (!string.IsNullOrEmpty(request.SearchTerm))
+        {
+            query = query.Where(e =>
+                EF.Functions.Like(e.FirstName, $"%{request.SearchTerm}%") ||
+                EF.Functions.Like(e.LastName, $"%{request.SearchTerm}%") ||
+                EF.Functions.Like(e.Email, $"%{request.SearchTerm}%") ||
+                EF.Functions.Like(e.MobileNumber.ToString(), $"%{request.SearchTerm}%") ||
+                EF.Functions.Like(e.Address, $"%{request.SearchTerm}%"));
         }
 
 

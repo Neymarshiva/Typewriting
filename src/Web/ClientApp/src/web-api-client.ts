@@ -238,7 +238,7 @@ export class StudentsClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getStudentsWithPagination(pageNumber: number, pageSize: number, gender: number): Promise<PaginatedListOfStudentsBriefDto> {
+    getStudentsWithPagination(pageNumber: number, pageSize: number, gender: number | null | undefined, batchTimingsId: number | null | undefined, machinesId: number | null | undefined, searchTerm: string | null | undefined): Promise<PaginatedListOfStudentsBriefDto> {
         let url_ = this.baseUrl + "/api/Students?";
         if (pageNumber === undefined || pageNumber === null)
             throw new Error("The parameter 'pageNumber' must be defined and cannot be null.");
@@ -248,10 +248,14 @@ export class StudentsClient {
             throw new Error("The parameter 'pageSize' must be defined and cannot be null.");
         else
             url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-        if (gender === undefined || gender === null)
-            throw new Error("The parameter 'gender' must be defined and cannot be null.");
-        else
+        if (gender !== undefined && gender !== null)
             url_ += "Gender=" + encodeURIComponent("" + gender) + "&";
+        if (batchTimingsId !== undefined && batchTimingsId !== null)
+            url_ += "BatchTimingsId=" + encodeURIComponent("" + batchTimingsId) + "&";
+        if (machinesId !== undefined && machinesId !== null)
+            url_ += "MachinesId=" + encodeURIComponent("" + machinesId) + "&";
+        if (searchTerm !== undefined && searchTerm !== null)
+            url_ += "SearchTerm=" + encodeURIComponent("" + searchTerm) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
