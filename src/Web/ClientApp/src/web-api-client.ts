@@ -238,7 +238,7 @@ export class StudentsClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getStudentsWithPagination(pageNumber: number, pageSize: number): Promise<PaginatedListOfStudentsBriefDto> {
+    getStudentsWithPagination(pageNumber: number, pageSize: number, gender: number): Promise<PaginatedListOfStudentsBriefDto> {
         let url_ = this.baseUrl + "/api/Students?";
         if (pageNumber === undefined || pageNumber === null)
             throw new Error("The parameter 'pageNumber' must be defined and cannot be null.");
@@ -248,6 +248,10 @@ export class StudentsClient {
             throw new Error("The parameter 'pageSize' must be defined and cannot be null.");
         else
             url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (gender === undefined || gender === null)
+            throw new Error("The parameter 'gender' must be defined and cannot be null.");
+        else
+            url_ += "Gender=" + encodeURIComponent("" + gender) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {

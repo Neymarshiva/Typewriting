@@ -169,6 +169,16 @@
               "format": "int32"
             },
             "x-position": 2
+          },
+          {
+            "name": "Gender",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 3
           }
         ],
         "responses": {

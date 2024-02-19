@@ -7,6 +7,12 @@ export function useStudents() {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
+  //Filter By
+
+  const filterByGender = !searchParams.get("gender")
+    ? 0
+    : Number(searchParams.get("gender"));
+
   // PAGINATION
   const pageNumber = !searchParams.get("page")
     ? 1
@@ -19,8 +25,8 @@ export function useStudents() {
     data: students,
     error,
   } = useQuery({
-    queryKey: ["students", pageNumber, pageSize],
-    queryFn: () => getStudents({ pageNumber, pageSize }),
+    queryKey: ["students", pageNumber, pageSize, filterByGender],
+    queryFn: () => getStudents({ filterByGender, pageNumber, pageSize }),
   });
 
   // PRE-FETCHING
@@ -28,14 +34,16 @@ export function useStudents() {
 
   if (pageNumber < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ["students", pageNumber + 1, pageSize],
-      queryFn: () => getStudents({ pageNumber: pageNumber + 1, pageSize }),
+      queryKey: ["students", pageNumber + 1, pageSize, filterByGender],
+      queryFn: () =>
+        getStudents({ filterByGender, pageNumber: pageNumber + 1, pageSize }),
     });
 
   if (pageNumber > 1)
     queryClient.prefetchQuery({
-      queryKey: ["students", pageNumber - 1, pageSize],
-      queryFn: () => getStudents({ pageNumber: pageNumber - 1, pageSize }),
+      queryKey: ["students", pageNumber - 1, pageSize, filterByGender],
+      queryFn: () =>
+        getStudents({ filterByGender, pageNumber: pageNumber - 1, pageSize }),
     });
 
   return { isLoading, error, students };
