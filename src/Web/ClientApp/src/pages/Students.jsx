@@ -10,12 +10,13 @@ export class Students extends Component {
     render() {
         return (
             <>
-                {/* <Row type="horizontal">
-                    <Heading as="h1">Students</Heading> 
-                </Row> */}
+                <Row type="horizontal">
+                    <Heading as="h1">Students</Heading>
+                    <AddStudent />
+                </Row>
 
                 <Row type="horizontal">
-                    <AddStudent />
+
                     <StudentTableOperations />
                 </Row>
 

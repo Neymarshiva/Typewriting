@@ -4,6 +4,17 @@ import Input from "../../ui/Input";
 import TableOperations from "../../ui/TableOperations";
 import { useBatchTimmings } from "../batchtimmings/useBatchTimmings";
 import { useMachines } from "../machines/useMachines";
+import { CiSearch } from "react-icons/ci";
+import styled from "styled-components";
+
+const StyledFormRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.2rem 0;
+  width: 100%;
+`;
+
 
 
 function StudentTableOperations() {
@@ -25,7 +36,7 @@ function StudentTableOperations() {
 
     function handleChange(e) {
         debugger;
-        searchParams.set("searchTerm", e.target.value); 
+        searchParams.set("searchTerm", e.target.value);
         if (searchParams.get("page")) searchParams.set("page", 1);
         if (!e.target.value) {
             searchParams.delete("searchTerm");
@@ -37,31 +48,47 @@ function StudentTableOperations() {
 
     return (
         <TableOperations>
+            <StyledFormRow>
+            <label>Search</label>
+                <Input
+                    type="text"
+                    id="searchTerm"
+                    onChange={handleChange}
+                    value={searchTermVal}
+                    placeholder="Search students..."
+                />
+            </StyledFormRow>
 
-            <Input
-                type="text"
-                id="searcTerm"
-                onChange={handleChange}
-                value={searchTermVal}
-            />
+            <StyledFormRow>
+                <label>Gender</label>
+                <FilterBy
+                    filterField="gender"
+                    options={[
+                        { value: "0", label: "All" },
+                        { value: "1", label: "Male" },
+                        { value: "2", label: "Female" },
+                        { value: "3", label: "Others" },
+                    ]}
+                />
+            </StyledFormRow>
 
-            <FilterBy
-                filterField="gender"
-                options={[
-                    { value: "0", label: "All" },
-                    { value: "1", label: "Male" },
-                    { value: "2", label: "Female" },
-                    { value: "3", label: "Others" },
-                ]}
-            />
-            <FilterBy
-                filterField="machineNumber"
-                options={machineOption}
-            />
-            <FilterBy
-                filterField="batchTiming"
-                options={batchTimmingsOption}
-            />
+            <StyledFormRow>
+                <label>Machine Number</label>
+                <FilterBy
+                    filterField="machineNumber"
+                    options={machineOption}
+                />
+            </StyledFormRow>
+
+            <StyledFormRow>
+                <label>Batch Timing</label>
+                <FilterBy
+                    filterField="batchTiming"
+                    options={batchTimmingsOption}
+                />
+            </StyledFormRow>
+
+
         </TableOperations>
     )
 }
