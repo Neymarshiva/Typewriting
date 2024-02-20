@@ -15,6 +15,12 @@ const StyledFormRow = styled.div`
   width: 100%;
 `;
 
+const StyledLabel = styled.label`
+    color:var(--color-grey-600);
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    font-weight: 700;
+`;
 
 
 function StudentTableOperations() {
@@ -49,7 +55,7 @@ function StudentTableOperations() {
     return (
         <TableOperations>
             <StyledFormRow>
-            <label>Search</label>
+                <StyledLabel>Search</StyledLabel>
                 <Input
                     type="text"
                     id="searchTerm"
@@ -60,7 +66,7 @@ function StudentTableOperations() {
             </StyledFormRow>
 
             <StyledFormRow>
-                <label>Gender</label>
+                <StyledLabel>Gender</StyledLabel>
                 <FilterBy
                     filterField="gender"
                     options={[
@@ -73,7 +79,7 @@ function StudentTableOperations() {
             </StyledFormRow>
 
             <StyledFormRow>
-                <label>Machine Number</label>
+                <StyledLabel>Machine Number</StyledLabel>
                 <FilterBy
                     filterField="machineNumber"
                     options={machineOption}
@@ -81,7 +87,7 @@ function StudentTableOperations() {
             </StyledFormRow>
 
             <StyledFormRow>
-                <label>Batch Timing</label>
+                <StyledLabel>Batch Timing</StyledLabel>
                 <FilterBy
                     filterField="batchTiming"
                     options={batchTimmingsOption}
