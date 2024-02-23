@@ -127,29 +127,29 @@
                         <span class="w-125px text-gray-500 fw-semibold fs-7"></span>
                     </div>
 
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger fw-bold" role="alert"></div>
                     <div class="mb-4">
-                        <input asp-for="Input.UserName" class="form-control" autocomplete="UserName" aria-required="true"
+                        <input asp-for="Input.UserName" class="form-control mb-1" autocomplete="UserName" aria-required="true"
                                placeholder="User Name" />
 
-                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                        <span asp-validation-for="Input.UserName" class="text-danger fw-bold"></span>
                     </div>
                     <div class="mb-4">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"
+                        <input asp-for="Input.Email" class="form-control mb-1" autocomplete="username" aria-required="true"
                                placeholder="Email" />
 
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <span asp-validation-for="Input.Email" class="text-danger fw-bold"></span>
                     </div>
                     <div class="mb-4">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password"
+                        <input asp-for="Input.Password" class="form-control mb-1" autocomplete="new-password"
                                aria-required="true" placeholder="Password" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        <span asp-validation-for="Input.Password" class="text-danger fw-bold"></span>
                     </div>
                     <div class="mb-4">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password"
+                        <input asp-for="Input.ConfirmPassword" class="form-control mb-1" autocomplete="new-password"
                                aria-required="true" placeholder="Repeat Password" />
 
-                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger fw-bold"></span>
                     </div>
                     <div class="d-grid mb-10">
                         <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Sign up</button>
