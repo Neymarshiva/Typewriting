@@ -1,0 +1,8 @@
+import { IdentityClient } from "../web-api-client.ts";
+
+export async function logoutApi() {
+    let client = new IdentityClient();
+    const data = await client.logout(); 
+    return data;
+  }
+  

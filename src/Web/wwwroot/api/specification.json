@@ -29,6 +29,26 @@
         }
       }
     },
+    "/api/Identity": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "operationId": "Logout",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Machines": {
       "get": {
         "tags": [
