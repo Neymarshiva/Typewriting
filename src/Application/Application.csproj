@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="BatchTimmings\Commands\" />
-    <Folder Include="Identity\Queries\" />
   </ItemGroup>
 
 </Project>

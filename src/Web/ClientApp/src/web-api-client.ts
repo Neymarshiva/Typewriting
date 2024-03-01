@@ -73,6 +73,41 @@ export class IdentityClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
+    getCurrentUser(): Promise<CurrentUserDto> {
+        let url_ = this.baseUrl + "/api/Identity";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetCurrentUser(_response);
+        });
+    }
+
+    protected processGetCurrentUser(response: Response): Promise<CurrentUserDto> {
+        followIfLoginRedirect(response);
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = CurrentUserDto.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<CurrentUserDto>(null as any);
+    }
+
     logout(): Promise<boolean> {
         let url_ = this.baseUrl + "/api/Identity";
         url_ = url_.replace(/[?&]$/, "");
@@ -906,6 +941,50 @@ export class BatchTimmingsDto implements IBatchTimmingsDto {
 export interface IBatchTimmingsDto {
     id?: number;
     timings?: string;
+}
+
+export class CurrentUserDto implements ICurrentUserDto {
+    userName?: string | undefined;
+    email?: string | undefined;
+    phoneNumber?: string | undefined;
+
+    constructor(data?: ICurrentUserDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.userName = _data["userName"];
+            this.email = _data["email"];
+            this.phoneNumber = _data["phoneNumber"];
+        }
+    }
+
+    static fromJS(data: any): CurrentUserDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CurrentUserDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userName"] = this.userName;
+        data["email"] = this.email;
+        data["phoneNumber"] = this.phoneNumber;
+        return data;
+    }
+}
+
+export interface ICurrentUserDto {
+    userName?: string | undefined;
+    email?: string | undefined;
+    phoneNumber?: string | undefined;
 }
 
 export class MachinesDto implements IMachinesDto {

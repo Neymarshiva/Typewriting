@@ -30,6 +30,24 @@
       }
     },
     "/api/Identity": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "operationId": "GetCurrentUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserDto"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Identity"
@@ -662,6 +680,24 @@
           },
           "timings": {
             "type": "string"
+          }
+        }
+      },
+      "CurrentUserDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
