@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using TypeWriting.Domain.Entities;
 using TypeWriting.Infrastructure.Identity;
 
 namespace TypeWriting.Web.Areas.Identity.Pages.Account

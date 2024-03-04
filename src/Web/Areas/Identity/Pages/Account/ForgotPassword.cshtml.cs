@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using TypeWriting.Domain.Entities;
 using TypeWriting.Infrastructure.Identity;
 
 namespace TypeWriting.Web.Areas.Identity.Pages.Account

@@ -13,7 +13,6 @@ namespace TypeWriting.Application.Machine.Commands.CreateMachines;
 public record CreateMachinesCommand : IRequest<int>
 {
     public string MachineNumber { get; init; } = string.Empty;
-
     public int LanguageId { get; init; }
 }
 
@@ -21,10 +20,12 @@ public record CreateMachinesCommand : IRequest<int>
 public class CreateMachinesCommandHandler : IRequestHandler<CreateMachinesCommand, int>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IUser _user;
 
-    public CreateMachinesCommandHandler(IApplicationDbContext context)
+    public CreateMachinesCommandHandler(IApplicationDbContext context, IUser user)
     {
         _context = context;
+        _user = user;
     }
 
     public async Task<int> Handle(CreateMachinesCommand request, CancellationToken cancellationToken)
@@ -33,7 +34,8 @@ public class CreateMachinesCommandHandler : IRequestHandler<CreateMachinesComman
         {
             MachineNumber = request.MachineNumber,
             LanguagesId = request.LanguageId,
-            CreatedBy = "Adminstrator"
+            CreatedBy = "Adminstrator",
+            UserId = _user.Id
         };
 
         _context.Machines.Add(entity);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TypeWriting.Domain.Entities;
+using TypeWriting.Infrastructure.Identity;
 
 namespace TypeWriting.Infrastructure.Data.Configurations;
 public class MachinesConfiguration : IEntityTypeConfiguration<Machines>

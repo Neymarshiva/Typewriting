@@ -3,6 +3,7 @@ using TypeWriting.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TypeWriting.Domain.Entities;
 
 namespace TypeWriting.Infrastructure.Identity;
 
