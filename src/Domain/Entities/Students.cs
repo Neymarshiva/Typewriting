@@ -15,6 +15,8 @@ public class Students : BaseAuditableEntity
     public long MobileNumber { get; set; }
     public Gender Gender { get; set; }
     public string? Address { get; set; }
+    public string? UserId { get; set; }
     public Machines Machines { get; set; } = null!;
+    public ApplicationUser User { get; set; } = null!;
     public BatchTimings BatchTimings { get; set; } = null!;
 }

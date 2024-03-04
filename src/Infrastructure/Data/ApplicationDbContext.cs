@@ -29,6 +29,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         builder.Entity<Machines>().HasQueryFilter(m => m.UserId == _user.Id);
+        builder.Entity<Students>().HasQueryFilter(s => s.UserId == _user.Id);
 
         base.OnModelCreating(builder);
     }

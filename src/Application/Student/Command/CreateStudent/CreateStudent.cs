@@ -25,10 +25,12 @@ public record CreateStudentCommand : IRequest<int>
 public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand, int>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IUser _user;
 
-    public CreateStudentCommandHandler(IApplicationDbContext context)
+    public CreateStudentCommandHandler(IApplicationDbContext context,IUser user)
     {
         _context = context;
+        _user = user;
     }
 
     public async Task<int> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
@@ -42,7 +44,8 @@ public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand,
             Email = request.Email,
             MobileNumber = request.MobileNumber,
             Gender = request.Gender,
-            Address = request.Address
+            Address = request.Address,
+            UserId = _user.Id
         };
 
         _context.Students.Add(entity);
