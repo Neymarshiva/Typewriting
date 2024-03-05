@@ -827,6 +827,11 @@
           "address": {
             "type": "string",
             "nullable": true
+          },
+          "joiningDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -877,6 +882,11 @@
           },
           "address": {
             "type": "string",
+            "nullable": true
+          },
+          "joiningDate": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         }

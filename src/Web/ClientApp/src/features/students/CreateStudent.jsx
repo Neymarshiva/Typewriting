@@ -1,6 +1,6 @@
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Input from "../../ui/Input";
 import RadioGroup from "../../ui/RadioGroup";
 import { useState } from "react";
@@ -11,6 +11,8 @@ import { useBatchTimmings } from "../batchtimmings/useBatchTimmings";
 import { useMachines } from "../machines/useMachines";
 import { useCreateStudents } from "./useCreateStudents";
 import { useEditStudents } from "./useEditStudents";
+import Datepicker from "react-tailwindcss-datepicker";
+import CompoundDatePicker from "../../ui/DatePicker";
 
 const StyledSelect = styled.select`
   font-size: 1.4rem;
@@ -40,15 +42,29 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
 
     const isWorking = isCreating || isEditing;
 
-    const { register, handleSubmit, watch, reset, formState } = useForm({
+    const { register, handleSubmit, watch, reset, formState, control } = useForm({
         defaultValues: isEditSession ? editValues : {},
     });
 
 
     const { errors } = formState;
 
+    const [showCalendar, setShowCalendar] = useState(false);
+
+
+    const [selectedDate, setSelectedDate] = useState({
+        startDate: isEditSession ? editValues.joiningDate : new Date(),
+        endDate: null
+    });
+
+
+
+
     function onSubmit(data) {
+
         data.gender = parseInt(data.gender);
+
+        data.joiningDate = data.joiningDate.startDate;
 
         if (isEditSession)
             editStudents(
@@ -120,10 +136,10 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         {...register('mobileNumber', {
                             required: 'Mobile number is required',
                             pattern: {
-                              value: /^[0-9]{10}$/,
-                              message: 'Mobile number must be 10 digits'
+                                value: /^[0-9]{10}$/,
+                                message: 'Mobile number must be 10 digits'
                             }
-                          })}
+                        })}
                     />
                 </FormRow>
                 <FormRow label="Gender" error={errors?.gender?.message}>
@@ -175,6 +191,30 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         ))}
                     </StyledSelect>
                 </FormRow>
+                <FormRow label="Joining Date" error={errors?.joiningDate?.message}>
+
+                    <Controller
+                        name="joiningDate"
+                        control={control}
+                        defaultValue={isEditSession ? editValues.joiningDate : null}
+                        rules={{ required: 'Date is required' }}
+                        render={({ field }) => (
+                            <Datepicker
+                                value={field.value}
+                                onChange={(date) => field.onChange(date)}
+                                disabled={isWorking}
+                                useRange={false}
+                                asSingle={true}
+                                onFocus={() => setShowCalendar(true)}
+                                displayFormat={"DD/MM/YYYY"}
+                                readOnly={true}
+                                inputClassName="text-xl datepicker"
+                            />
+                        )}
+                    />
+
+                </FormRow>
+
                 <FormRow>
                     <Button disabled={isWorking}
                         variation="secondary"
@@ -188,7 +228,7 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                     </Button>
                 </FormRow>
             </Form>
-        </div>
+        </div >
 
 
     )

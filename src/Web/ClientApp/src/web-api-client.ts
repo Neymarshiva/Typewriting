@@ -1195,6 +1195,7 @@ export class StudentsBriefDto implements IStudentsBriefDto {
     mobileNumber?: number;
     gender?: Gender;
     address?: string | undefined;
+    joiningDate?: Date | undefined;
 
     constructor(data?: IStudentsBriefDto) {
         if (data) {
@@ -1218,6 +1219,7 @@ export class StudentsBriefDto implements IStudentsBriefDto {
             this.mobileNumber = _data["mobileNumber"];
             this.gender = _data["gender"];
             this.address = _data["address"];
+            this.joiningDate = _data["joiningDate"] ? new Date(_data["joiningDate"].toString()) : <any>undefined;
         }
     }
 
@@ -1241,6 +1243,7 @@ export class StudentsBriefDto implements IStudentsBriefDto {
         data["mobileNumber"] = this.mobileNumber;
         data["gender"] = this.gender;
         data["address"] = this.address;
+        data["joiningDate"] = this.joiningDate ? this.joiningDate.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -1257,6 +1260,7 @@ export interface IStudentsBriefDto {
     mobileNumber?: number;
     gender?: Gender;
     address?: string | undefined;
+    joiningDate?: Date | undefined;
 }
 
 export enum Gender {
@@ -1274,6 +1278,7 @@ export class CreateStudentCommand implements ICreateStudentCommand {
     mobileNumber?: number;
     gender?: Gender;
     address?: string | undefined;
+    joiningDate?: Date | undefined;
 
     constructor(data?: ICreateStudentCommand) {
         if (data) {
@@ -1294,6 +1299,7 @@ export class CreateStudentCommand implements ICreateStudentCommand {
             this.mobileNumber = _data["mobileNumber"];
             this.gender = _data["gender"];
             this.address = _data["address"];
+            this.joiningDate = _data["joiningDate"] ? new Date(_data["joiningDate"].toString()) : <any>undefined;
         }
     }
 
@@ -1314,6 +1320,7 @@ export class CreateStudentCommand implements ICreateStudentCommand {
         data["mobileNumber"] = this.mobileNumber;
         data["gender"] = this.gender;
         data["address"] = this.address;
+        data["joiningDate"] = this.joiningDate ? this.joiningDate.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -1327,6 +1334,7 @@ export interface ICreateStudentCommand {
     mobileNumber?: number;
     gender?: Gender;
     address?: string | undefined;
+    joiningDate?: Date | undefined;
 }
 
 export class UpdateStudentCommand implements IUpdateStudentCommand {

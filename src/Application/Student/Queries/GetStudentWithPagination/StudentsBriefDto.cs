@@ -21,6 +21,7 @@ public class StudentsBriefDto
     public long MobileNumber { get; init; }
     public Gender Gender { get; init; }
     public string? Address { get; init; }
+    public DateTime? JoiningDate { get; set; }
 
     private class Mapping : Profile
     {

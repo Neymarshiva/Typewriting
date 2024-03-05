@@ -62,10 +62,11 @@ function StudentRow({ student }) {
     email,
     mobileNumber,
     gender,
-    address
+    address,
+    joiningDate
   } = student;
-
   const { isDeleting, deleteStudents } = useDeleteStudents();
+  const formattedDate = joiningDate ? new Date(joiningDate).toLocaleDateString() : '';
 
   return (
     <Table.Row>
@@ -76,9 +77,12 @@ function StudentRow({ student }) {
             <MdOutlineMail /> <span>{email}</span>
           </StackedIcon>
         </Stacked>
+        <StackedIcon>
+          <ImMobile /><span>{mobileNumber}</span>
+        </StackedIcon>
       </Student>
       <StackedIcon>
-        <ImMobile /><span>{mobileNumber}</span>
+        <span>{formattedDate}</span>
       </StackedIcon>
       <Stacked> {GenderEnum(gender)}</Stacked>
       <Stacked> {address}</Stacked>

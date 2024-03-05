@@ -19,6 +19,7 @@ public record UpdateStudentCommand : IRequest
     public long MobileNumber { get; init; }
     public Gender Gender { get; init; }
     public string? Address { get; init; }
+    public DateTime? JoiningDate { get; set; }
 }
 
 public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
@@ -45,6 +46,7 @@ public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
         entity.MobileNumber = request.MobileNumber;
         entity.Gender = request.Gender;
         entity.Address = request.Address;
+        entity.JoiningDate = request.JoiningDate;
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

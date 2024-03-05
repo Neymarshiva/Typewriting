@@ -20,6 +20,7 @@ public record CreateStudentCommand : IRequest<int>
     public long MobileNumber { get; init; }
     public Gender Gender { get; init; }
     public string? Address { get; init; }
+    public DateTime? JoiningDate { get; init; }
 }
 
 public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand, int>
@@ -45,7 +46,8 @@ public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand,
             MobileNumber = request.MobileNumber,
             Gender = request.Gender,
             Address = request.Address,
-            UserId = _user.Id
+            UserId = _user.Id,
+            JoiningDate = request.JoiningDate
         };
 
         _context.Students.Add(entity);
