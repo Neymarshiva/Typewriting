@@ -29,6 +29,7 @@ const StyledSelect = styled.select`
 `;
 
 
+
 function CreateStudent({ studentToEdit = {}, onCloseModal }) {
 
     const { id: editId, ...editValues } = studentToEdit;
@@ -184,28 +185,31 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                     </StyledSelect>
                 </FormRow>
                 <FormRow label="Joining Date" error={errors?.joiningDate?.message}>
-                    <Controller
-                        name="joiningDate"
-                        control={control}
-                        rules={{ required: 'Date is required' }}
+                    <CompoundDatePicker>
+                        <Controller
+                            name="joiningDate"
+                            control={control}
+                            rules={{ required: 'Date is required' }}
 
-                        render={({ field }) => (
-                            <Datepicker
-                                value={field.value}
-                                onChange={(date) => {
-                                    field.onChange(date); // Update the form field value
+                            render={({ field }) => (
+                                <Datepicker
+                                    value={field.value}
+                                    onChange={(date) => {
+                                        field.onChange(date); // Update the form field value
 
-                                }}
-                                disabled={isWorking}
-                                useRange={false}
-                                asSingle={true}
-                                onFocus={() => setShowCalendar(true)}
-                                displayFormat={"DD/MM/YYYY"}
-                                readOnly={true}
-                                inputClassName="text-xl datepicker"
-                            />
-                        )}
-                    />
+                                    }}
+                                    disabled={isWorking}
+                                    useRange={false}
+                                    asSingle={true}
+                                    onFocus={() => setShowCalendar(true)}
+                                    displayFormat={"DD/MM/YYYY"}
+                                    readOnly={true}
+                                    inputClassName="text-xl datepicker"
+                                />
+                            )}
+                        />
+                    </CompoundDatePicker>
+
 
                 </FormRow>
 
