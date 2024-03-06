@@ -24,9 +24,7 @@ const Avatar = styled.img`
 
 function UserAvatar() {
 
-  const { user } = useUser();
-  console.log("Neymarshiva");
-  console.table(user);
+  const { user } = useUser(); 
   return (
     <StyledUserAvatar>
       <Avatar

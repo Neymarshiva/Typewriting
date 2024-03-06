@@ -1347,6 +1347,7 @@ export class UpdateStudentCommand implements IUpdateStudentCommand {
     mobileNumber?: number;
     gender?: Gender;
     address?: string | undefined;
+    joiningDate?: Date | undefined;
 
     constructor(data?: IUpdateStudentCommand) {
         if (data) {
@@ -1368,6 +1369,7 @@ export class UpdateStudentCommand implements IUpdateStudentCommand {
             this.mobileNumber = _data["mobileNumber"];
             this.gender = _data["gender"];
             this.address = _data["address"];
+            this.joiningDate = _data["joiningDate"] ? new Date(_data["joiningDate"].toString()) : <any>undefined;
         }
     }
 
@@ -1389,6 +1391,7 @@ export class UpdateStudentCommand implements IUpdateStudentCommand {
         data["mobileNumber"] = this.mobileNumber;
         data["gender"] = this.gender;
         data["address"] = this.address;
+        data["joiningDate"] = this.joiningDate ? this.joiningDate.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -1403,6 +1406,7 @@ export interface IUpdateStudentCommand {
     mobileNumber?: number;
     gender?: Gender;
     address?: string | undefined;
+    joiningDate?: Date | undefined;
 }
 
 export class PaginatedListOfTodoItemBriefDto implements IPaginatedListOfTodoItemBriefDto {

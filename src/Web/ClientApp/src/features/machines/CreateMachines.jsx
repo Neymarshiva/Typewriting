@@ -41,7 +41,7 @@ function CreateMachines({ machineToEdit = {}, onCloseModal }) {
 
     useEffect(() => {
         const filtraPavimento = () => {
-            console.log('mysel value', watchMysel);
+           
         }
         filtraPavimento()
     }, [watchMysel]);

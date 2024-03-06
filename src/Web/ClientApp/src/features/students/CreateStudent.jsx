@@ -3,7 +3,7 @@ import FormRow from "../../ui/FormRow";
 import { useForm, Controller } from "react-hook-form";
 import Input from "../../ui/Input";
 import RadioGroup from "../../ui/RadioGroup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Textarea from "../../ui/Textarea";
 import Button from "../../ui/Button";
@@ -34,6 +34,7 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
     const { id: editId, ...editValues } = studentToEdit;
     const isEditSession = Boolean(editId);
 
+
     const { isLoading, batchTimmings } = useBatchTimmings();
     const { isMachineLoading, machines } = useMachines();
 
@@ -50,15 +51,6 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
     const { errors } = formState;
 
     const [showCalendar, setShowCalendar] = useState(false);
-
-
-    const [selectedDate, setSelectedDate] = useState({
-        startDate: isEditSession ? editValues.joiningDate : new Date(),
-        endDate: null
-    });
-
-
-
 
     function onSubmit(data) {
 
@@ -192,16 +184,18 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                     </StyledSelect>
                 </FormRow>
                 <FormRow label="Joining Date" error={errors?.joiningDate?.message}>
-
                     <Controller
                         name="joiningDate"
                         control={control}
-                        defaultValue={isEditSession ? editValues.joiningDate : null}
                         rules={{ required: 'Date is required' }}
+
                         render={({ field }) => (
                             <Datepicker
                                 value={field.value}
-                                onChange={(date) => field.onChange(date)}
+                                onChange={(date) => {
+                                    field.onChange(date); // Update the form field value
+
+                                }}
                                 disabled={isWorking}
                                 useRange={false}
                                 asSingle={true}

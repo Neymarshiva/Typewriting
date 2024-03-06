@@ -10,8 +10,7 @@ export class AddMachine extends Component {
         this.addNewMachinePopupFn = this.addNewMachinePopupFn.bind(this);
     }
 
-    addNewMachinePopupFn = () => {
-        console.log("button clicked");
+    addNewMachinePopupFn = () => {        
         this.setState({
             isOpenModal: !this.state.isOpenModal
         });

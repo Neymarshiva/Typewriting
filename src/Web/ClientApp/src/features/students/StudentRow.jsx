@@ -51,6 +51,13 @@ const StackedIcon = styled.div`
 
 
 function StudentRow({ student }) {
+
+
+  student.joiningDate = {
+    startDate: student?.joiningDate,
+    endDate: student?.joiningDate,
+  }
+
   const {
     id,
     machinesId,
@@ -66,7 +73,9 @@ function StudentRow({ student }) {
     joiningDate
   } = student;
   const { isDeleting, deleteStudents } = useDeleteStudents();
-  const formattedDate = joiningDate ? new Date(joiningDate).toLocaleDateString() : '';
+
+
+  const formattedDate = joiningDate ? new Date(joiningDate.startDate).toLocaleDateString() : '';
 
   return (
     <Table.Row>
