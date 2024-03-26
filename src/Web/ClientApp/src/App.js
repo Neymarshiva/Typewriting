@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { DarkModeProvider } from "./context/DarkModeContext";
+import StudentDetail from "./features/studentdetails/StudentDetail";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -40,6 +41,10 @@ export default class App extends Component {
                 <Route path="students" element={<Students />} />
                 <Route path="timings" element={<Timings />} />
                 <Route path="settings" element={<Settings />} />
+                <Route
+                  path="studentdetail/:studentId"
+                  element={<StudentDetail />}
+                />
               </Route>
             </Routes>
             <Toaster

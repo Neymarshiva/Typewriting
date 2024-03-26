@@ -21,7 +21,7 @@ function StudentTable() {
                         <div>Joined Date</div> 
                         <div>Gender</div>
                         <div>Address</div>
-                        <div>Machine Number</div>
+                        <div>Machine No</div>
                         <div>Batch Timing </div>
                         <div></div>
                     </Table.Header>

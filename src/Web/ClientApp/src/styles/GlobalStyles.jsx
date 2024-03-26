@@ -40,6 +40,12 @@ const GlobalStyles = createGlobalStyle`
 
     --image-grayscale: 0;
   --image-opacity: 100%;
+  --bs-text-gray-800:#1B84FF!important;
+  --bs-text-gray-900:#071437;
+  --bs-card-border-color:#F1F1F4 !important;
+  --bs-card-background-color:#ffffff;
+  --bs-body-color: #071437;
+  --bs-text-gray-600:#78829D;
   }
   
   &.dark-mode {
@@ -78,6 +84,11 @@ const GlobalStyles = createGlobalStyle`
 
 --image-grayscale: 10%;
 --image-opacity: 90%;
+--bs-text-gray-600:#808290;
+--bs-text-gray-800:#1B84FF!important;
+--bs-text-gray-900:#F5F5F5;
+--bs-card-border-color:##1E2027 !important;
+--bs-card-background-color:#18212f;
   }
   
   /* Indigo */

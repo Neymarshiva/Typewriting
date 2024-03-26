@@ -9,6 +9,7 @@ import { useDeleteStudents } from "./useDeleteStudents";
 import { GenderEnum } from "../../enums/globalEnum";
 import { MdOutlineMail } from "react-icons/md";
 import { ImMobile } from "react-icons/im";
+import { NavLink } from "react-router-dom";
 
 const Student = styled.div`
   font-size: 1.6rem;
@@ -47,7 +48,11 @@ const StackedIcon = styled.div`
     margin-top:0.4rem;
   }
 `;
-
+const StyledNavLink = styled(NavLink)`
+&:hover {
+    transition: color .2s ease;
+    color: var(--bs-text-gray-800);
+}`;
 
 
 function StudentRow({ student }) {
@@ -80,7 +85,10 @@ function StudentRow({ student }) {
   return (
     <Table.Row>
       <Student>
-        {firstName + " " + lastName}
+        <StyledNavLink to={`/studentdetail/${id}`}>
+          {firstName + " " + lastName}
+        </StyledNavLink>
+
         <Stacked>
           <StackedIcon>
             <MdOutlineMail /> <span>{email}</span>
