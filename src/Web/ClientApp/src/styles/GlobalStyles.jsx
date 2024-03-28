@@ -49,7 +49,7 @@ const GlobalStyles = createGlobalStyle`
   }
   
   &.dark-mode {
-    --color-grey-0: #18212f;
+--color-grey-0: #18212f;
 --color-grey-50: #111827;
 --color-grey-100: #1f2937;
 --color-grey-200: #374151;
@@ -106,7 +106,12 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-md: 7px;
   --border-radius-lg: 9px;
 
-
+  --color-nav-grey-0: #18212f;
+  --color-nav-800: #f3f4f6;
+  --color-nav-50: #111827;
+  --color-nav-600: #d1d5db;
+  --color-brand-nav-600: #4f46e5;
+  
 }
 
 *,
