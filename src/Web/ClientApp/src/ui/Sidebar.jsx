@@ -19,9 +19,13 @@ const StyledSidebar = styled.aside`
   gap: 3.2rem;
 `;
 
-function Sidebar() {
-  const [expanded, setExpanded] = useState(true);
+function Sidebar({ expanded, onValueChange }) {
+  //const [expanded, setExpanded] = useState(true);
   const [active, setActive] = useState(mainLinks[0].id);
+
+  function handleClick() {
+    onValueChange();
+  }
 
   return (
     <StyledSidebar className={`${expanded ? "w-full" : "w-32"}`}>
@@ -40,7 +44,7 @@ function Sidebar() {
             </h2>
           </div>
           <button
-            onClick={() => setExpanded((prev) => !prev)}
+            onClick={handleClick}
             className="p-1.5 font-bold text-gray-100 rounded-lg bg-accent-light hover:bg-accent-lighter"
           >
             {expanded ? <LuChevronFirst /> : <LuChevronLast />}
