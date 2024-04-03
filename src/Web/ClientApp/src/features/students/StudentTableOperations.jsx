@@ -40,8 +40,7 @@ function StudentTableOperations() {
         batchTimmingsOption.push({ value: batchtime?.id, label: batchtime?.timings })
     ));
 
-    function handleChange(e) {
-        debugger;
+    function handleChange(e) {        
         searchParams.set("searchTerm", e.target.value);
         if (searchParams.get("page")) searchParams.set("page", 1);
         if (!e.target.value) {

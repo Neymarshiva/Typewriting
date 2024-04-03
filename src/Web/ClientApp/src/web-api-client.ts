@@ -320,7 +320,7 @@ export class StudentsClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getStudentsWithPagination(pageNumber: number, pageSize: number, gender: number | null | undefined, batchTimingsId: number | null | undefined, machinesId: number | null | undefined, searchTerm: string | null | undefined): Promise<PaginatedListOfStudentsBriefDto> {
+    getStudentsWithPagination(pageNumber: number, pageSize: number, gender: number | null | undefined, batchTimingsId: number | null | undefined, machinesId: number | null | undefined, searchTerm: string | null | undefined, studentId: number | null | undefined): Promise<PaginatedListOfStudentsBriefDto> {
         let url_ = this.baseUrl + "/api/Students?";
         if (pageNumber === undefined || pageNumber === null)
             throw new Error("The parameter 'pageNumber' must be defined and cannot be null.");
@@ -338,6 +338,8 @@ export class StudentsClient {
             url_ += "MachinesId=" + encodeURIComponent("" + machinesId) + "&";
         if (searchTerm !== undefined && searchTerm !== null)
             url_ += "SearchTerm=" + encodeURIComponent("" + searchTerm) + "&";
+        if (studentId !== undefined && studentId !== null)
+            url_ += "StudentId=" + encodeURIComponent("" + studentId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {

@@ -19,6 +19,7 @@ public record GetStudentWithPaginationQuery : IRequest<PaginatedList<StudentsBri
     public int? BatchTimingsId { get; init; }
     public int? MachinesId { get; init; }
     public string? SearchTerm { get; init; }
+    public int? StudentId { get; init; }
 }
 
 
@@ -49,6 +50,10 @@ public class GetStudentWithPaginationQueryHandler : IRequestHandler<GetStudentWi
         if (request.BatchTimingsId > 0)
         {
             query = query.Where(x => x.BatchTimingsId == request.BatchTimingsId);
+        }
+        if (request.StudentId > 0)
+        {
+            query = query.Where(x => x.Id == request.StudentId);
         }
         if (!string.IsNullOrEmpty(request.SearchTerm))
         {

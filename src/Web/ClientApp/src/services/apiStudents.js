@@ -7,7 +7,8 @@ export async function getStudents({
   filterByMachineNumber,
   filterByBatchTimings,
   searchTerm,
-}) {
+  studentId
+}) {  
   let client = new StudentsClient();
   const data = await client.getStudentsWithPagination(
     pageNumber,
@@ -15,7 +16,8 @@ export async function getStudents({
     filterByGender,
     filterByBatchTimings,
     filterByMachineNumber,
-    searchTerm
+    searchTerm,
+    studentId
   );
 
   return data;

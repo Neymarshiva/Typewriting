@@ -46,6 +46,7 @@ const GlobalStyles = createGlobalStyle`
   --bs-card-background-color:#ffffff;
   --bs-body-color: #071437;
   --bs-text-gray-600:#78829D;
+  --bs-text-primary:#1B84FF;
   }
   
   &.dark-mode {
@@ -89,6 +90,7 @@ const GlobalStyles = createGlobalStyle`
 --bs-text-gray-900:#F5F5F5;
 --bs-card-border-color:##1E2027 !important;
 --bs-card-background-color:#18212f;
+--bs-text-primary:#1B84FF;
   }
   
   /* Indigo */
@@ -199,6 +201,11 @@ img {
 
   /* For dark mode */
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+}
+
+.text-hover-primary:hover {
+    transition: color .2s ease;
+    color: var(--bs-text-primary)!important;
 }
 
 `;

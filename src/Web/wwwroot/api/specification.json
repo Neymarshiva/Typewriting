@@ -246,6 +246,16 @@
               "nullable": true
             },
             "x-position": 6
+          },
+          {
+            "name": "StudentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-position": 7
           }
         ],
         "responses": {

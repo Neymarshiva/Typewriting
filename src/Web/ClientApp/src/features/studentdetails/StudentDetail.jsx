@@ -2,6 +2,12 @@ import styled, { css } from "styled-components";
 import Card from "../../ui/Card";
 import Separator from "../../ui/Separator";
 import { FaAngleDown } from "react-icons/fa";
+import { useParams } from 'react-router-dom';
+import { useStudents } from "../students/useStudents";
+import Spinner from "../../ui/Spinner";
+import { useStudentDetails } from "./useStudentDetails";
+import { GenderEnum } from "../../enums/globalEnum";
+
 
 const flexstyles = css`
   display: flex;
@@ -32,6 +38,7 @@ const DetailToggle = styled.div`
     font-size: 1.75rem!important;
     padding-top: 0.75rem!important;
     padding-bottom: 0.75rem!important;
+    padding-left:2rem;
     width:100%;
 `
 const DetailDiv = styled.div`
@@ -49,10 +56,19 @@ const DetailItemDiv = styled.div`
 const DetailValueDiv = styled.div`
     color: var(--bs-text-gray-600);
     margin-top:0.5rem;
-    
 `
+const StudentName = styled.div`
+  font-weight:600 !important;   
+    color:var(--bs-text-gray-900);
+    text-align: center;
+`;
 
 function StudentDetail() {
+    const { isLoading, firstStudent } = useStudentDetails();
+    if (isLoading) return <Spinner />;
+
+
+    const formattedDate = firstStudent.joiningDate ? new Date(firstStudent.joiningDate).toLocaleDateString() : '';
     return (
         <Card
             flexdirection="column"
@@ -69,7 +85,10 @@ function StudentDetail() {
         >
             <UserInfo>
                 <Avatar>
-                    <img className="rounded-full" src="default-user.jpg" alt="" />
+                    <img className="rounded-full mb-4" src="default-user.jpg" alt="" />
+                    <StudentName className="text-hover-primary mb-3">
+                        {`${firstStudent?.firstName}  ${firstStudent?.lastName}`}
+                    </StudentName>
                 </Avatar>
             </UserInfo>
             <DetailToggle>
@@ -77,14 +96,29 @@ function StudentDetail() {
             </DetailToggle>
             <Separator></Separator>
             <div className="w-full">
-                <div className="pb-5 text-2xl">
-                    <DetailItemDiv>Account ID</DetailItemDiv>
-                    <DetailValueDiv>123455666</DetailValueDiv>
+                <div className="p-8 text-2xl">
 
                     <DetailItemDiv>Email </DetailItemDiv>
-                    <DetailValueDiv>Shiva@yopmail.com</DetailValueDiv>
+                    <DetailValueDiv>{firstStudent?.email}</DetailValueDiv>
 
-                   
+                    <DetailItemDiv>Mobile Number </DetailItemDiv>
+                    <DetailValueDiv>{firstStudent?.mobileNumber}</DetailValueDiv>
+
+                    <DetailItemDiv>Address </DetailItemDiv>
+                    <DetailValueDiv>{firstStudent?.address}</DetailValueDiv>
+
+                    <DetailItemDiv>Gender </DetailItemDiv>
+                    <DetailValueDiv>{GenderEnum(firstStudent?.gender)}</DetailValueDiv>
+
+                    <DetailItemDiv>Joining Date </DetailItemDiv>
+                    <DetailValueDiv>{formattedDate}</DetailValueDiv>
+
+                    <DetailItemDiv>Machine Number</DetailItemDiv>
+                    <DetailValueDiv>{firstStudent?.machinesNumber}</DetailValueDiv>
+
+                    <DetailItemDiv>Batch Timmings</DetailItemDiv>
+                    <DetailValueDiv>{firstStudent?.timings}</DetailValueDiv>
+
                 </div>
 
             </div>
