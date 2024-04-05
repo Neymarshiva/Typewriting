@@ -14,6 +14,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import StudentDetail from "./features/studentdetails/StudentDetail";
+import PageNotFound from "./pages/PageNotFound";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -46,6 +47,7 @@ export default class App extends Component {
                   element={<StudentDetail />}
                 />
               </Route>
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Toaster
               position="top-center"

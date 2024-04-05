@@ -7,6 +7,7 @@ import { useStudents } from "../students/useStudents";
 import Spinner from "../../ui/Spinner";
 import { useStudentDetails } from "./useStudentDetails";
 import { GenderEnum } from "../../enums/globalEnum";
+import Empty from "../../ui/Empty";
 
 
 const flexstyles = css`
@@ -66,7 +67,7 @@ const StudentName = styled.div`
 function StudentDetail() {
     const { isLoading, firstStudent } = useStudentDetails();
     if (isLoading) return <Spinner />;
-
+    if (!firstStudent) return <Empty resourceName="student" />;
 
     const formattedDate = firstStudent.joiningDate ? new Date(firstStudent.joiningDate).toLocaleDateString() : '';
     return (
