@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import UserAvatar from "./UserAvatar";
 import HeaderMenu from "./HeaderMenu";
+import CountrySelector from "./CountrySelector";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -14,12 +15,13 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
-    return (
+  return (
     <StyledHeader>
-        <UserAvatar/>
-        <HeaderMenu/>
+      <CountrySelector />
+      <UserAvatar />
+      <HeaderMenu />
     </StyledHeader>
-    );
-  }
-  
-  export default Header;
+  );
+}
+
+export default Header;
