@@ -8,6 +8,9 @@ import Spinner from "../../ui/Spinner";
 import { useStudentDetails } from "./useStudentDetails";
 import { GenderEnum } from "../../enums/globalEnum";
 import Empty from "../../ui/Empty";
+import Button from "../../ui/Button";
+import Modal from "../../ui/Modal";
+import CreateStudent from "../students/CreateStudent";
 
 
 const flexstyles = css`
@@ -69,7 +72,16 @@ function StudentDetail() {
     if (isLoading) return <Spinner />;
     if (!firstStudent) return <Empty resourceName="student" />;
 
+
+
     const formattedDate = firstStudent.joiningDate ? new Date(firstStudent.joiningDate).toLocaleDateString() : '';
+
+    firstStudent.joiningDate = {
+        startDate: firstStudent?.joiningDate,
+        endDate: firstStudent?.joiningDate,
+    }
+
+
     return (
         <Card
             flexdirection="column"
@@ -93,7 +105,22 @@ function StudentDetail() {
                 </Avatar>
             </UserInfo>
             <DetailToggle>
-                <DetailDiv>Details  <FaAngleDown /> </DetailDiv>
+                <DetailDiv>Details  <FaAngleDown />
+                </DetailDiv>
+                <DetailDiv>
+                    <Modal>
+                        <Modal.Open opens="edit">
+                            <Button size="small">
+                                Edit student
+                            </Button>
+                        </Modal.Open>
+
+                        <Modal.Window name="edit">
+                            <CreateStudent studentToEdit={firstStudent} />
+                        </Modal.Window>
+                    </Modal>
+
+                </DetailDiv>
             </DetailToggle>
             <Separator></Separator>
             <div className="w-full">
