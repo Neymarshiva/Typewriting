@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Heading from "../ui/Heading";
 import SignupForm from "../features/authentication/SignupForm";
 import CreateMachines from '../features/machines/CreateMachines';
+import UserDetail from '../features/settings/UserDetail';
 export class Settings extends Component {
 
     constructor(props) {
@@ -22,12 +23,7 @@ export class Settings extends Component {
 
     render() {
         return (
-            <>
-                <Heading as="h1">Create a new user</Heading>
-                <SignupForm onChangeShowForm={this.setShowFrom}></SignupForm>
-
-                {this.state.showForm && <CreateMachines />} 
-            </>
+            <UserDetail/>
         );
     }
 }

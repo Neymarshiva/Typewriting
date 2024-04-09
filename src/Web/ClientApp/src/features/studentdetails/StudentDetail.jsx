@@ -118,7 +118,7 @@ function StudentDetail() {
         >
             <UserInfo>
                 <Avatar>
-                    <img className="rounded-full mb-4" src="default-user.jpg" alt="" />
+                    <img className="rounded-full mb-4" src="user-image.jpg" alt="" />
                     <StudentName className="text-hover-primary mb-3">
                         {`${firstStudent?.firstName}  ${firstStudent?.lastName}`}
                     </StudentName>
