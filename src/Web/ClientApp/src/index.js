@@ -12,7 +12,9 @@ const root = createRoot(rootElement);
 
 root.render(
   <BrowserRouter basename={baseUrl}>
-    <App />
+   <React.Suspense fallback={<div>Loading...</div>}>
+      <App />
++   </React.Suspense>
   </BrowserRouter>);
 
 // If you want your app to work offline and load faster, you can change

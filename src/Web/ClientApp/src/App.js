@@ -15,6 +15,7 @@ import { Toaster } from "react-hot-toast";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import StudentDetail from "./features/studentdetails/StudentDetail";
 import PageNotFound from "./pages/PageNotFound";
+import "./i18n/config.ts";
 
 export default class App extends Component {
   static displayName = App.name;

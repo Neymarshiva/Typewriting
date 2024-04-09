@@ -1,0 +1,9 @@
+{
+    "hello_world": "Hello, World!", 
+    "simple_number": "A simple number (default formatting): {{value, number}}",
+    "percent": "Percentage (use values between 0 and 1): {{value, number(style: percent)}}",
+    "custom_number": "Custom formatting: {{value, number(minimumFractionDigits: 2; maximumFractionDigits: 4; signDisplay: always)}}",
+    "trees_grown_other": "We have grown {{count, number}} trees 🌳", 
+    "intlNumber": "Some {{val, number}}",
+    "intlNumberWithOptions": "Some {{val, number(minimumFractionDigits: 2)}}"
+}
