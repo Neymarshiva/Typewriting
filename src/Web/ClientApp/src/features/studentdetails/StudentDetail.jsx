@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Card from "../../ui/Card";
 import Separator from "../../ui/Separator";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
 import { useStudents } from "../students/useStudents";
 import Spinner from "../../ui/Spinner";
@@ -125,7 +125,7 @@ function StudentDetail() {
                 </Avatar>
             </UserInfo>
             <DetailToggle>
-                <DetailDiv onClick={toggleDetail} >Details  <FaAngleDown />
+                <DetailDiv onClick={toggleDetail} >Details {isopen ? <FaAngleUp /> : <FaAngleDown />}
                 </DetailDiv>
                 <DetailDiv>
                     <Modal>
