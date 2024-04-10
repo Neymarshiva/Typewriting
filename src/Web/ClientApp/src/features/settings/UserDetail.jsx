@@ -1,5 +1,9 @@
 import Card from "../../ui/Card"
 import styled, { css } from 'styled-components';
+import { MdOutlineVerified } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+import { CiLocationOn } from "react-icons/ci";
+import { MdOutlineMarkEmailRead } from "react-icons/md";
 
 const flexstyles = css`
   display: flex;
@@ -50,34 +54,108 @@ const ActiveSymbol = styled.div`
     position: absolute !important;
 `;
 
+const Title = styled.div`
+    display:flex;
+    margin-bottom: 0.5rem !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    justify-content: space-between !important;
+`;
+
+const Navs = styled.ul`
+    border-bottom-width: 2px;
+    border-color: transparent !important;
+    border-bottom-style: solid;
+
+    align-items: stretch;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    font-weight: 600 !important;
+    font-size: 1.15rem !important;
+
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+
+    &:hover{
+    color:var(--bs-text-primary);
+    }
+`;
+
+const NavItem = styled.li`
+    display: flex;
+    align-items: stretch;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: -2px;
+    margin-top: 0.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.15rem !important;
+`;
+
 function UserDetail() {
     return (
-        <Card
-            flexdirection="row"
-            justifycontent="start"
-            alignitems="center"
-            background="var(--bs-card-background-color);"
-            width="100%"
-            height="100%"
-            border="1px solid var(--bs-card-border-color)"
-            borderradius=".5rem"
-            color="var(--bs-body-color)"
-            padding="1rem"
-            flexstyles={flexstyles}
-        >
-            <UserDetailDiv>
-                <UserProfile>
-                    <UserPic>
-                        <img src="user-image.jpg" alt=""></img>
-                        <ActiveSymbol></ActiveSymbol>
-                    </UserPic>
-                </UserProfile>
-                <UserInfo>
+        <>
+            <Card
+                flexdirection="column"
+                justifycontent="start"
+                alignitems="start"
+                background="var(--bs-card-background-color);"
+                width="100%"
+                height="100%"
+                border="1px solid var(--bs-card-border-color)"
+                borderradius=".5rem"
+                color="var(--bs-body-color)"
+                padding="1rem"
+                flexstyles={flexstyles}
+            >
+                <UserDetailDiv>
+                    <UserProfile>
+                        <UserPic>
+                            <img src="user-image.jpg" alt=""></img>
+                            <ActiveSymbol></ActiveSymbol>
+                        </UserPic>
+                    </UserProfile>
+                    <UserInfo>
+                        <Title>
+                            <div className="flex flex-col">
+                                <div className="flex items-center mb-3">
+                                    <span className="text-gray-900 text-hover-primary fs-2 fw-bold me-1 text-5xl">Neymar Shiva</span>
+                                    <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-3xl font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"><MdOutlineVerified /></span>
 
-                </UserInfo>
-            </UserDetailDiv>
+                                </div>
+                                <div className="flex flex-wrap font-medium text-2xl mb-4 pe-2">
+                                    <span className="flex  items-center text-gray-500 text-hover-primary me-5 mb-2">
 
-        </Card>
+                                        <span className="mr-2"><FaUserCircle /> </span>
+                                        Admin
+                                    </span>
+                                    <span className="flex  items-center text-gray-500 text-hover-primary me-5 mb-2">
+
+                                        <span className="mr-2"><CiLocationOn /> </span>
+                                        SF, Bay Area
+                                    </span>
+                                    <span className="flex  items-center text-gray-500 text-hover-primary me-5 mb-2">
+
+                                        <span className="mr-2"><MdOutlineMarkEmailRead /> </span>
+                                        Neymarshiva@yopmail.com
+                                    </span>
+                                </div>
+                            </div>
+                        </Title>
+                    </UserInfo>
+                </UserDetailDiv>
+                <Navs>
+                    <NavItem>test</NavItem>
+                    <NavItem>test</NavItem>
+                </Navs>
+            </Card>
+
+
+        </>
     )
 }
 
