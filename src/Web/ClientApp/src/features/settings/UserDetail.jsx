@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import { MdOutlineVerified } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
-import { MdOutlineMarkEmailRead } from "react-icons/md";
-
+import { MdOutlineMarkEmailRead } from "react-icons/md"; 
+import Tabs from "../../ui/Tabs";
 const flexstyles = css`
   display: flex;
   flex-direction: ${(props) => props.flexdirection || "row"};
@@ -62,39 +62,7 @@ const Title = styled.div`
     justify-content: space-between !important;
 `;
 
-const Navs = styled.ul`
-    border-bottom-width: 2px;
-    border-color: transparent !important;
-    border-bottom-style: solid;
-
-    align-items: stretch;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-
-    font-weight: 600 !important;
-    font-size: 1.15rem !important;
-
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
-
-    &:hover{
-    color:var(--bs-text-primary);
-    }
-`;
-
-const NavItem = styled.li`
-    display: flex;
-    align-items: stretch;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin-bottom: -2px;
-    margin-top: 0.5rem !important;
-    font-weight: 600 !important;
-    font-size: 1.15rem !important;
-`;
+ 
 
 function UserDetail() {
     return (
@@ -148,11 +116,31 @@ function UserDetail() {
                         </Title>
                     </UserInfo>
                 </UserDetailDiv>
-                <Navs>
-                    <NavItem>test</NavItem>
-                    <NavItem>test</NavItem>
-                </Navs>
             </Card>
+            <div>
+                <Tabs>
+                    <div>
+                        <Tabs.TabMenu>
+                            <Tabs.TabMenuItem id="recent">Recent</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="popular">Popular</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="trending">Trending</Tabs.TabMenuItem>
+                        </Tabs.TabMenu>
+                    </div>
+                    <div>
+                        <Tabs.TabPane id="recent">
+                            recent tab
+                        </Tabs.TabPane>
+                        <Tabs.TabPane id="popular">
+                            popular tab
+                        </Tabs.TabPane>
+                        <Tabs.TabPane id="trending">
+                            treding tab
+                        </Tabs.TabPane>
+                    </div>
+
+
+                </Tabs>
+            </div>
 
 
         </>
