@@ -47,6 +47,16 @@
   "DateRequired": "Date is required",  
   "ThisFieldIsRequired": "This field is required", 
   "CreateMachine": "Create new machine",
-  "EditMachine": "Edit machine"
+  "EditMachine": "Edit machine", 
+  "AreYouSureDelete": "Are you sure you want to delete",
+  "Permanently": "permanently",
+  "ThisActionCannotBeUndone": "This action cannot be undone" ,
+  "Details": "Details",
+  "Showing": "Showing",
+  "to": "to",
+  "of": "of",
+  "results": "results",
+  "Previous": "Previous",
+  "Next": "Next"
 
 }

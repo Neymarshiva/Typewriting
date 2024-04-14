@@ -47,5 +47,15 @@
   "DateRequired": "التاريخ مطلوب", 
   "ThisFieldIsRequired": "هذا الحقل مطلوب", 
   "CreateMachine": "إنشاء جهاز جديد",
-  "EditMachine": "تحرير الجهاز"
+  "EditMachine": "تحرير الجهاز",   
+  "AreYouSureDelete": "هل أنت متأكد أنك تريد حذف",
+  "Permanently": "بشكل دائم",
+  "ThisActionCannotBeUndone": "لا يمكن التراجع عن هذا الإجراء" ,
+  "Details": "التفاصيل",
+  "Showing": "عرض",
+  "to": "إلى",
+  "of": "من",
+  "results": "النتائج",
+  "Previous": "السابق",
+  "Next": "التالي"
 }

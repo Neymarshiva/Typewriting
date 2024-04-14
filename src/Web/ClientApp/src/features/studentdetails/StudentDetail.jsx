@@ -12,6 +12,7 @@ import Empty from "../../ui/Empty";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 import CreateStudent from "../students/CreateStudent";
+import { useTranslation } from "react-i18next";
 
 // Define styled components
 const flexstyles = css`
@@ -87,9 +88,10 @@ const StudentName = styled.div`
 function StudentDetail() {
     const { isLoading, firstStudent } = useStudentDetails();
     const [isopen, setIsOpen] = useState(true); // State to manage the visibility of the detail section
+    const { t } = useTranslation();
 
     if (isLoading) return <Spinner />;
-    if (!firstStudent) return <Empty resourceName="student" />;
+    if (!firstStudent) return <Empty resourceName={t("student")} />;
 
     const formattedDate = firstStudent.joiningDate ? new Date(firstStudent.joiningDate).toLocaleDateString() : '';
 
@@ -125,13 +127,13 @@ function StudentDetail() {
                 </Avatar>
             </UserInfo>
             <DetailToggle>
-                <DetailDiv onClick={toggleDetail} >Details {isopen ? <FaAngleUp /> : <FaAngleDown />}
+                <DetailDiv onClick={toggleDetail} >{t("Details")} {isopen ? <FaAngleUp /> : <FaAngleDown />}
                 </DetailDiv>
                 <DetailDiv>
                     <Modal>
                         <Modal.Open opens="edit">
                             <Button size="small">
-                                Edit student
+                                {t("Edit")} {t("Student")}
                             </Button>
                         </Modal.Open>
                         <Modal.Window name="edit">
@@ -144,19 +146,19 @@ function StudentDetail() {
             <DetailToggleDiv isopen={isopen.toString()}> {/* Pass isOpen state to control the visibility */}
                 <div className="w-full">
                     <div className="p-8 text-2xl">
-                        <DetailItemDiv>Email </DetailItemDiv>
+                        <DetailItemDiv>{t("Email")}</DetailItemDiv>
                         <DetailValueDiv>{firstStudent?.email}</DetailValueDiv>
-                        <DetailItemDiv>Mobile Number </DetailItemDiv>
+                        <DetailItemDiv>{t("MobileNumber")}</DetailItemDiv>
                         <DetailValueDiv>{firstStudent?.mobileNumber}</DetailValueDiv>
-                        <DetailItemDiv>Address </DetailItemDiv>
+                        <DetailItemDiv>{t("Address")}</DetailItemDiv>
                         <DetailValueDiv>{firstStudent?.address}</DetailValueDiv>
-                        <DetailItemDiv>Gender </DetailItemDiv>
+                        <DetailItemDiv>{t("Gender")}</DetailItemDiv>
                         <DetailValueDiv>{GenderEnum(firstStudent?.gender)}</DetailValueDiv>
-                        <DetailItemDiv>Joining Date </DetailItemDiv>
+                        <DetailItemDiv>{t("JoiningDate")}</DetailItemDiv>
                         <DetailValueDiv>{formattedDate}</DetailValueDiv>
-                        <DetailItemDiv>Machine Number</DetailItemDiv>
+                        <DetailItemDiv>{t("MachineNumber")}</DetailItemDiv>
                         <DetailValueDiv>{firstStudent?.machinesNumber}</DetailValueDiv>
-                        <DetailItemDiv>Batch Timmings</DetailItemDiv>
+                        <DetailItemDiv>{t("BatchTimming")}</DetailItemDiv>
                         <DetailValueDiv>{firstStudent?.timings}</DetailValueDiv>
                     </div>
                 </div>
