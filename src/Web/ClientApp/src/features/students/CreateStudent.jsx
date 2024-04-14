@@ -13,6 +13,7 @@ import { useCreateStudents } from "./useCreateStudents";
 import { useEditStudents } from "./useEditStudents";
 import Datepicker from "react-tailwindcss-datepicker";
 import CompoundDatePicker from "../../ui/DatePicker";
+import { useTranslation } from "react-i18next";
 
 const StyledSelect = styled.select`
   font-size: 1.4rem;
@@ -28,13 +29,11 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 `;
 
-
-
 function CreateStudent({ studentToEdit = {}, onCloseModal }) {
+    const { t } = useTranslation();
 
     const { id: editId, ...editValues } = studentToEdit;
     const isEditSession = Boolean(editId);
-
 
     const { isLoading, batchTimmings } = useBatchTimmings();
     const { isMachineLoading, machines } = useMachines();
@@ -48,15 +47,12 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
         defaultValues: isEditSession ? editValues : {},
     });
 
-
     const { errors } = formState;
 
     const [showCalendar, setShowCalendar] = useState(false);
 
     function onSubmit(data) {
-
         data.gender = parseInt(data.gender);
-
         data.joiningDate = data.joiningDate.startDate;
 
         if (isEditSession)
@@ -77,92 +73,89 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         onCloseModal?.();
                     },
                 });
-
     }
 
-    function onError() {
-
-    }
+    function onError() {}
 
     return (
         <div>
             <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? "modal" : "regular"}>
-                <FormRow label="First Name" error={errors?.firstName?.message}>
+                <FormRow label={t("FirstName")} error={errors?.firstName?.message}>
                     <Input
                         type="text"
                         id="firstName"
                         disabled={isWorking}
                         {...register("firstName", {
-                            required: "This field is required",
+                            required: t("Required"),
                         })}
                     />
                 </FormRow>
-                <FormRow label="Last Name" error={errors?.lastName?.message}>
+                <FormRow label={t("LastName")} error={errors?.lastName?.message}>
                     <Input
                         type="text"
                         id="lastName"
                         disabled={isWorking}
                         {...register("lastName", {
-                            required: "This field is required",
+                            required: t("Required"),
                         })}
                     />
                 </FormRow>
-                <FormRow label="Email" error={errors?.email?.message}>
+                <FormRow label={t("Email")} error={errors?.email?.message}>
                     <Input
                         type="text"
                         id="email"
                         disabled={isWorking}
                         {...register('email', {
-                            required: 'This field is required',
+                            required: t("Required"),
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: 'Invalid email address'
+                                message: t("InvalidEmail"),
                             }
                         })}
                     />
                 </FormRow>
-                <FormRow label="Mobile Number" error={errors?.mobileNumber?.message}>
+                <FormRow label={t("MobileNumber")} error={errors?.mobileNumber?.message}>
                     <Input
                         type="number"
                         id="mobileNumber"
                         disabled={isWorking}
                         {...register('mobileNumber', {
-                            required: 'Mobile number is required',
+                            required: t("MobileNumberRequired"),
                             pattern: {
                                 value: /^[0-9]{10}$/,
-                                message: 'Mobile number must be 10 digits'
+                                message: t("InvalidMobileNumber"),
                             }
                         })}
                     />
                 </FormRow>
-                <FormRow label="Gender" error={errors?.gender?.message}>
+                <FormRow label={t("Gender")} error={errors?.gender?.message}>
                     <StyledSelect
                         defaultValue="0"
                         disabled={isWorking}
-                        {...register("gender", { validate: (value) => value !== "0" || "This field is required" })}
+                        {...register("gender", { validate: (value) => value !== "0" || t("GenderRequired") })}
                     >
-                        <option value="0">---Select---</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Others</option>
+                        <option value="0">{t("Select")}</option>
+                        <option value="1">{t("Male")}</option>
+                        <option value="2">{t("Female")}</option>
+                        <option value="3">{t("Others")}</option>
                     </StyledSelect>
                 </FormRow>
-                <FormRow label="Address" error={errors?.address?.message}>
+                <FormRow label={t("Address")} error={errors?.address?.message}>
                     <Textarea
                         type="number"
                         id="address"
                         defaultValue=""
                         disabled={isWorking}
                         {...register("address", {
-                            required: "This field is required",
+                            required: t("Required"),
                         })}
                     />
                 </FormRow>
-                <FormRow label="Machine Number" error={errors?.machinesId?.message}>
+                <FormRow label={t("MachineNumber")} error={errors?.machinesId?.message}>
                     <StyledSelect
                         defaultValue="0"
                         disabled={isWorking}
-                        {...register("machinesId", { validate: (value) => value !== "0" || "This field is required" })}
+                        {...register("machinesId", { validate: (value) => value !== "0" || t("MachineNumberRequired") })}
                     >
                         {machines?.map((machine) => (
                             <option value={machine.id} key={machine.id}>
@@ -171,11 +164,11 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         ))}
                     </StyledSelect>
                 </FormRow>
-                <FormRow label="Batch Timming" error={errors?.batchTimingsId?.message}>
+                <FormRow label={t("BatchTimming")} error={errors?.batchTimingsId?.message}>
                     <StyledSelect
                         defaultValue="0"
                         disabled={isWorking}
-                        {...register("batchTimingsId", { validate: (value) => value !== "0" || "This field is required" })}
+                        {...register("batchTimingsId", { validate: (value) => value !== "0" || t("BatchTimmingRequired") })}
                     >
                         {batchTimmings?.map((batchtime) => (
                             <option value={batchtime.id} key={batchtime.id}>
@@ -184,20 +177,16 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                         ))}
                     </StyledSelect>
                 </FormRow>
-                <FormRow label="Joining Date" error={errors?.joiningDate?.message}>
+                <FormRow label={t("JoiningDate")} error={errors?.joiningDate?.message}>
                     <CompoundDatePicker>
                         <Controller
                             name="joiningDate"
                             control={control}
-                            rules={{ required: 'Date is required' }}
-
+                            rules={{ required: t("DateRequired") }}
                             render={({ field }) => (
                                 <Datepicker
                                     value={field.value}
-                                    onChange={(date) => {
-                                        field.onChange(date); // Update the form field value
-
-                                    }}
+                                    onChange={(date) => field.onChange(date)}
                                     disabled={isWorking}
                                     useRange={false}
                                     asSingle={true}
@@ -209,26 +198,18 @@ function CreateStudent({ studentToEdit = {}, onCloseModal }) {
                             )}
                         />
                     </CompoundDatePicker>
-
-
                 </FormRow>
 
                 <FormRow>
-                    <Button disabled={isWorking}
-                        variation="secondary"
-                        type="reset"
-                        onClick={() => onCloseModal?.()}
-                    >
-                        Cancel
+                    <Button disabled={isWorking} variation="secondary" type="reset" onClick={() => onCloseModal?.()}>
+                        {t("Cancel")}
                     </Button>
                     <Button disabled={isWorking}>
-                        {isEditSession ? "Edit student" : "Create student"}
+                        {isEditSession ? t("EditStudent") : t("CreateStudent")}
                     </Button>
                 </FormRow>
             </Form>
         </div >
-
-
     )
 }
 

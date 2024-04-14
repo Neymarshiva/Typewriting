@@ -5,6 +5,7 @@ import StudentTable from '../features/students/StudentTable';
 import AddStudent from '../features/students/AddStudent';
 import StudentTableOperations from '../features/students/StudentTableOperations';
 import styled from "styled-components";
+import { useTranslation } from 'react-i18next';
 
 const StyledFilterRow = styled.div`
     border: 1px solid var(--color-grey-300);
@@ -20,6 +21,7 @@ const StyledFilterRow = styled.div`
 
 
 export class Students extends Component {
+    
     render() {
         return (
             <>

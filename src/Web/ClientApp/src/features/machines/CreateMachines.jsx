@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useCreateMachines } from "./useCreateMachines";
 import { useEditMachines } from "./useEditMachines";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 const StyledSelect = styled.select`
   font-size: 1.4rem;
@@ -24,8 +25,7 @@ const StyledSelect = styled.select`
 `;
 
 function CreateMachines({ machineToEdit = {}, onCloseModal }) {
-
-
+    const { t } = useTranslation();
     const { id: editId, ...editValues } = machineToEdit;
     const isEditSession = Boolean(editId);
     const { register, handleSubmit, watch, reset, formState } = useForm({
@@ -46,10 +46,7 @@ function CreateMachines({ machineToEdit = {}, onCloseModal }) {
         filtraPavimento()
     }, [watchMysel]);
 
-
-
     function onSubmit(data) {
-
         if (isEditSession)
             editMachines(
                 { newMachineData: data, id: editId },
@@ -69,6 +66,7 @@ function CreateMachines({ machineToEdit = {}, onCloseModal }) {
                     },
                 });
     }
+
     function onError(errors) {
         console.log(errors);
     }
@@ -76,51 +74,40 @@ function CreateMachines({ machineToEdit = {}, onCloseModal }) {
     return (
         <div>
             <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? "modal" : "regular"}>
-                <FormRow label="Machine Number" error={errors?.machineNumber?.message}>
+                <FormRow label={t("MachineNumber")} error={errors?.machineNumber?.message}>
                     <Input
                         type="number"
                         id="machineNumber"
                         disabled={isWorking}
                         {...register("machineNumber", {
-                            required: "This field is required",
+                            required: t("ThisFieldIsRequired"),
                         })}
                     />
                 </FormRow>
 
-                <FormRow label="Language" error={errors?.languageId?.message}>
+                <FormRow label={t("Language")} error={errors?.languageId?.message}>
 
                     <StyledSelect
                         defaultValue="0"
                         disabled={isWorking}
-                        {...register("languageId", { validate: (value) => value !== "0" || "This field is required" })}
+                        {...register("languageId", { validate: (value) => value !== "0" || t("ThisFieldIsRequired") })}
                     >
-                        <option value="0">---Select---</option>
-                        <option value="1">English</option>
-                        <option value="2">Tamil</option>
+                        <option value="0">{t("Select")}</option>
+                        <option value="1">{t("English")}</option>
+                        <option value="2">{t("Tamil")}</option>
                     </StyledSelect>
-
-                    {/* <Select
-                        defaultValue="0"
-                        options={[
-                            { value: 0, label: "--Select Languag--" },
-                            { value: 1, label: "English" },
-                            { value: 2, label: "Tamil" },
-                        ]} 
-                        {...register("languageId", { validate: (value) => value !== "0" })}
-                    /> */}
 
                 </FormRow>
                 <FormRow>
-                    {/* type is an HTML attribute! */}
                     <Button disabled={isWorking}
                         variation="secondary"
                         type="reset"
                         onClick={() => onCloseModal?.()}
                     >
-                        Cancel
+                        {t("Cancel")}
                     </Button>
                     <Button disabled={isWorking}>
-                        {isEditSession ? "Edit machine" : "Create new machine"}
+                        {isEditSession ? t("EditMachine") : t("CreateMachine")}
                     </Button>
                 </FormRow>
 

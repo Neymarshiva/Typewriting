@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 import CreateStudent from "./CreateStudent";
@@ -5,11 +6,12 @@ import CreateStudent from "./CreateStudent";
 
 
 function AddStudent() {
+    const {t}=useTranslation();
     return (
         <div>
             <Modal>
                 <Modal.Open opens="student-form">
-                    <Button>Add new student</Button>
+                    <Button>{t('AddNewStudent')}</Button>
                 </Modal.Open>
                 <Modal.Window name="student-form">
                     <CreateStudent />

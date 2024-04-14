@@ -6,6 +6,7 @@ import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import CreateMachines from "./CreateMachines.jsx";
 import { useDeleteMachines } from "./useDeleteMachines.js";
 import ConfirmDelete from "../../ui/ConfirmDelete.jsx";
+import { useTranslation } from "react-i18next";
 
 const MachineNumber = styled.div`
   font-family: "Sono";
@@ -26,6 +27,7 @@ function MachineRow({ machine }) {
         lanuagesType
     } = machine;
     const { isDeleting, deleteMachine } = useDeleteMachines();
+    const{t}=useTranslation();
     return (
 
         <Table.Row>
@@ -42,11 +44,11 @@ function MachineRow({ machine }) {
                         <Menus.List id={machineId}> 
 
                             <Modal.Open opens="edit">
-                                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                                <Menus.Button icon={<HiPencil />}>{t("Edit")}</Menus.Button>
                             </Modal.Open>
 
                             <Modal.Open opens="delete">
-                                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                                <Menus.Button icon={<HiTrash />}>{t("Delete")}</Menus.Button>
                             </Modal.Open>
                         </Menus.List>
                         <Modal.Window name="edit">

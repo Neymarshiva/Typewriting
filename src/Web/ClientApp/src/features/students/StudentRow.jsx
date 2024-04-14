@@ -10,6 +10,7 @@ import { GenderEnum } from "../../enums/globalEnum";
 import { MdOutlineMail } from "react-icons/md";
 import { ImMobile } from "react-icons/im";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Student = styled.div`
   font-size: 1.6rem;
@@ -57,6 +58,7 @@ const StyledNavLink = styled(NavLink)`
 
 function StudentRow({ student }) {
 
+  const{t}= useTranslation();
 
   student.joiningDate = {
     startDate: student?.joiningDate,
@@ -112,11 +114,11 @@ function StudentRow({ student }) {
             <Menus.List id={id}>
 
               <Modal.Open opens="edit">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>{t('Edit')}</Menus.Button>
               </Modal.Open>
 
               <Modal.Open opens="delete">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>{t('Delete')}</Menus.Button>
               </Modal.Open>
             </Menus.List>
             <Modal.Window name="edit">

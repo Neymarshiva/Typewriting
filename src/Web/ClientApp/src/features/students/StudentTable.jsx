@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Menus from "../../ui/Menus";
 import Pagination from "../../ui/Pagination";
 import Spinner from "../../ui/Spinner";
@@ -11,18 +12,19 @@ import { useStudents } from "./useStudents";
 
 function StudentTable() {
     const { isLoading, students } = useStudents();
+    const { t } = useTranslation();
     if (isLoading) return <Spinner />;
     return (
         <>
             <Menus>
                 <Table columns="5fr 4fr 2fr 4fr 3fr  3fr 1fr">
                     <Table.Header>
-                        <div>Student</div> 
-                        <div>Joined Date</div> 
-                        <div>Gender</div>
-                        <div>Address</div>
-                        <div>Machine No</div>
-                        <div>Batch Timing </div>
+                        <div>{t("Student")}</div>
+                        <div>{t("JoinedDate")}</div>
+                        <div>{t("Gender")}</div>
+                        <div>{t("Address")}</div>
+                        <div>{t("MachineNo")}</div>
+                        <div>{t("BatchTimming")} </div>
                         <div></div>
                     </Table.Header>
                     <Table.Body

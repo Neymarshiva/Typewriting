@@ -4,7 +4,8 @@ import { useState } from "react";
 import { LuChevronFirst } from "react-icons/lu";
 import { LuChevronLast } from "react-icons/lu";
 import SidebarItem from "./SidebarItem";
-import { additionalLinks, mainLinks } from "./Links";
+import { mainLinks } from "./Links";
+import { useTranslation } from "react-i18next";
 
 const StyledSidebar = styled.aside`
   background-color: var(--color-nav-grey-0);
@@ -21,7 +22,7 @@ const StyledSidebar = styled.aside`
 
 function Sidebar({ expanded, onValueChange }) {
   //const [expanded, setExpanded] = useState(true);
-  const [active, setActive] = useState(mainLinks[0].id);
+  const [active, setActive] = useState(mainLinks[0].id); 
 
   function handleClick() {
     onValueChange();

@@ -1,9 +1,51 @@
 {
-    "hello_world": "مرحباً بالعالم!",
-    "simple": "رقم بالتنسيق الإفتراضي: {{value, number}}",
-  "percent": "النسبة المئوية (استخدم القيم بين ٠  و ١): {{value, number(style: percent)}}",
-  "custom_number": "تنسيق مخصص: {{value, number(minimumFractionDigits: 2; maximumFractionDigits: 4; signDisplay: always)}}",
-  "trees_grown_other": "لقد زرعنا {{count, number}} شجرة 🌳",
-  "intlNumber": "لقد زرعنا {{val, number}} شجرة 🌳",
-    "intlNumberWithOptions": "Some {{val, number(minimumFractionDigits: 2)}}"
+  "hello_world": "مرحباً بالعالم!",
+  "simple_number": "رقم بسيط (التنسيق الافتراضي): {{value, number}}",
+  "percent": "النسبة المئوية (استخدم القيم بين 0 و 1): {{value, number(style: percent)}}",
+  "custom_number": "التنسيق المخصص: {{value, number(minimumFractionDigits: 2; maximumFractionDigits: 4; signDisplay: always)}}",
+  "trees_grown_other": "لقد نمت {{count, number}} شجرة 🌳",
+  "intlNumber": "بعض {{val, number}}",
+  "intlNumberWithOptions": "بعض {{val, number(minimumFractionDigits: 2)}}",
+  "DashboardKey": "لوحة القيادة",
+  "Students": "الطلاب",
+  "Machines": "الآلات",
+  "TimingsKey": "الأوقات",
+  "Settings": "الإعدادات",
+  "Search": "بحث",
+  "MachineNumber": "رقم الجهاز",
+  "Gender": "الجنس",
+  "BatchTimming": "توقيت الدفعة",
+  "Student": "الطالب",
+  "JoinedDate": "تاريخ الانضمام",
+  "Address": "العنوان",
+  "MachineNo": "رقم الجهاز",
+  "Language": "اللغة",
+  "Edit": "تحرير",
+  "Delete": "حذف",
+  "AddNewMachine": "إضافة جهاز جديد",
+  "AddNewStudent": "إضافة طالب جديد",
+  "All": "الكل",
+  "Male": "ذكر",
+  "Female": "أنثى",
+  "Others": "آخرون",
+  "FirstName": "الاسم الأول",
+  "LastName": "الاسم الأخير",
+  "Email": "البريد الإلكتروني",
+  "MobileNumber": "رقم الجوال",   
+  "JoiningDate": "تاريخ الانضمام",
+  "Cancel": "إلغاء",
+  "CreateStudent": "إنشاء طالب",
+  "EditStudent": "تحرير الطالب",
+  "Select": "---اختر---",
+  "Required": "هذا الحقل مطلوب",
+  "InvalidEmail": "عنوان البريد الإلكتروني غير صالح",
+  "MobileNumberRequired": "رقم الجوال مطلوب",
+  "InvalidMobileNumber": "يجب أن يتكون رقم الجوال من 10 أرقام",
+  "GenderRequired": "هذا الحقل مطلوب",
+  "MachineNumberRequired": "هذا الحقل مطلوب",
+  "BatchTimmingRequired": "هذا الحقل مطلوب",
+  "DateRequired": "التاريخ مطلوب", 
+  "ThisFieldIsRequired": "هذا الحقل مطلوب", 
+  "CreateMachine": "إنشاء جهاز جديد",
+  "EditMachine": "تحرير الجهاز"
 }

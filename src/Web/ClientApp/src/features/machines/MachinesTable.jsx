@@ -3,8 +3,11 @@ import { useMachines } from "./useMachines.js";
 import MachineRow from "./MachineRow.jsx";
 import Menus from "../../ui/Menus.jsx";
 import Spinner from "../../ui/Spinner.jsx";
+import { useTranslation } from "react-i18next";
 function MachineTable() {
     const { isLoading, machines } = useMachines();
+    const{t}=useTranslation();
+
     if (isLoading) return <Spinner />;
 
     return (
@@ -12,8 +15,8 @@ function MachineTable() {
             <Menus>
                 <Table columns="2fr 2fr 2fr">
                     <Table.Header>
-                        <div>Machine Number</div>
-                        <div>Language</div>
+                        <div>{t("MachineNumber")}</div>
+                        <div>{t("Language")}</div>
                         <div></div>
                     </Table.Header>
                     <Table.Body

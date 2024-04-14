@@ -8,7 +8,7 @@ import { PiStudent, PiClockLight } from "react-icons/pi";
 const mainLinks = [
     {
         id: 1,
-        label: "Dashboard",
+        label: "DashboardKey",
         icon: <HiOutlineHome />,
         routePath:"/dashboard"
     },
@@ -26,7 +26,7 @@ const mainLinks = [
     },
     {
         id: 4,
-        label: "Timings",
+        label: "TimingsKey",
         icon: <PiClockLight />,
         routePath:"/timings"
     },

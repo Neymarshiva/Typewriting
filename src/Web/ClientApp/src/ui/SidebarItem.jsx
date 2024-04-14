@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -41,6 +42,7 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 function SidebarItem({ link, expanded, active, setActive }) {
+  const { t } = useTranslation();
     return (
         <li
             className={`my-4
@@ -51,7 +53,7 @@ function SidebarItem({ link, expanded, active, setActive }) {
             <StyledNavLink to={`${link.routePath}`}>
                 {link.icon}
                 <span className={`${expanded ? "block" : "hidden"} transition-all`}>
-                    {link.label}
+                    {t(link.label)}
                 </span>
             </StyledNavLink>
 

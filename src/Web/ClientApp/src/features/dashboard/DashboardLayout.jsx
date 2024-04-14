@@ -6,8 +6,7 @@ import i18next from "i18next";
 
 function DashboardLayout() {
   
-    const { t } = useTranslation();
-    const { i18n } = useTranslation();
+    const { t } = useTranslation(); 
     return (
         <div>
 

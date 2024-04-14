@@ -1,45 +1,29 @@
+import React, { useState } from 'react';
 import Button from "../../ui/Button";
-import React, { Component } from 'react';
 import Modal from "../../ui/Modal";
 import CreateMachines from '../../features/machines/CreateMachines';
-export class AddMachine extends Component {
+import { useTranslation } from 'react-i18next';
 
-    constructor(props) {
-        super(props);
-        this.state = { isOpenModal: false };
-        this.addNewMachinePopupFn = this.addNewMachinePopupFn.bind(this);
-    }
+const AddMachine = () => {
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
-    addNewMachinePopupFn = () => {        
-        this.setState({
-            isOpenModal: !this.state.isOpenModal
-        });
-
+    const{t}=useTranslation();
+    const addNewMachinePopupFn = () => {
+        setIsOpenModal(!isOpenModal);
     };
 
-    render() {
-
-        return (
-            <div>
-                <Modal>
-                    <Modal.Open opens="machine-form">
-                        <Button>Add new machines</Button>
-                    </Modal.Open>
-                    <Modal.Window name="machine-form">
-                        <CreateMachines />
-                    </Modal.Window>
-                </Modal>
-            </div>
-        )
-
-        // return (
-        //     <div>
-        //         <Button onClick={this.addNewMachinePopupFn}>Add  machines</Button>
-
-        //         {this.state.isOpenModal && <Modal><CreateMachines /></Modal>}
-        //     </div>
-        // );
-    }
-}
+    return (
+        <div>
+            <Modal>
+                <Modal.Open opens="machine-form">
+                    <Button onClick={addNewMachinePopupFn}>{t("AddNewMachine")}</Button>
+                </Modal.Open>
+                <Modal.Window name="machine-form">
+                    <CreateMachines />
+                </Modal.Window>
+            </Modal>
+        </div>
+    );
+};
 
 export default AddMachine;
