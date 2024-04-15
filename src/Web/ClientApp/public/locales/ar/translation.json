@@ -6,6 +6,7 @@
   "trees_grown_other": "لقد نمت {{count, number}} شجرة 🌳",
   "intlNumber": "بعض {{val, number}}",
   "intlNumberWithOptions": "بعض {{val, number(minimumFractionDigits: 2)}}",
+  "simple_date": "تاريخ بسيط (التنسيق الافتراضي): {{value, datetime}}",
   "DashboardKey": "لوحة القيادة",
   "Students": "الطلاب",
   "Machines": "الآلات",

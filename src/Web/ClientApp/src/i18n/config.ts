@@ -1,55 +1,39 @@
 
 // Core i18next library.
-import i18n from "i18next";
+import i18next from "i18next";
 // Bindings for React: allow components to
 // re-render when language changes.
 import { initReactI18next } from "react-i18next";
 
 import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
+import formatters from "./formatters.tsx"; 
 
 export const supportedLngs = {
     en: "English",
     ar: "Arabic (العربية)",
     fr: "French",
-    de:"German"
+    de: "German"
 };
 
-i18n
-    .use(HttpApi)
-    .use(LanguageDetector)
-    // Add React bindings as a plugin.
-    .use(initReactI18next)
-    // Initialize the i18next instance.
-    .init({
-        // Config options
+i18next
+  .use(HttpApi)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  // init i18next
+  // for all options read: https://www.i18next.com/overview/configuration-options
+  .init({
+    fallbackLng: "en",
+    supportedLngs: Object.keys(supportedLngs), 
+    interpolation: {
+      escapeValue: false, // not needed for react as it escapes by default
+    },
+  });
 
-        // Specifies the default language (locale) used
-        // when a user visits our site for the first time.
-        // We use English here, but feel free to use
-        // whichever locale you want.                   
-        //lng: "en",
-
-        // Fallback locale used when a translation is
-        // missing in the active locale. Again, use your
-        // preferred locale here. 
-        fallbackLng: "en",
-        supportedLngs: Object.keys(supportedLngs),
-        // Enables useful output in the browser’s
-        // dev console.
-        debug: true,
-
-        // Normally, we want `escapeValue: true` as it
-        // ensures that i18next escapes any code in
-        // translation messages, safeguarding against
-        // XSS (cross-site scripting) attacks. However,
-        // React does this escaping itself, so we turn 
-        // it off in i18next.
-        interpolation: {
-            escapeValue: false,
-        },
+Object.entries(formatters).forEach(([key, resolver]) => {
+  i18next.services.formatter?.add(key, resolver);
+});
+ 
 
 
-    });
-
-export default i18n;
+export default i18next;

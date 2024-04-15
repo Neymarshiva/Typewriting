@@ -10,7 +10,8 @@ import { GenderEnum } from "../../enums/globalEnum";
 import { MdOutlineMail } from "react-icons/md";
 import { ImMobile } from "react-icons/im";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";  
+
 
 const Student = styled.div`
   font-size: 1.6rem;
@@ -58,8 +59,8 @@ const StyledNavLink = styled(NavLink)`
 
 function StudentRow({ student }) {
 
-  const{t}= useTranslation();
-
+  const{t}= useTranslation();  
+  
   student.joiningDate = {
     startDate: student?.joiningDate,
     endDate: student?.joiningDate,
@@ -81,8 +82,11 @@ function StudentRow({ student }) {
   } = student;
   const { isDeleting, deleteStudents } = useDeleteStudents();
 
+  console.log(joiningDate);
 
   const formattedDate = joiningDate ? new Date(joiningDate.startDate).toLocaleDateString() : '';
+
+  console.log(new Date(joiningDate.startDate)); 
 
   return (
     <Table.Row>

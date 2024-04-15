@@ -6,6 +6,7 @@
     "trees_grown_other": "We have grown {{count, number}} trees 🌳", 
     "intlNumber": "Some {{val, number}}",
     "intlNumberWithOptions": "Some {{val, number(minimumFractionDigits: 2)}}",
+    "simple_date": "A simple date (default formatting): {{value, datetime}}",
     "DashboardKey": "Dashboard",
     "Students": "Students",
     "Machines": "Machines",
