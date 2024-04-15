@@ -2,6 +2,7 @@ import styled from "styled-components";
 import UserAvatar from "./UserAvatar";
 import HeaderMenu from "./HeaderMenu";
 import CountrySelector from "./CountrySelector";
+import LanguageDropdown from "./LanguageDropdown";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -17,7 +18,7 @@ const StyledHeader = styled.header`
 function Header() {
   return (
     <StyledHeader>
-      <CountrySelector />
+      <LanguageDropdown/>    
       <UserAvatar />
       <HeaderMenu />
     </StyledHeader>
