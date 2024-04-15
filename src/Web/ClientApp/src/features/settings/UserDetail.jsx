@@ -119,7 +119,7 @@ function UserDetail() {
             </Card>
             <div>
                 <Tabs>
-                    <div>
+                    <div className="w-1/2">
                         <Tabs.TabMenu>
                             <Tabs.TabMenuItem id="recent">Recent</Tabs.TabMenuItem>
                             <Tabs.TabMenuItem id="popular">Popular</Tabs.TabMenuItem>
