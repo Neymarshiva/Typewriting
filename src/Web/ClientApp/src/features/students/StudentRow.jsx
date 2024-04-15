@@ -10,7 +10,7 @@ import { GenderEnum } from "../../enums/globalEnum";
 import { MdOutlineMail } from "react-icons/md";
 import { ImMobile } from "react-icons/im";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next";  
+import { useTranslation } from "react-i18next";
 
 
 const Student = styled.div`
@@ -59,8 +59,8 @@ const StyledNavLink = styled(NavLink)`
 
 function StudentRow({ student }) {
 
-  const{t}= useTranslation();  
-  
+  const { t } = useTranslation();
+
   student.joiningDate = {
     startDate: student?.joiningDate,
     endDate: student?.joiningDate,
@@ -86,7 +86,7 @@ function StudentRow({ student }) {
 
   const formattedDate = joiningDate ? new Date(joiningDate.startDate).toLocaleDateString() : '';
 
-  console.log(new Date(joiningDate.startDate)); 
+  console.log(new Date(joiningDate.startDate));
 
   return (
     <Table.Row>
@@ -105,7 +105,9 @@ function StudentRow({ student }) {
         </StackedIcon>
       </Student>
       <StackedIcon>
-        <span>{formattedDate}</span>
+        <span> {t('DateFormat', {
+          value: joiningDate.startDate,
+        })}</span>
       </StackedIcon>
       <Stacked> {GenderEnum(gender)}</Stacked>
       <Stacked> {address}</Stacked>

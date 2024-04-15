@@ -57,5 +57,6 @@
     "of": "de",
     "results": "résultats",
     "Previous": "Précédent",
-    "Next": "Suivant"
+    "Next": "Suivant",
+    "DateFormat":"{{value, datetime}}"
 }

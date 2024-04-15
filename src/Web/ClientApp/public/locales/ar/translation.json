@@ -58,5 +58,6 @@
   "of": "من",
   "results": "النتائج",
   "Previous": "السابق",
-  "Next": "التالي"
+  "Next": "التالي",
+  "DateFormat":"{{value, datetime}}"
 }

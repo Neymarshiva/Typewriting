@@ -57,5 +57,6 @@
     "of": "von",
     "results": "Ergebnisse",
     "Previous": "Zurück",
-    "Next": "Weiter"
+    "Next": "Weiter",
+    "DateFormat":"{{value, datetime}}"
 }
