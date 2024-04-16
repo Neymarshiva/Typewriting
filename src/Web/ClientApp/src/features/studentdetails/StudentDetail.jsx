@@ -86,85 +86,87 @@ const StudentName = styled.div`
 `;
 
 function StudentDetail() {
-    const { isLoading, firstStudent } = useStudentDetails();
-    const [isopen, setIsOpen] = useState(true); // State to manage the visibility of the detail section
-    const { t } = useTranslation();
+  const { isLoading, firstStudent } = useStudentDetails();
+  const [isopen, setIsOpen] = useState(true); // State to manage the visibility of the detail section
+  const { t } = useTranslation();
 
-    if (isLoading) return <Spinner />;
-    if (!firstStudent) return <Empty resourceName={t("student")} />;
+  if (isLoading) return <Spinner />;
+  if (!firstStudent) return <Empty resourceName={t("student")} />;
 
-    const formattedDate = firstStudent.joiningDate ? new Date(firstStudent.joiningDate).toLocaleDateString() : '';
 
-    firstStudent.joiningDate = {
-        startDate: firstStudent?.joiningDate,
-        endDate: firstStudent?.joiningDate,
-    }
+  // Create a shallow copy of the student object
+  const clonedFirstStudent = { ...firstStudent }; 
 
-    const toggleDetail = () => {
-        setIsOpen((prev) => !prev); // Toggle the isOpen state
-    };
+  clonedFirstStudent.joiningDate = {
+    startDate: clonedFirstStudent?.joiningDate,
+    endDate: clonedFirstStudent?.joiningDate,
+  }
 
-    return (
-        <Card
-            flexdirection="column"
-            justifycontent="start"
-            alignitems="center"
-            background="var(--bs-card-background-color);"
-            width="30%"
-            height="100%"
-            border="1px solid var(--bs-card-border-color)"
-            borderradius=".5rem"
-            color="var(--bs-body-color)"
-            padding="1rem"
-            flexstyles={flexstyles}
-        >
-            <UserInfo>
-                <Avatar>
-                    <img className="rounded-full mb-4" src="user-image.jpg" alt="" />
-                    <StudentName className="text-hover-primary mb-3">
-                        {`${firstStudent?.firstName}  ${firstStudent?.lastName}`}
-                    </StudentName>
-                </Avatar>
-            </UserInfo>
-            <DetailToggle>
-                <DetailDiv onClick={toggleDetail} >{t("Details")} {isopen ? <FaAngleUp /> : <FaAngleDown />}
-                </DetailDiv>
-                <DetailDiv>
-                    <Modal>
-                        <Modal.Open opens="edit">
-                            <Button size="small">
-                                {t("Edit")} {t("Student")}
-                            </Button>
-                        </Modal.Open>
-                        <Modal.Window name="edit">
-                            <CreateStudent studentToEdit={firstStudent} />
-                        </Modal.Window>
-                    </Modal>
-                </DetailDiv>
-            </DetailToggle>
-            <Separator></Separator>
-            <DetailToggleDiv isopen={isopen.toString()}> {/* Pass isOpen state to control the visibility */}
-                <div className="w-full">
-                    <div className="p-8 text-2xl">
-                        <DetailItemDiv>{t("Email")}</DetailItemDiv>
-                        <DetailValueDiv>{firstStudent?.email}</DetailValueDiv>
-                        <DetailItemDiv>{t("MobileNumber")}</DetailItemDiv>
-                        <DetailValueDiv>{firstStudent?.mobileNumber}</DetailValueDiv>
-                        <DetailItemDiv>{t("Address")}</DetailItemDiv>
-                        <DetailValueDiv>{firstStudent?.address}</DetailValueDiv>
-                        <DetailItemDiv>{t("Gender")}</DetailItemDiv>
-                        <DetailValueDiv>{GenderEnum(firstStudent?.gender)}</DetailValueDiv>
-                        <DetailItemDiv>{t("JoiningDate")}</DetailItemDiv>
-                        <DetailValueDiv>{formattedDate}</DetailValueDiv>
-                        <DetailItemDiv>{t("MachineNumber")}</DetailItemDiv>
-                        <DetailValueDiv>{firstStudent?.machinesNumber}</DetailValueDiv>
-                        <DetailItemDiv>{t("BatchTimming")}</DetailItemDiv>
-                        <DetailValueDiv>{firstStudent?.timings}</DetailValueDiv>
-                    </div>
-                </div>
-            </DetailToggleDiv>
-        </Card >
-    );
+  const toggleDetail = () => {
+    setIsOpen((prev) => !prev); // Toggle the isOpen state
+  };
+
+  return (
+    <Card
+      flexdirection="column"
+      justifycontent="start"
+      alignitems="center"
+      background="var(--bs-card-background-color);"
+      width="30%"
+      height="100%"
+      border="1px solid var(--bs-card-border-color)"
+      borderradius=".5rem"
+      color="var(--bs-body-color)"
+      padding="1rem"
+      flexstyles={flexstyles}
+    >
+      <UserInfo>
+        <Avatar>
+          <img className="rounded-full mb-4" src="user-image.jpg" alt="" />
+          <StudentName className="text-hover-primary mb-3">
+            {`${clonedFirstStudent?.firstName}  ${clonedFirstStudent?.lastName}`}
+          </StudentName>
+        </Avatar>
+      </UserInfo>
+      <DetailToggle>
+        <DetailDiv onClick={toggleDetail} >{t("Details")} {isopen ? <FaAngleUp /> : <FaAngleDown />}
+        </DetailDiv>
+        <DetailDiv>
+          <Modal>
+            <Modal.Open opens="edit">
+              <Button size="small">
+                {t("Edit")} {t("Student")}
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="edit">
+              <CreateStudent studentToEdit={clonedFirstStudent} />
+            </Modal.Window>
+          </Modal>
+        </DetailDiv>
+      </DetailToggle>
+      <Separator></Separator>
+      <DetailToggleDiv isopen={isopen.toString()}> {/* Pass isOpen state to control the visibility */}
+        <div className="w-full">
+          <div className="p-8 text-2xl">
+            <DetailItemDiv>{t("Email")}</DetailItemDiv>
+            <DetailValueDiv>{clonedFirstStudent?.email}</DetailValueDiv>
+            <DetailItemDiv>{t("MobileNumber")}</DetailItemDiv>
+            <DetailValueDiv>{clonedFirstStudent?.mobileNumber}</DetailValueDiv>
+            <DetailItemDiv>{t("Address")}</DetailItemDiv>
+            <DetailValueDiv>{clonedFirstStudent?.address}</DetailValueDiv>
+            <DetailItemDiv>{t("Gender")}</DetailItemDiv>
+            <DetailValueDiv>{GenderEnum(clonedFirstStudent?.gender)}</DetailValueDiv>
+            <DetailItemDiv>{t("JoiningDate")}</DetailItemDiv>
+            <DetailValueDiv>{t('DateFormat', {value: clonedFirstStudent.joiningDate.startDate})} </DetailValueDiv>
+            <DetailItemDiv>{t("MachineNumber")}</DetailItemDiv>
+            <DetailValueDiv>{clonedFirstStudent?.machinesNumber}</DetailValueDiv>
+            <DetailItemDiv>{t("BatchTimming")}</DetailItemDiv>
+            <DetailValueDiv>{clonedFirstStudent?.timings}</DetailValueDiv>
+          </div>
+        </div>
+      </DetailToggleDiv>
+    </Card >
+  );
 }
 
 export default StudentDetail;

@@ -86,12 +86,7 @@ function StudentRow({ student }) {
   } = clonedStudent;
   const { isDeleting, deleteStudents } = useDeleteStudents();
 
-  console.log('joiningDate', joiningDate);
-
-  const formattedDate = joiningDate ? new Date(joiningDate.startDate).toLocaleDateString() : '';
-
-  console.log(new Date(joiningDate.startDate));
-
+ 
   return (
     <Table.Row>
       <Student>
