@@ -58,9 +58,18 @@ const DropdownItem = styled.button`
   }
 `;
 
+const languageNames = {
+    en: 'English',
+    fr: 'French',
+    de: 'German',
+    ar: 'Arabic',
+};
+
+
 const LanguageDropdown = () => {
     const { i18n } = useTranslation();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
     const changeLanguage = (language) => {
         i18n.changeLanguage(language);
@@ -70,8 +79,9 @@ const LanguageDropdown = () => {
     return (
         <DropdownContainer>
             <DropdownButton onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                <FlagIcon code={i18n.language.toUpperCase() === 'EN' ? 'US' : i18n.language.toUpperCase()} />
-                {i18n.language === 'en' ? 'English' : i18n.language === 'fr' ? 'French' : 'German'}
+                <FlagIcon code={i18n.language?.toUpperCase() === 'EN' ? 'US' : i18n.language?.toUpperCase()} />
+                {languageNames[i18n.language] || 'Unknown Language'}
+
                 <svg
                     className={`${isDropdownOpen ? 'transform rotate-180' : ''} ml-1 h-4 w-4 text-gray-500`}
                     xmlns="http://www.w3.org/2000/svg"

@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
-import AppLayout from "../ui/AppLayout";
+import React from 'react';
 import DashboardLayout from '../features/dashboard/DashboardLayout';
 
-export class Home extends Component {
-  static displayName = Home.name;
+const Home = () => {
+  return (
+    <DashboardLayout />
+  );
+};
 
-  render() {
-    return (
-      <DashboardLayout />
-    );
-  }
-}
+export default Home;

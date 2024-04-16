@@ -1,31 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Heading from "../ui/Heading";
 import SignupForm from "../features/authentication/SignupForm";
 import CreateMachines from '../features/machines/CreateMachines';
 import UserDetail from '../features/settings/UserDetail';
-export class Settings extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { showForm: false };
-        this.setShowFrom = this.setShowFrom.bind(this);
-    }
+const Settings = () => {
+    const [showForm, setShowForm] = useState(false);
 
+    const toggleForm = () => {
+        console.log("setShowForm trigger");
+        setShowForm(prevState => !prevState);
+    };
 
-    setShowFrom() {       
-        console.log("setShowForm trigger")
-        this.setState({
-            showForm: !this.state.showForm
-        });
-    }
+    return (
+        <>
+            {showForm ? <SignupForm /> : <UserDetail />}
+            <button onClick={toggleForm}>Toggle Form</button>
+        </>
+    );
+};
 
-
-
-    render() {
-        return (
-            <UserDetail/>
-        );
-    }
-}
-
-
+export default Settings;

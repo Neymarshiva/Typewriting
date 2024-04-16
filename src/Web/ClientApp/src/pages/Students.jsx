@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Row from '../ui/Row';
 import Heading from '../ui/Heading';
 import StudentTable from '../features/students/StudentTable';
@@ -15,30 +15,27 @@ const StyledFilterRow = styled.div`
     overflow: hidden;
     padding: 1rem;
     justify-content: space-between;
-      align-items: center;
-      display: flex;
+    align-items: center;
+    display: flex;
 `;
 
+const Students = () => {
+    return (
+        <>
+            <Row type="horizontal">
+                <Heading as="h1">Students</Heading>
+                <AddStudent />
+            </Row>
 
-export class Students extends Component {
-    
-    render() {
-        return (
-            <>
-                <Row type="horizontal">
-                    <Heading as="h1">Students</Heading>
-                    <AddStudent />
-                </Row>
+            <StyledFilterRow>
+                <StudentTableOperations />
+            </StyledFilterRow>
 
-                <StyledFilterRow>
+            <Row>
+                <StudentTable />
+            </Row>
+        </>
+    );
+};
 
-                    <StudentTableOperations />
-                </StyledFilterRow>
-
-                <Row>
-                    <StudentTable />
-                </Row>
-            </>
-        );
-    }
-}
+export default Students;
