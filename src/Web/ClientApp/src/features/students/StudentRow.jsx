@@ -61,11 +61,15 @@ function StudentRow({ student }) {
 
   const { t } = useTranslation();
 
-  student.joiningDate = {
+  // Create a shallow copy of the student object
+  const clonedStudent = { ...student };
+
+  // Modify the duplicate object
+  clonedStudent.joiningDate = {
     startDate: student?.joiningDate,
     endDate: student?.joiningDate,
-  }
-
+  }; 
+  
   const {
     id,
     machinesId,
@@ -79,10 +83,10 @@ function StudentRow({ student }) {
     gender,
     address,
     joiningDate
-  } = student;
+  } = clonedStudent;
   const { isDeleting, deleteStudents } = useDeleteStudents();
 
-  console.log(joiningDate);
+  console.log('joiningDate', joiningDate);
 
   const formattedDate = joiningDate ? new Date(joiningDate.startDate).toLocaleDateString() : '';
 
