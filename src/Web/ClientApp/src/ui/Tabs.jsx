@@ -9,8 +9,8 @@ function classNames(...classes) {
 const TabsContext = createContext();
 
 // Compound component Tabs
-function Tabs({ children }) {
-    const [activeTab, setActiveTab] = useState(null);
+function Tabs({ children, id }) {
+    const [activeTab, setActiveTab] = useState(id ?? null);
 
     return (
         <TabsContext.Provider value={{ activeTab, setActiveTab }}>

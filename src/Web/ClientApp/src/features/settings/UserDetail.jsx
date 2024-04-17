@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 import { MdOutlineVerified } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
-import { MdOutlineMarkEmailRead } from "react-icons/md"; 
+import { MdOutlineMarkEmailRead } from "react-icons/md";
 import Tabs from "../../ui/Tabs";
+import ProfileDetail from "./ProfileDetail";
 const flexstyles = css`
   display: flex;
   flex-direction: ${(props) => props.flexdirection || "row"};
@@ -62,7 +63,7 @@ const Title = styled.div`
     justify-content: space-between !important;
 `;
 
- 
+
 
 function UserDetail() {
     return (
@@ -118,22 +119,22 @@ function UserDetail() {
                 </UserDetailDiv>
             </Card>
             <div>
-                <Tabs>
+                <Tabs id="overview">
                     <div className="w-1/2">
                         <Tabs.TabMenu>
-                            <Tabs.TabMenuItem id="recent">Recent</Tabs.TabMenuItem>
-                            <Tabs.TabMenuItem id="popular">Popular</Tabs.TabMenuItem>
-                            <Tabs.TabMenuItem id="trending">Trending</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="overview">OverView</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="settings">Settings</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="security">Security</Tabs.TabMenuItem>
                         </Tabs.TabMenu>
                     </div>
                     <div>
-                        <Tabs.TabPane id="recent">
-                            recent tab
+                        <Tabs.TabPane id="overview">
+                            <ProfileDetail />
                         </Tabs.TabPane>
-                        <Tabs.TabPane id="popular">
+                        <Tabs.TabPane id="settings">
                             popular tab
                         </Tabs.TabPane>
-                        <Tabs.TabPane id="trending">
+                        <Tabs.TabPane id="security">
                             treding tab
                         </Tabs.TabPane>
                     </div>
