@@ -35,8 +35,8 @@ const UserPic = styled.div`
     position: relative !important;
 
     & img{
-    width: 160px;
-    height: 160px;
+    width: 100px;
+    height: 100px;
     max-width: none;
     }
 `;
@@ -92,7 +92,7 @@ function UserDetail() {
                         <Title>
                             <div className="flex flex-col">
                                 <div className="flex items-center mb-3">
-                                    <span className="text-gray-900 text-hover-primary fs-2 fw-bold me-1 text-5xl">Neymar Shiva</span>
+                                    <span className="text-gray-900 text-hover-primary fs-2 fw-bold me-1 text-3xl">Neymar Shiva</span>
                                     <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-3xl font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"><MdOutlineVerified /></span>
 
                                 </div>
