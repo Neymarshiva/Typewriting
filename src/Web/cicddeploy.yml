@@ -11,53 +11,58 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-steps:
-- task: NuGetToolInstaller@1
+jobs:
+- job: Backend
+  steps:
+  - task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '$(solution)'
 
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '8.x'  # Use '8.x' instead of 'net8.0' for .NET Core 8
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '8.x'  # Use '8.x' instead of 'net8.0' for .NET Core 8
 
-- task: DotNetCoreCLI@2
-  displayName: 'Build Backend'
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Build Backend'
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration $(buildConfiguration)'
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18.x'  # Use '17.x' for React 17
-    checkLatest: true
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(System.DefaultWorkingDirectory)'
+      ArtifactName: 'backend'
 
-- script: |
-    cd src/Web/ClientApp
-    npm install
-    npm run build
-  displayName: 'Build Frontend'
+- job: Frontend
+  dependsOn: Backend
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'  # Use '17.x' for React 17
+      checkLatest: true
 
-- powershell: |
-    $buildDir = "$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build"
-    if (Test-Path -Path $buildDir -PathType Container) {
-        Write-Output "Build directory exists, copying files..."
-        Copy-Item -Path $buildDir\* -Destination '$(Build.ArtifactStagingDirectory)/react-app' -Recurse
-    }
-    else {
-        Write-Output "Build directory not found, skipping copy files task."
-    }
-  displayName: 'Copy Files'
+  - script: |
+      cd src/Web/ClientApp
+      npm install
+      npm run build
+    displayName: 'Build Frontend'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/react-app'
-    ArtifactName: 'react-app'
+  - powershell: |
+      $buildDir = "$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build"
+      if (Test-Path -Path $buildDir -PathType Container) {
+          Write-Output "Build directory exists, copying files..."
+          Copy-Item -Path $buildDir\* -Destination '$(Build.ArtifactStagingDirectory)/react-app' -Recurse
+      }
+      else {
+          Write-Warning "Build directory not found, skipping copy files task."
+      }
+    displayName: 'Copy Files'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
-    ArtifactName: 'backend'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/react-app'
+      ArtifactName: 'react-app'
