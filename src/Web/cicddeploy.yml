@@ -41,15 +41,13 @@ steps:
     npm run build
   displayName: 'Build Frontend'
 
-- task: CopyFiles@2
+- task: EnsureBuildInstalled@0
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build'  # Adjusted path
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/react-app'
+    sourceFolder: '$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/react-app'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build'
     ArtifactName: 'react-app'
 
 - task: PublishBuildArtifacts@1
