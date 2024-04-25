@@ -50,8 +50,8 @@ jobs:
       npm install
       npm run build
       try {
-          mkdir "$(Build.ArtifactStagingDirectory)/client-app"
-          Copy-Item -Path "./build/*" -Destination "$(Build.ArtifactStagingDirectory)/client-app" -Recurse -ErrorAction Stop
+          mkdir "$(Build.ArtifactStagingDirectory)/frontend"
+          Copy-Item -Path "./build/*" -Destination "$(Build.ArtifactStagingDirectory)/frontend" -Recurse -ErrorAction Stop
       }
       catch {
           Write-Error "Failed to copy frontend build artifacts: $_"
@@ -61,5 +61,5 @@ jobs:
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/client-app'
-      ArtifactName: 'client-app'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend'
+      ArtifactName: 'frontend'
