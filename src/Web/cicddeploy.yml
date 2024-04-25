@@ -43,7 +43,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'src/Web/ClientApp/build'
+    SourceFolder: '$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build'  # Adjusted path
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/react-app'
 
