@@ -36,14 +36,14 @@ steps:
     checkLatest: true
 
 - script: |
-    cd client-app
+    cd src/Web/client-app
     npm install
     npm run build
   displayName: 'Build Frontend'
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'YourReactAppDirectory/build'
+    SourceFolder: 'src/Web/client-app/build'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/react-app'
 
