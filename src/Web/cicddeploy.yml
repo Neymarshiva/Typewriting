@@ -41,13 +41,25 @@ steps:
     npm run build
   displayName: 'Build Frontend'
 
-- task: EnsureBuildInstalled@0
+- script: |
+    IF EXIST src\Web\ClientApp\build (
+        echo Build directory exists, copying files...
+    ) ELSE (
+        echo Build directory not found, skipping copy files task.
+        exit 0
+    )
+  displayName: 'Check Build Directory'
+
+- task: CopyFiles@2
+  condition: succeeded()
   inputs:
-    sourceFolder: '$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build'
+    SourceFolder: 'src/Web/ClientApp/build'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/react-app'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/react-app'
     ArtifactName: 'react-app'
 
 - task: PublishBuildArtifacts@1
