@@ -49,18 +49,9 @@ jobs:
       cd src/Web/ClientApp
       npm install
       npm run build
-    displayName: 'Build Frontend'
-
-  - powershell: |
-      $buildDir = "$(System.DefaultWorkingDirectory)\src\Web\ClientApp\build"
-      if (Test-Path -Path $buildDir -PathType Container) {
-          Write-Output "Build directory exists, copying files..."
-          Copy-Item -Path $buildDir\* -Destination '$(Build.ArtifactStagingDirectory)/react-app' -Recurse
-      }
-      else {
-          Write-Warning "Build directory not found, skipping copy files task."
-      }
-    displayName: 'Copy Files'
+      mkdir "$(Build.ArtifactStagingDirectory)/react-app"
+      Copy-Item -Path "./build/*" -Destination "$(Build.ArtifactStagingDirectory)/react-app" -Recurse
+    displayName: 'Build and Copy Frontend Artifacts'
 
   - task: PublishBuildArtifacts@1
     inputs:
