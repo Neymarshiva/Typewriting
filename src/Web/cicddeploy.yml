@@ -1,0 +1,58 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.x.x'  # Updated to .NET Core 8
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Backend'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '17.x'  # Updated to React 17
+    checkLatest: true
+
+- script: |
+    cd YourReactAppDirectory
+    npm install
+    npm run build
+  displayName: 'Build Frontend'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'YourReactAppDirectory/build'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/react-app'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/react-app'
+    ArtifactName: 'react-app'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    ArtifactName: 'backend'
