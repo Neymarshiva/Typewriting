@@ -21,7 +21,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: 'net8.0'  # Updated to .NET Core 8
+    version: '8.x'  # Use '8.x' instead of 'net8.0' for .NET Core 8
 
 - task: DotNetCoreCLI@2
   displayName: 'Build Backend'
@@ -32,7 +32,7 @@ steps:
 
 - task: NodeTool@0
   inputs:
-    versionSpec: '18.2.0'  # Updated to React 17
+    versionSpec: '18.x'  # Use '17.x' for React 17
     checkLatest: true
 
 - script: |
