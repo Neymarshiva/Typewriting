@@ -46,7 +46,7 @@ jobs:
       checkLatest: true
 
   - script: |
-      cd Web/ClientApp
+      cd src/Web/ClientApp
       npm install
       npm run build
       try {
