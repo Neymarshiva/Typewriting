@@ -4,8 +4,7 @@ import styled from "styled-components";
 
 
 const StyledCountryDiv = styled.div`
-  width: 15%; 
-
+   
   .menu-flags #rfs-btn span {
     overflow: visible !important;
     color:var(--color-grey-600);

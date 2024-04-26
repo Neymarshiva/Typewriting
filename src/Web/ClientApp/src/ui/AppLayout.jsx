@@ -24,8 +24,7 @@ const LayoutContainer = styled.div`
 
 const Main = styled.main`
   background-color: var(--color-grey-50);
-  padding: 2rem 3.8rem 4.4rem;
-  overflow: scroll;
+  padding: 2rem 3.8rem 4.4rem; 
 `;
 
 const ContentContainer = styled.div`

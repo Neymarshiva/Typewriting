@@ -10,8 +10,7 @@ const flexstyles = css`
   justify-content: ${(props) => props.justifycontent || "start"};
 `;
 
-const Profile = styled.div`
-margin-top:2rem;
+const Profile = styled.div` 
 `
 
 const CardHeader = styled.div`

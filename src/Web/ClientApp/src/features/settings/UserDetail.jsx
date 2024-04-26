@@ -6,6 +6,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
 import Tabs from "../../ui/Tabs";
 import ProfileDetail from "./ProfileDetail";
+import UpdateProfileDetail from "./UpdateProfileDetail";
 const flexstyles = css`
   display: flex;
   flex-direction: ${(props) => props.flexdirection || "row"};
@@ -120,7 +121,7 @@ function UserDetail() {
             </Card>
             <div>
                 <Tabs id="overview">
-                    <div className="w-1/2">
+                    <div className="w-1/2 mb-8">
                         <Tabs.TabMenu>
                             <Tabs.TabMenuItem id="overview">OverView</Tabs.TabMenuItem>
                             <Tabs.TabMenuItem id="settings">Settings</Tabs.TabMenuItem>
@@ -132,7 +133,7 @@ function UserDetail() {
                             <ProfileDetail />
                         </Tabs.TabPane>
                         <Tabs.TabPane id="settings">
-                            popular tab
+                            <UpdateProfileDetail />
                         </Tabs.TabPane>
                         <Tabs.TabPane id="security">
                             treding tab
