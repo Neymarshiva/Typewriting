@@ -50,24 +50,28 @@ const StyledCountryDiv = styled.div`
    
 `;
 
-function CountrySelector() {
-  const [selected, setSelected] = useState("");
+function CountrySelector({ selected, onChange, error }) {
+  const [selectedCountry, setSelectedCountry] = useState(selected);
 
-
-
+  const handleChange = (code) => {
+    setSelectedCountry(code);
+    onChange(code);
+  };
 
   return (
-    <StyledCountryDiv>
-      <ReactFlagsSelect
-        selected={selected}
-        onSelect={(code) => setSelected(code)}
-        searchable
-        searchPlaceholder="Search countries"
-        className="menu-flags"
-      />
-    </StyledCountryDiv>
-
+    <div>
+      <StyledCountryDiv>
+        <ReactFlagsSelect
+          selected={selectedCountry}
+          onSelect={handleChange}
+          searchable
+          searchPlaceholder="Search countries"
+          className="menu-flags"
+        />
+      </StyledCountryDiv>
+      {error && <span className="text-red-800 font-medium">{error}</span>}
+    </div>
   );
 }
 
-export default CountrySelector
+export default CountrySelector;

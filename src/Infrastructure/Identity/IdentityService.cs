@@ -51,6 +51,34 @@ public class IdentityService : IIdentityService
 
         return (result.ToApplicationResult(), user.Id);
     }
+    public async Task<Result> UpdateUserAsync(string newUserName, string newEmail, string newPhoneNumber, string CompanyName, string CountryCulture, string State)
+    {
+        var user = await _userManager.FindByIdAsync(newUserName);
+
+        if (user == null)
+        {
+            return Result.Failure(new List<string> { "User does not exist." });
+        }
+        user.UserName = newUserName;
+        user.Email = newEmail;
+        user.CountryCulture = CountryCulture;
+        user.State = State;
+        user.CompanyName = CompanyName;
+        user.PhoneNumber = newPhoneNumber;
+
+
+
+        var updateResult = await _userManager.UpdateAsync(user);
+
+        if (updateResult.Succeeded)
+        {
+            return Result.Success();
+        }
+        else
+        {
+            return updateResult.ToApplicationResult();
+        }
+    }
 
     public async Task<bool> IsInRoleAsync(string userId, string role)
     {
@@ -91,7 +119,7 @@ public class IdentityService : IIdentityService
 
     public async Task<bool> LogoutAsync()
     {
-        await _signInManager.SignOutAsync(); 
+        await _signInManager.SignOutAsync();
         return true;
     }
 }

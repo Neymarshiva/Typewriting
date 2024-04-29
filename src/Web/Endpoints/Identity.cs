@@ -1,6 +1,8 @@
 ﻿using NuGet.Protocol.Plugins;
 using TypeWriting.Application.Common.Interfaces;
+using TypeWriting.Application.Common.Models;
 using TypeWriting.Application.Identity.Command.LogoutIdentity;
+using TypeWriting.Application.Identity.Command.UpdateIdentity;
 using TypeWriting.Application.Identity.Queries.GetCurrentUser;
 using TypeWriting.Application.Machine.Queries.GetMachines;
 using ISender = MediatR.ISender;
@@ -15,7 +17,8 @@ public class Identity : EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapGet(GetCurrentUser)
-            .MapPost(Logout);
+            .MapPost(Logout)
+            .MapPut(UpdateCurrentUser, "{userName}");
     }
     public async Task<bool> Logout(ISender sender)
     { 
@@ -27,5 +30,10 @@ public class Identity : EndpointGroupBase
         return await sender.Send(new GetCurrentUserQuery());
     }
 
-
+    public async Task<IResult> UpdateCurrentUser(ISender sender, string userName, UpdateIdentityCommand command)
+    {
+        if (userName != command.UserName) return Results.BadRequest();
+        await sender.Send(command);
+        return Results.NoContent(); 
+    }
 }

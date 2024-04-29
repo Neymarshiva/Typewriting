@@ -67,6 +67,42 @@
         }
       }
     },
+    "/api/Identity/{userName}": {
+      "put": {
+        "tags": [
+          "Identity"
+        ],
+        "operationId": "UpdateCurrentUser",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIdentityCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/Machines": {
       "get": {
         "tags": [
@@ -706,6 +742,48 @@
             "nullable": true
           },
           "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCulture": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateIdentityCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCulture": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
             "type": "string",
             "nullable": true
           }

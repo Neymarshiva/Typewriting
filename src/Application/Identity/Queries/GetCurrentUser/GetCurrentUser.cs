@@ -25,7 +25,10 @@ public class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, C
         {            
             UserName = _user.UserName ,
             Email = _user.Email,
-            PhoneNumber = _user.PhoneNumber
+            PhoneNumber = _user.PhoneNumber,
+            //CompanyName = _user.CompanyName,
+            //CountryCulture = _user.CompanyId,
+            //State = _user.State
         };
        return await Task.FromResult(currentUser);
     }

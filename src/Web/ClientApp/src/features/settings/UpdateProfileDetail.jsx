@@ -7,6 +7,10 @@ import CountrySelector from "../../ui/CountrySelector";
 import Select from "../../ui/Select";
 import Button from "../../ui/Button";
 import styled from "styled-components";
+import { useEditUser } from "./useEditUser";
+import { useState } from "react";
+import * as Yup from 'yup';
+
 
 
 const StyledSelect = styled.select`
@@ -29,13 +33,47 @@ function UpdateProfileDetail({ onCloseModal }) {
     const { t } = useTranslation();
     const { register, handleSubmit, formState } = useForm();
     const { errors } = formState;
+    const { isEditing, editUser } = useEditUser();
+    const [selectedCountry, setSelectedCountry] = useState('');
+    const [customErrors, setErrors] = useState({});
 
-    function onSubmit(data) {
+    function onSubmit(data) { 
+        const newData = { ...data, countryCulture: selectedCountry };
 
+        // Perform validation using Yup schema or custom logic
+        const schema = Yup.object().shape({
+            countryCulture: Yup.string().required('Country is required'),
+        });
+
+         
+        schema.validate(newData, { abortEarly: false })
+            .then(() => {
+                // Validation passed, proceed with form submission or other actions
+                editUser({ newUserDetailsData: newData, userName: 'Neymarshiva@yopmail.com' });
+                setErrors({});
+            })
+            .catch((validationErrors) => {
+                // Validation failed, update error state with error messages
+                const newErrors = {};
+                validationErrors.inner.forEach((error) => {
+                    newErrors[error.path] = error.message;
+                });
+                setErrors(newErrors);
+            });
+
+        
     }
+
 
     function handleChange() {
 
+    }
+
+    function handleCountryChange(selected) {
+        if(selected){
+            setErrors({});
+        }
+        setSelectedCountry(selected);
     }
 
     return (
@@ -43,7 +81,7 @@ function UpdateProfileDetail({ onCloseModal }) {
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <FormRow label={t("UserName")} error={errors?.userName?.message}>
                     <Input
-                        type="number"
+                        type="text"
                         id="userName"
                         {...register("userName", {
                             required: t("ThisFieldIsRequired"),
@@ -60,8 +98,8 @@ function UpdateProfileDetail({ onCloseModal }) {
                     />
                 </FormRow>
 
-                <FormRow label={t("Country")} error={errors?.country?.message}>
-                    <CountrySelector />
+                <FormRow label={t("Country")} error={errors.country}>
+                    <CountrySelector selected={selectedCountry} onChange={handleCountryChange} error={customErrors.country} />                     
                 </FormRow>
 
                 <FormRow label={t("State")} error={errors?.State?.message}>
@@ -74,11 +112,11 @@ function UpdateProfileDetail({ onCloseModal }) {
                     />
                 </FormRow>
 
-                <FormRow label={t("MobileNumber")} error={errors?.mobileNumber?.message}>
+                <FormRow label={t("MobileNumber")} error={errors?.phoneNumber?.message}>
                     <Input
                         type="tel"
-                        id="mobileNumber"
-                        {...register("mobileNumber", {
+                        id="phoneNumber"
+                        {...register("phoneNumber", {
                             required: t("ThisFieldIsRequired"),
                             pattern: {
                                 value: /^[0-9]{10}$/, // Validating 10 digit number

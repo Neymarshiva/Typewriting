@@ -143,6 +143,44 @@ export class IdentityClient {
         }
         return Promise.resolve<boolean>(null as any);
     }
+
+    updateCurrentUser(userName: string, command: UpdateIdentityCommand): Promise<void> {
+        let url_ = this.baseUrl + "/api/Identity/{userName}";
+        if (userName === undefined || userName === null)
+            throw new Error("The parameter 'userName' must be defined.");
+        url_ = url_.replace("{userName}", encodeURIComponent("" + userName));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(command);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processUpdateCurrentUser(_response);
+        });
+    }
+
+    protected processUpdateCurrentUser(response: Response): Promise<void> {
+        followIfLoginRedirect(response);
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
+    }
 }
 
 export class MachinesClient {
@@ -949,6 +987,9 @@ export class CurrentUserDto implements ICurrentUserDto {
     userName?: string | undefined;
     email?: string | undefined;
     phoneNumber?: string | undefined;
+    companyName?: string | undefined;
+    countryCulture?: string | undefined;
+    state?: string | undefined;
 
     constructor(data?: ICurrentUserDto) {
         if (data) {
@@ -964,6 +1005,9 @@ export class CurrentUserDto implements ICurrentUserDto {
             this.userName = _data["userName"];
             this.email = _data["email"];
             this.phoneNumber = _data["phoneNumber"];
+            this.companyName = _data["companyName"];
+            this.countryCulture = _data["countryCulture"];
+            this.state = _data["state"];
         }
     }
 
@@ -979,6 +1023,9 @@ export class CurrentUserDto implements ICurrentUserDto {
         data["userName"] = this.userName;
         data["email"] = this.email;
         data["phoneNumber"] = this.phoneNumber;
+        data["companyName"] = this.companyName;
+        data["countryCulture"] = this.countryCulture;
+        data["state"] = this.state;
         return data;
     }
 }
@@ -987,6 +1034,65 @@ export interface ICurrentUserDto {
     userName?: string | undefined;
     email?: string | undefined;
     phoneNumber?: string | undefined;
+    companyName?: string | undefined;
+    countryCulture?: string | undefined;
+    state?: string | undefined;
+}
+
+export class UpdateIdentityCommand implements IUpdateIdentityCommand {
+    userName?: string | undefined;
+    email?: string | undefined;
+    phoneNumber?: string | undefined;
+    companyName?: string | undefined;
+    countryCulture?: string | undefined;
+    state?: string | undefined;
+
+    constructor(data?: IUpdateIdentityCommand) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.userName = _data["userName"];
+            this.email = _data["email"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.companyName = _data["companyName"];
+            this.countryCulture = _data["countryCulture"];
+            this.state = _data["state"];
+        }
+    }
+
+    static fromJS(data: any): UpdateIdentityCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateIdentityCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userName"] = this.userName;
+        data["email"] = this.email;
+        data["phoneNumber"] = this.phoneNumber;
+        data["companyName"] = this.companyName;
+        data["countryCulture"] = this.countryCulture;
+        data["state"] = this.state;
+        return data;
+    }
+}
+
+export interface IUpdateIdentityCommand {
+    userName?: string | undefined;
+    email?: string | undefined;
+    phoneNumber?: string | undefined;
+    companyName?: string | undefined;
+    countryCulture?: string | undefined;
+    state?: string | undefined;
 }
 
 export class MachinesDto implements IMachinesDto {
