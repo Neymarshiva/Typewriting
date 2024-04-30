@@ -127,11 +127,11 @@ namespace TypeWriting.Web.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
-                        };
-                    var claimsResult = await _userManager.AddClaimsAsync(user, claims);
+                    //var claims = new List<Claim>
+                    //    {
+                    //        new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
+                    //    };
+                    //var claimsResult = await _userManager.AddClaimsAsync(user, claims);
 
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
