@@ -28,16 +28,19 @@ const StyledSelect = styled.select`
 `;
 
 
-function UpdateProfileDetail({ onCloseModal }) {
+function UpdateProfileDetail({ user }) {
+     
 
     const { t } = useTranslation();
-    const { register, handleSubmit, formState } = useForm();
+    const { register, handleSubmit, formState } = useForm({
+        defaultValues: user ? user : {},
+    });
     const { errors } = formState;
     const { isEditing, editUser } = useEditUser();
     const [selectedCountry, setSelectedCountry] = useState('');
     const [customErrors, setErrors] = useState({});
 
-    function onSubmit(data) { 
+    function onSubmit(data) {
         const newData = { ...data, countryCulture: selectedCountry };
 
         // Perform validation using Yup schema or custom logic
@@ -45,11 +48,11 @@ function UpdateProfileDetail({ onCloseModal }) {
             countryCulture: Yup.string().required('Country is required'),
         });
 
-         
+
         schema.validate(newData, { abortEarly: false })
             .then(() => {
                 // Validation passed, proceed with form submission or other actions
-                editUser({ newUserDetailsData: newData, userName: 'Neymarshiva@yopmail.com' });
+                editUser({ newUserDetailsData: newData, userName: newData.userName });
                 setErrors({});
             })
             .catch((validationErrors) => {
@@ -58,10 +61,11 @@ function UpdateProfileDetail({ onCloseModal }) {
                 validationErrors.inner.forEach((error) => {
                     newErrors[error.path] = error.message;
                 });
+                console.log("NewError", newErrors);
                 setErrors(newErrors);
             });
 
-        
+
     }
 
 
@@ -70,7 +74,7 @@ function UpdateProfileDetail({ onCloseModal }) {
     }
 
     function handleCountryChange(selected) {
-        if(selected){
+        if (selected) {
             setErrors({});
         }
         setSelectedCountry(selected);
@@ -99,7 +103,7 @@ function UpdateProfileDetail({ onCloseModal }) {
                 </FormRow>
 
                 <FormRow label={t("Country")} error={errors.country}>
-                    <CountrySelector selected={selectedCountry} onChange={handleCountryChange} error={customErrors.country} />                     
+                    <CountrySelector selected={selectedCountry} onChange={handleCountryChange} error={customErrors.countryCulture} />
                 </FormRow>
 
                 <FormRow label={t("State")} error={errors?.State?.message}>

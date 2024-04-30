@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using TypeWriting.Infrastructure.Identity;
 using TypeWriting.Domain.Entities;
+using System.Security.Claims;
 
 namespace TypeWriting.Web.Areas.Identity.Pages.Account
 {
@@ -115,7 +116,7 @@ namespace TypeWriting.Web.Areas.Identity.Pages.Account
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
 
-                if(user == null)
+                if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
@@ -126,6 +127,12 @@ namespace TypeWriting.Web.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
+                        };
+                    var claimsResult = await _userManager.AddClaimsAsync(user, claims);
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

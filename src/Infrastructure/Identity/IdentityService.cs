@@ -53,7 +53,7 @@ public class IdentityService : IIdentityService
     }
     public async Task<Result> UpdateUserAsync(string newUserName, string newEmail, string newPhoneNumber, string CompanyName, string CountryCulture, string State)
     {
-        var user = await _userManager.FindByIdAsync(newUserName);
+        var user = await _userManager.FindByEmailAsync(newEmail);
 
         if (user == null)
         {

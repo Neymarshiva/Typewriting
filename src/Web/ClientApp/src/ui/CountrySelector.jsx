@@ -51,6 +51,7 @@ const StyledCountryDiv = styled.div`
 `;
 
 function CountrySelector({ selected, onChange, error }) {
+  console.log('CountryError', error);
   const [selectedCountry, setSelectedCountry] = useState(selected);
 
   const handleChange = (code) => {
