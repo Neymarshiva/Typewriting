@@ -8,6 +8,7 @@ import Tabs from "../../ui/Tabs";
 import ProfileDetail from "./ProfileDetail";
 import UpdateProfileDetail from "./UpdateProfileDetail";
 import { useUser } from "../../authentication/useUser";
+import { useTranslation } from "react-i18next";
 const flexstyles = css`
   display: flex;
   flex-direction: ${(props) => props.flexdirection || "row"};
@@ -69,7 +70,7 @@ const Title = styled.div`
 
 function UserDetail() {
     const { user } = useUser();
-    console.log("User Detail", user);
+    const { t } = useTranslation();
     return (
         <>
             <Card
@@ -126,9 +127,9 @@ function UserDetail() {
                 <Tabs id="overview">
                     <div className="w-1/2 mb-8">
                         <Tabs.TabMenu>
-                            <Tabs.TabMenuItem id="overview">OverView</Tabs.TabMenuItem>
-                            <Tabs.TabMenuItem id="settings">Settings</Tabs.TabMenuItem>
-                            <Tabs.TabMenuItem id="security">Security</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="overview">{t("Overview")}</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="settings">{t("Settings")}</Tabs.TabMenuItem>
+                            <Tabs.TabMenuItem id="security">{t("Security")}</Tabs.TabMenuItem>
                         </Tabs.TabMenu>
                     </div>
                     <div>

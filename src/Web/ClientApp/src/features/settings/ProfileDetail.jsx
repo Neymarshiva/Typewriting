@@ -52,7 +52,7 @@ function ProfileDetail({ user }) {
         <Profile>
             <Card
                 flexdirection="column"
-                justifycontent="start"
+              justifycontent="start"
                 alignitems="start"
                 background="var(--bs-card-background-color);"
                 width="100%"
@@ -65,35 +65,35 @@ function ProfileDetail({ user }) {
             >
                 <CardHeader>
                     <CardTitle>
-                        Profile Detail
+                        {t("Profile Detail")}
                     </CardTitle>
                     <Button size="small" className="self-center">
-                        {t("Edit")} Profile
+                        {t("Edit")} {t("Profile")}
                     </Button>
                 </CardHeader>
                 <CardBody>
                     <CardRow>
-                        <label className="font-semibold text-gray-400">Full Name</label>
+                        <label className="font-semibold text-gray-400">{t("Full Name")}</label>
                         <div className="">
                             <span className="font-bold text-xl text-gray-800">{user?.userName}</span>
                         </div>
                     </CardRow>
                     <CardRow>
-                        <label className="font-semibold text-gray-400">Company</label>
+                        <label className="font-semibold text-gray-400">{t("Company")}</label>
                         <div className="">
                             <span className="font-bold text-xl text-gray-800">{user?.companyName}</span>
                         </div>
                     </CardRow>
                     <CardRow>
-                        <label className="font-semibold text-gray-400">Contact Phone</label>
+                        <label className="font-semibold text-gray-400">{t("Contact Phone")}</label>
                         <div className="">
                             <span className="font-bold text-xl text-gray-800 mr-4">{user?.phoneNumber}
                             </span>
-                            <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Verfied</span>
+                            <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{t("Verified")}</span>
                         </div>
                     </CardRow>
                     <CardRow>
-                        <label className="font-semibold text-gray-400">Country</label>
+                        <label className="font-semibold text-gray-400">{t("Country")}</label>
                         <div className="">
                             <span className="font-bold text-xl text-gray-800">{user?.countryCulture}</span>
                         </div>

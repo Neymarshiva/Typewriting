@@ -11,8 +11,6 @@ import { useEditUser } from "./useEditUser";
 import { useState } from "react";
 import * as Yup from 'yup';
 
-
-
 const StyledSelect = styled.select`
   font-size: 1.4rem;
   padding: 0.8rem 1.2rem;
@@ -27,10 +25,7 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 `;
 
-
 function UpdateProfileDetail({ user }) {
-
-
     const { t } = useTranslation();
     const { register, handleSubmit, formState } = useForm({
         defaultValues: user ? user : {},
@@ -39,37 +34,25 @@ function UpdateProfileDetail({ user }) {
     const { isEditing, editUser } = useEditUser();
     const [selectedCountry, setSelectedCountry] = useState(user.countryCulture);
     const [customErrors, setErrors] = useState({}); 
+
     function onSubmit(data) {
         const newData = { ...data, countryCulture: selectedCountry };
-
-        // Perform validation using Yup schema or custom logic
         const schema = Yup.object().shape({
-            countryCulture: Yup.string().required('Country is required'),
+            countryCulture: Yup.string().required(t("CountryIsRequired")),
         });
-
 
         schema.validate(newData, { abortEarly: false })
             .then(() => {
-                // Validation passed, proceed with form submission or other actions
                 editUser({ newUserDetailsData: newData, userName: newData.userName });
                 setErrors({});
             })
             .catch((validationErrors) => {
-                // Validation failed, update error state with error messages
                 const newErrors = {};
                 validationErrors.inner.forEach((error) => {
-                    newErrors[error.path] = error.message;
+                    newErrors[error.path] = t(error.message);
                 });
-                console.log("NewError", newErrors);
                 setErrors(newErrors);
             });
-
-
-    }
-
-
-    function handleChange() {
-
     }
 
     function handleCountryChange(selected) {
@@ -100,11 +83,9 @@ function UpdateProfileDetail({ user }) {
                         })}
                     />
                 </FormRow>
-
                 <FormRow label={t("Country")} error={errors.country}>
                     <CountrySelector selected={selectedCountry} onChange={handleCountryChange} error={customErrors.countryCulture} />
                 </FormRow>
-
                 <FormRow label={t("State")} error={errors?.state?.message}>
                     <Input
                         type="text"
@@ -114,7 +95,6 @@ function UpdateProfileDetail({ user }) {
                         })}
                     />
                 </FormRow>
-
                 <FormRow label={t("MobileNumber")} error={errors?.phoneNumber?.message}>
                     <Input
                         type="tel"
@@ -128,7 +108,6 @@ function UpdateProfileDetail({ user }) {
                         })}
                     />
                 </FormRow>
-
                 <FormRow label={t("Email")} error={errors?.email?.message}>
                     <Input
                         type="email"
@@ -142,27 +121,22 @@ function UpdateProfileDetail({ user }) {
                         })}
                     />
                 </FormRow>
-
                 <FormRow label={t("Role")} error={errors?.role?.message}>
                     <StyledSelect
                         defaultValue={"Admin"}
                         {...register("role", {
                             required: t("ThisFieldIsRequired"),
                         })}
-                        onChange={handleChange}
                     >
                         <option value="">{t("Select")}</option>
-                        <option value="Admin">{t("Admin")}</option>
+                        <option value="Administrator">{t("Admin")}</option>
                         <option value="Manager">{t("Manager")}</option>
-
                     </StyledSelect>
                 </FormRow>
-
                 <Button type="submit">{t("Submit")}</Button>
             </Form>
-
         </div>
-    )
+    );
 }
 
-export default UpdateProfileDetail
+export default UpdateProfileDetail;
