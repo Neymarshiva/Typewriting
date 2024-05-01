@@ -11,7 +11,7 @@ export function useEditUser() {
     mutationFn: ({ newUserDetailsData, userName }) => UpdateUser(userName, newUserDetailsData),
     onSuccess: () => {
       toast.success("UserDetails successfully edited");
-      //queryClient.invalidateQueries({ queryKey: ["students"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
     onError: (err) => toast.error(err.message),
   });

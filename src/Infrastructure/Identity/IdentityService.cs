@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TypeWriting.Domain.Entities;
+using System.Security.Claims;
 
 namespace TypeWriting.Infrastructure.Identity;
 
@@ -66,9 +67,36 @@ public class IdentityService : IIdentityService
         user.CompanyName = CompanyName;
         user.PhoneNumber = newPhoneNumber;
 
+        var newClaims = new[]
+              {
+                new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty),
+                new Claim(ClaimTypes.Country, user.CountryCulture ?? string.Empty),
+                new Claim("CompanyName", user.CompanyName ?? string.Empty),
+                new Claim("State", user.State ?? string.Empty)
+            };
+
+        var existingClaims = await _userManager.GetClaimsAsync(user);
+
+        // Remove existing claims that need to be updated or removed
+        foreach (var claim in existingClaims)
+        {
+            // Example: Remove claims with specific types
+            if (claim.Type == ClaimTypes.MobilePhone || claim.Type == ClaimTypes.Country ||
+                claim.Type == "CompanyName" || claim.Type == "State")
+            {
+                await _userManager.RemoveClaimAsync(user, claim);
+            }
+        }
+
+        // Add or update new claims
+        foreach (var newClaim in newClaims)
+        {
+            await _userManager.AddClaimAsync(user, newClaim);
+        }
 
 
-        var updateResult = await _userManager.UpdateAsync(user);
+        var updateResult = await _userManager.UpdateAsync(user); 
+        await _signInManager.RefreshSignInAsync(user);
 
         if (updateResult.Succeeded)
         {

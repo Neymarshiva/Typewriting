@@ -96,7 +96,7 @@ function UserDetail() {
                         <Title>
                             <div className="flex flex-col">
                                 <div className="flex items-center mb-3">
-                                    <span className="text-gray-900 text-hover-primary fs-2 fw-bold me-1 text-3xl">Neymar Shiva</span>
+                                    <span className="text-gray-900 text-hover-primary fs-2 fw-bold me-1 text-3xl">{user?.userName}</span>
                                     <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-3xl font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"><MdOutlineVerified /></span>
 
                                 </div>
@@ -109,12 +109,12 @@ function UserDetail() {
                                     <span className="flex  items-center text-gray-500 text-hover-primary me-5 mb-2">
 
                                         <span className="mr-2"><CiLocationOn /> </span>
-                                        SF, Bay Area
+                                        {user?.state}
                                     </span>
                                     <span className="flex  items-center text-gray-500 text-hover-primary me-5 mb-2">
 
                                         <span className="mr-2"><MdOutlineMarkEmailRead /> </span>
-                                        Neymarshiva@yopmail.com
+                                        {user?.email}
                                     </span>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ function UserDetail() {
                     </div>
                     <div>
                         <Tabs.TabPane id="overview">
-                            <ProfileDetail />
+                            <ProfileDetail user={user} />
                         </Tabs.TabPane>
                         <Tabs.TabPane id="settings">
                             <UpdateProfileDetail user={user} />

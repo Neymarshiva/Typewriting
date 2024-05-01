@@ -46,7 +46,7 @@ const CardRow = styled.div`
     grid-template-columns: repeat(2, minmax(0, 1fr));
 `
 
-function ProfileDetail() {
+function ProfileDetail({ user }) {
     const { t } = useTranslation();
     return (
         <Profile>
@@ -75,27 +75,27 @@ function ProfileDetail() {
                     <CardRow>
                         <label className="font-semibold text-gray-400">Full Name</label>
                         <div className="">
-                            <span className="font-bold text-xl text-gray-800">Max Smith</span>
+                            <span className="font-bold text-xl text-gray-800">{user?.userName}</span>
                         </div>
                     </CardRow>
                     <CardRow>
                         <label className="font-semibold text-gray-400">Company</label>
                         <div className="">
-                            <span className="font-bold text-xl text-gray-800">TypeWriting</span>
+                            <span className="font-bold text-xl text-gray-800">{user?.companyName}</span>
                         </div>
                     </CardRow>
                     <CardRow>
                         <label className="font-semibold text-gray-400">Contact Phone</label>
                         <div className="">
-                            <span className="font-bold text-xl text-gray-800 mr-4">044 3276 454 935
-                            </span> 
+                            <span className="font-bold text-xl text-gray-800 mr-4">{user?.phoneNumber}
+                            </span>
                             <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Verfied</span>
                         </div>
                     </CardRow>
                     <CardRow>
                         <label className="font-semibold text-gray-400">Country</label>
                         <div className="">
-                            <span className="font-bold text-xl text-gray-800">US</span>
+                            <span className="font-bold text-xl text-gray-800">{user?.countryCulture}</span>
                         </div>
                     </CardRow>
                 </CardBody>
