@@ -119,7 +119,28 @@ public class IdentityService : IIdentityService
 
     public async Task<bool> LogoutAsync()
     {
+        // Sign out the user
         await _signInManager.SignOutAsync();
+
+        // Get the current user
+        var user = await _userManager.GetUserAsync(_signInManager.Context.User);
+        if (user != null)
+        {
+            // Retrieve all claims associated with the user
+            var existingClaims = await _userManager.GetClaimsAsync(user);
+
+            // Remove all claims associated with the user
+            var removeAllClaimsResult = await _userManager.RemoveClaimsAsync(user, existingClaims);
+            if (!removeAllClaimsResult.Succeeded)
+            {
+                // Handle the case where removing claims failed
+                // You can log an error or take appropriate action
+                return false;
+            }
+        }
+
         return true;
     }
+
+
 }

@@ -29,7 +29,7 @@ const StyledSelect = styled.select`
 
 
 function UpdateProfileDetail({ user }) {
-     
+
 
     const { t } = useTranslation();
     const { register, handleSubmit, formState } = useForm({
@@ -37,9 +37,8 @@ function UpdateProfileDetail({ user }) {
     });
     const { errors } = formState;
     const { isEditing, editUser } = useEditUser();
-    const [selectedCountry, setSelectedCountry] = useState('');
-    const [customErrors, setErrors] = useState({});
-
+    const [selectedCountry, setSelectedCountry] = useState(user.countryCulture);
+    const [customErrors, setErrors] = useState({}); 
     function onSubmit(data) {
         const newData = { ...data, countryCulture: selectedCountry };
 
@@ -106,11 +105,11 @@ function UpdateProfileDetail({ user }) {
                     <CountrySelector selected={selectedCountry} onChange={handleCountryChange} error={customErrors.countryCulture} />
                 </FormRow>
 
-                <FormRow label={t("State")} error={errors?.State?.message}>
+                <FormRow label={t("State")} error={errors?.state?.message}>
                     <Input
                         type="text"
-                        id="State"
-                        {...register("State", {
+                        id="state"
+                        {...register("state", {
                             required: t("ThisFieldIsRequired"),
                         })}
                     />

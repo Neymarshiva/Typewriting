@@ -127,11 +127,42 @@ namespace TypeWriting.Web.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    //var claims = new List<Claim>
-                    //    {
-                    //        new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
-                    //    };
-                    //var claimsResult = await _userManager.AddClaimsAsync(user, claims);
+                    var claims = new[]
+                       {
+                            new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty),
+                            new Claim(ClaimTypes.Country, user.CountryCulture ?? string.Empty),
+                            new Claim("CompanyName", user.CompanyName ?? string.Empty),
+                            new Claim("State", user.State ?? string.Empty)
+                        };
+
+                    var userClaims = await _userManager.GetClaimsAsync(user);
+
+                    foreach (var claimToRemove in claims)
+                    {
+                        var existingClaim = userClaims.FirstOrDefault(c =>
+                            c.Type == claimToRemove.Type && c.Value == claimToRemove.Value);
+
+                        if (existingClaim != null)
+                        {
+                            // Remove the claim if it exists
+                            await _userManager.RemoveClaimAsync(user, existingClaim);
+                        }
+                    }
+
+
+                    //await _userManager.AddClaimsAsync(user, claims);
+
+                    var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
+
+                    if (claimsPrincipal?.Identity is ClaimsIdentity claimsIdentity)
+                    {
+                        claimsIdentity.AddClaims(claims);
+                    }
+
+                    await _signInManager.Context.SignInAsync(IdentityConstants.ApplicationScheme,
+                        claimsPrincipal,
+                        new AuthenticationProperties { });
+
 
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);

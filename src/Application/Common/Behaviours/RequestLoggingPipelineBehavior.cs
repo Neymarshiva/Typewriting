@@ -8,7 +8,7 @@ using Serilog.Context;
 using TypeWriting.Application.Common.Models;
 
 namespace TypeWriting.Application.Common.Behaviours;
-internal sealed class RequestLoggingPipelineBehavior<TRequest, TResponse>
+public sealed class RequestLoggingPipelineBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class
     where TResponse : Result
