@@ -33,8 +33,7 @@ function TabPane({ id, children }) {
 function TabMenuItem({ id, children }) {
     const { activeTab, setActiveTab } = useContext(TabsContext);
 
-    function handleClick() {
-        debugger;
+    function handleClick() {        
         setActiveTab(id);
     }
 
