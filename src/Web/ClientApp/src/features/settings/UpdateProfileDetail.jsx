@@ -33,7 +33,7 @@ function UpdateProfileDetail({ user }) {
     const { errors } = formState;
     const { isEditing, editUser } = useEditUser();
     const [selectedCountry, setSelectedCountry] = useState(user.countryCulture);
-    const [customErrors, setErrors] = useState({}); 
+    const [customErrors, setErrors] = useState({});
 
     function onSubmit(data) {
         const newData = { ...data, countryCulture: selectedCountry };
@@ -133,7 +133,10 @@ function UpdateProfileDetail({ user }) {
                         <option value="Manager">{t("Manager")}</option>
                     </StyledSelect>
                 </FormRow>
-                <Button type="submit">{t("Submit")}</Button>
+                <FormRow>
+                    <Button type="submit">{t("Update User")}</Button>
+                </FormRow>
+
             </Form>
         </div>
     );

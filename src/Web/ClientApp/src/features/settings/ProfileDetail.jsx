@@ -2,6 +2,8 @@ import { useTranslation } from "react-i18next";
 import Button from "../../ui/Button";
 import Card from "../../ui/Card"
 import styled, { css } from 'styled-components';
+import { useContext } from "react"; 
+import { useTabs } from "../../ui/Tabs";
 
 const flexstyles = css`
   display: flex;
@@ -48,6 +50,13 @@ const CardRow = styled.div`
 
 function ProfileDetail({ user }) {
     const { t } = useTranslation();
+    const { activeTab, setActiveTab }= useTabs(); // Access setActiveTab from the TabsContext
+
+    function handleEditProfileClick() {        
+        // Set the active tab to "settings" when the "Edit Profile" button is clicked
+        setActiveTab('settings');
+    }
+
     return (
         <Profile>
             <Card
@@ -67,7 +76,7 @@ function ProfileDetail({ user }) {
                     <CardTitle>
                         {t("Profile Detail")}
                     </CardTitle>
-                    <Button size="small" className="self-center">
+                    <Button onClick={handleEditProfileClick} size="small" className="self-center">
                         {t("Edit")} {t("Profile")}
                     </Button>
                 </CardHeader>

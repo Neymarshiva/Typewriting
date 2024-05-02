@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledFormRow = styled.div`
-  display: grid !important;
+  display: grid;
   align-items: center;
   grid-template-columns: 24rem 1fr 1.2fr;
   gap: 2.4rem;
@@ -20,7 +20,7 @@ const StyledFormRow = styled.div`
     border-bottom: 1px solid var(--color-grey-100);
   }
 
-  &:has(button) {
+  &:has(button:not(#rfs-btn)) {
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;

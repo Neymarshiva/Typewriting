@@ -4,11 +4,12 @@ import { MdOutlineVerified } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
-import Tabs from "../../ui/Tabs";
+import { Tabs } from "../../ui/Tabs";
 import ProfileDetail from "./ProfileDetail";
 import UpdateProfileDetail from "./UpdateProfileDetail";
 import { useUser } from "../../authentication/useUser";
 import { useTranslation } from "react-i18next";
+import Security from "./Security";
 const flexstyles = css`
   display: flex;
   flex-direction: ${(props) => props.flexdirection || "row"};
@@ -140,7 +141,7 @@ function UserDetail() {
                             <UpdateProfileDetail user={user} />
                         </Tabs.TabPane>
                         <Tabs.TabPane id="security">
-                            treding tab
+                            <Security />
                         </Tabs.TabPane>
                     </div>
 

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Tab } from '@headlessui/react';
+import { DefaultContext } from 'react-icons/lib';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
@@ -33,6 +34,7 @@ function TabMenuItem({ id, children }) {
     const { activeTab, setActiveTab } = useContext(TabsContext);
 
     function handleClick() {
+        debugger;
         setActiveTab(id);
     }
 
@@ -59,9 +61,16 @@ function TabMenu({ children }) {
     return <>{children}</>;
 }
 
+function useTabs() {
+    const context = useContext(TabsContext);
+    if (context === undefined)
+        throw new Error("TabsContext was used outside of TabsProvider");
+    return context;
+}
+
 // Exporting compound components
 Tabs.TabPane = TabPane;
 Tabs.TabMenuItem = TabMenuItem;
 Tabs.TabMenu = TabMenu; // Exporting TabMenu component
 
-export default Tabs;
+export  { Tabs, useTabs };
