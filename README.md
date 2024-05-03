@@ -1,4 +1,4 @@
-# TypeWriting
+ # TypeWriting
 
 The project was generated using the [Clean.Architecture.Solution.Template](https://github.com/jasontaylordev/TypeWriting) version 8.0.2.
 
