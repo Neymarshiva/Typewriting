@@ -78,5 +78,14 @@
   "Manager": "Manager",
   "Profile":"Profile",
   "Overview": "Overview", 
-  "Security": "Security"
+  "Security": "Security",
+  "Old Password": "Old Password",
+  "New Password": "New Password",
+  "Confirm Password": "Confirm Password",
+  "Old password is required": "Old password is required",
+  "New password is required": "New password is required",
+  "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+  "Confirm password is required": "Confirm password is required",
+  "Passwords do not match": "Passwords do not match",
+  "Update Password": "Update Password"
 }

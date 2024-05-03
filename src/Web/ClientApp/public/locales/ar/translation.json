@@ -78,5 +78,14 @@
   "Manager": "مدير",
   "Profile":"الملف الشخصي",
   "Overview": "نظرة عامة", 
-  "Security": "الأمان"
+  "Security": "الأمان",
+  "Old Password": "كلمة السر القديمة",
+  "New Password": "كلمة السر الجديدة",
+  "Confirm Password": "تأكيد كلمة السر",
+  "Old password is required": "كلمة السر القديمة مطلوبة",
+  "New password is required": "كلمة السر الجديدة مطلوبة",
+  "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character": "يجب أن تحتوي كلمة السر على حرف كبير واحد وحرف صغير واحد ورقم واحد وحرف خاص",
+  "Confirm password is required": "تأكيد كلمة السر مطلوب",
+  "Passwords do not match": "كلمات السر غير متطابقة",
+  "Update Password": "تحديث كلمة السر"
 }

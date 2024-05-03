@@ -84,5 +84,14 @@
     "Manager": "Gestionnaire",
     "Profile":"Profil",
     "Overview": "Aperçu", 
-    "Security": "Sécurité"
+    "Security": "Sécurité",
+    "Old Password": "Ancien Mot de passe",
+    "New Password": "Nouveau Mot de passe",
+    "Confirm Password": "Confirmer le Mot de passe",
+    "Old password is required": "Ancien mot de passe requis",
+    "New password is required": "Nouveau mot de passe requis",
+    "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial",
+    "Confirm password is required": "Confirmer le mot de passe requis",
+    "Passwords do not match": "Les mots de passe ne correspondent pas",
+    "Update Password": "Mettre à jour le mot de passe"
 }

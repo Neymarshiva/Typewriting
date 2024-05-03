@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import Button from '../../ui/Button';
@@ -28,7 +28,7 @@ const Security = () => {
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <FormRow label="Old Password" error={errors?.oldPassword?.message}>
+            <FormRow label={t("Old Password")} error={errors?.oldPassword?.message}>
                 <div className="relative">
                     <Input
                         className='w-full'
@@ -47,7 +47,7 @@ const Security = () => {
                     </button>
                 </div>
             </FormRow>
-            <FormRow label="New Password" error={errors?.newPassword?.message}>
+            <FormRow label={t("New Password")} error={errors?.newPassword?.message}>
                 <div className="relative">
                     <Input
                         type={showNewPassword ? "text" : "password"}
@@ -71,7 +71,7 @@ const Security = () => {
                 </div>
             </FormRow>
 
-            <FormRow label="Confirm Password" error={errors?.confirmPassword?.message}>
+            <FormRow label={t("Confirm Password")} error={errors?.confirmPassword?.message}>
                 <div className="relative">
                     <Input
                         type={showConfirmPassword ? "text" : "password"}
@@ -92,7 +92,7 @@ const Security = () => {
                 </div>
             </FormRow>
             <FormRow>
-                <Button type="submit">Update Password</Button>
+                <Button type="submit">{t("Update Password")}</Button>
             </FormRow>
         </Form>
     );
