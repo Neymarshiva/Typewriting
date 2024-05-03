@@ -144,6 +144,13 @@ public class IdentityService : IIdentityService
 
         return result.ToApplicationResult();
     }
+    public async Task<Result> UpdatePasswordAsync(ApplicationUser user,string oldPassword, string newPassword)
+    {
+        var result =  await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+
+        return result.ToApplicationResult();
+    }
+
 
     public async Task<bool> LogoutAsync()
     {

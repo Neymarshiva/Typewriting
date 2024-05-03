@@ -1,4 +1,5 @@
 ﻿using TypeWriting.Application.Common.Models;
+using TypeWriting.Domain.Entities;
 
 namespace TypeWriting.Application.Common.Interfaces;
 
@@ -15,4 +16,6 @@ public interface IIdentityService
 
     Task<Result> DeleteUserAsync(string userId);
     Task<bool> LogoutAsync();
+    Task<Result> UpdatePasswordAsync(ApplicationUser user, string oldPassword, string newPassword);
+    Task<ApplicationUser?> GetUser(string userId);
 }

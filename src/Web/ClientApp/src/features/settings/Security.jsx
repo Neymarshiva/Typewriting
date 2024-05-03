@@ -6,6 +6,7 @@ import Button from '../../ui/Button';
 import Form from '../../ui/Form';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri'; // Import eye icons
 import { useTranslation } from 'react-i18next';
+import { useUpdatePassword } from './useUpdatePassword';
 
 const Security = () => {
     const { register, control, handleSubmit, formState, watch } = useForm();
@@ -16,12 +17,12 @@ const Security = () => {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const oldPassword = watch('oldPassword');
-    const newPassword = watch('newPassword');
-    const confirmPassword = watch('confirmPassword');
+    const { isLoading, updateUserPassword } = useUpdatePassword();
 
-    const onSubmit = (data) => {
-        // Submit logic here
+    const newPassword = watch('newPassword');
+
+    const onSubmit = (data) => {        
+        updateUserPassword({ newUserPassword: data });
         console.log(data);
     };
 
@@ -30,7 +31,7 @@ const Security = () => {
             <FormRow label="Old Password" error={errors?.oldPassword?.message}>
                 <div className="relative">
                     <Input
-                    className='w-full'
+                        className='w-full'
                         type={showOldPassword ? "text" : "password"}
                         id="oldPassword"
                         {...register("oldPassword", {

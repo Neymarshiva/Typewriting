@@ -16,9 +16,9 @@ public record UpdateIdentityCommand : IRequest<Result>
     public string? UserName { get; init; }
     public string? Email { get; init; }
     public string? PhoneNumber { get; init; }
-    public string? CompanyName { get; set; }
-    public string? CountryCulture { get; set; }
-    public string? State { get; set; }
+    public string? CompanyName { get; init; }
+    public string? CountryCulture { get; init; }
+    public string? State { get; init; }
 }
 
 public class UpdateIdentityCommandHandler : IRequestHandler<UpdateIdentityCommand, Result>
