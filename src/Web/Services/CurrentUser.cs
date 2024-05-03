@@ -14,4 +14,10 @@ public class CurrentUser : IUser
     }
 
     public string? Id => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+    public string? UserName => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Name);
+    public string? Email => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Email);
+    public string? PhoneNumber => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.MobilePhone);
+    public string? CountryCulture => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Country);
+    public string? State => _httpContextAccessor.HttpContext?.User?.FindFirstValue("State");
+    public string? CompanyName => _httpContextAccessor.HttpContext?.User?.FindFirstValue("CompanyName");
 }

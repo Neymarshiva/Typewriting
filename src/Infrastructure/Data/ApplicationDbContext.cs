@@ -4,12 +4,17 @@ using TypeWriting.Domain.Entities;
 using TypeWriting.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace TypeWriting.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    private readonly IUser _user;
+
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IUser user) : base(options) {
+        _user = user;
+    }
 
     public DbSet<TodoList> TodoLists => Set<TodoList>();
 
@@ -22,6 +27,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        builder.Entity<Machines>().HasQueryFilter(m => m.UserId == _user.Id);
+        builder.Entity<Students>().HasQueryFilter(s => s.UserId == _user.Id);
 
         base.OnModelCreating(builder);
     }

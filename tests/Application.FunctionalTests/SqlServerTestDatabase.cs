@@ -4,6 +4,9 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Respawn;
+using TypeWriting.Application.Common.Interfaces;
+using TypeWriting.Web.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace TypeWriting.Application.FunctionalTests;
 
@@ -35,7 +38,10 @@ public class SqlServerTestDatabase : ITestDatabase
             .UseSqlServer(_connectionString)
             .Options;
 
-        var context = new ApplicationDbContext(options);
+        var _httpContextAccessorMock = new Mock<IHttpContextAccessor>();
+        var currentUser = new CurrentUser(_httpContextAccessorMock.Object);
+
+        var context = new ApplicationDbContext(options, currentUser);
 
         context.Database.Migrate();
 

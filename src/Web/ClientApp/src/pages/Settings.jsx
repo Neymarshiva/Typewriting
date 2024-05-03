@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import UserDetail from '../features/settings/UserDetail';
+
+const Settings = () => {
 
 
-export class Settings extends Component {
-    render() {
-        return (
-            <div>Settings Is working</div>
-        );
-    }
-}
+    return (
+        <UserDetail />
+    );
+};
 
-
+export default Settings;

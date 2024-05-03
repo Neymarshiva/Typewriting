@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useUser } from "../authentication/useUser";
 
 
 const StyledUserAvatar = styled.div`
@@ -21,18 +22,18 @@ const Avatar = styled.img`
   outline: 2px solid var(--color-grey-100);
 `;
 
-function UserAvatar() { 
-     
-  
-    return (
-      <StyledUserAvatar>
-        <Avatar
-          src={"default-user.jpg"}
-          alt={`Avatar of shiva`}
-        />
-        <span>Shiva</span>
-      </StyledUserAvatar>
-    );
-  }
-  
-  export default UserAvatar;
+function UserAvatar() {
+
+  const { user } = useUser(); 
+  return (
+    <StyledUserAvatar>
+      <Avatar
+        src={"user-image.jpg"}
+        alt={user?.userName}
+      />
+      <span>{user?.userName}</span>
+    </StyledUserAvatar>
+  );
+}
+
+export default UserAvatar;

@@ -1,7 +1,7 @@
 ﻿# For more info on HTTP files go to https://aka.ms/vs/httpfile
-@Web_HostAddress = https://localhost:5001
+@Web_HostAddress = https://localhost:44447
 @AuthCookieName = .AspNetCore.Identity.Application
-@AuthCookieValue = <AuthCookieValue>
+@AuthCookieValue = CfDJ8F7i0tyjxeRCsM7T8zEak4JVz8MOHQRW2V2N24q63ow0QoM8PSP5MSEQznEElE9HUJhh6bpJzQ5Y_iUgEo12yTFDJeHwsx-tkEWCzwbJImxqb29xXyfF8xCzFaYVfyyIGwI-jsSsM_FCS22bkazYmm9vrUBRv8o6MG9njyy9_PPjpvnGJSmGyM3k0SDz8rsRozKfpB1B23lzu0T8TJ8OGrtN6ggLnK9W7sfSu2qcmjOJIs4rbNkIKffGfLkm6lh_ICxE7twugzfrO3s87_VrYmrbLf-RCorgGEJzZ7uDPDzNMJx4vFkQkB5aZ50mNaZ7qXT-ptiRhIrHg-2hA-PVm4tSSq3kUMbGSWd86H6B-0Ie1aMDbyEeByf574U5tdU18NdZAggxEKIbFPNap-0ksRciSUWw_vmZ9FOQ7K_78uy2fWhy9fIf6PdnoSsazr87MrrF2GtnBFuVd0HwkSPh_Qt8w-BpMI9c3V8LymvWZVMCAP-FWXLQHtHW7BNwbers-uZXVoodPVRLr9yrhQRhk1uwp55wAfnxBqLVgoyQGzCKMGXbu2Ls3z_eHue1zZVIhc2MgzYqoZNd5WxNo4MGbPbYe0kJ738kiMRTZUu8zE_zarabUQ7BCjVZej8MfH6aYLvI3-Fvx8ie6aKX29fH2aU3SEFippdEojSEdckhFzUi2wYft_sBLNekkrklmsozKK6s_fFak35ZRK33BsQ6kL3wq5wLAWp2bqAx63GR-crbUcNaHa2CX9TQpnZbm68qMQeaUZtfyc3fHLR1nzB0XNNoxoHB2I8dXfm2Wwzh5rlbA1gSqOPfAhssniWr_AdVxPvp9BoK57TranKjLjglk_AFTy8E9JPZQsx2Xfj-e95c_tf6cKrYerj3mWq1ZhqJAs_gGn-LJFQUQJ5k4U-uKxr68tsR_f_ib5OODQeL0vXDKJ3mYknykikCHQcI4HP6snaV8gO5PaWzcrcIx9Z9ksYpThZlMtNU0QmQeGVsKO6ef7sHTkXggrVc29Yvh5rhNkr6rhtwVsB3QqB-8fRhQFAfq_2Nqym29cWYa4WA_y0duD4obVgc2FLqFAFwo3HHv8lR58BdAzp6Ibw7d6UZhRShTsxEOBmSAAekQ9V3sin3vTrxNQUUv3Qjb0UJ84lcZ5Mu7tPj0YxdPp8RDM5e1IxQIekAqzRA_lex2nLzc41Q
 
 # GET Identity Account Login
 # Get the @RequestVerificationToken necessary for logging in.
@@ -11,8 +11,8 @@ GET {{Web_HostAddress}}/Identity/Account/Login
 
 # POST Identity Account Login
 # Get the @AuthCookieValue necessary for authenticating requests.
-@Email=administrator@localhost
-@Password=Administrator1!
+@Email=Neymarshiva@yopmail.com
+@Password=Test@123
 @RequestVerificationToken=<RequestVerificationToken>
 POST {{Web_HostAddress}}/Identity/Account/Login
 Content-Type: application/x-www-form-urlencoded

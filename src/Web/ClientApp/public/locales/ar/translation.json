@@ -1,0 +1,91 @@
+{
+  "hello_world": "مرحباً بالعالم!",
+  "simple_number": "رقم بسيط (التنسيق الافتراضي): {{value, number}}",
+  "percent": "النسبة المئوية (استخدم القيم بين 0 و 1): {{value, number(style: percent)}}",
+  "custom_number": "التنسيق المخصص: {{value, number(minimumFractionDigits: 2; maximumFractionDigits: 4; signDisplay: always)}}",
+  "trees_grown_other": "لقد نمت {{count, number}} شجرة 🌳",
+  "intlNumber": "بعض {{val, number}}",
+  "intlNumberWithOptions": "بعض {{val, number(minimumFractionDigits: 2)}}",
+  "simple_date": "تاريخ بسيط (التنسيق الافتراضي): {{value, datetime}}",
+  "DashboardKey": "لوحة القيادة",
+  "Students": "الطلاب",
+  "Machines": "الآلات",
+  "TimingsKey": "الأوقات",
+  "Settings": "الإعدادات",
+  "Search": "بحث",
+  "MachineNumber": "رقم الجهاز",
+  "Gender": "الجنس",
+  "BatchTimming": "توقيت الدفعة",
+  "Student": "الطالب",
+  "JoinedDate": "تاريخ الانضمام",
+  "Address": "العنوان",
+  "MachineNo": "رقم الجهاز",
+  "Language": "اللغة",
+  "Edit": "تحرير",
+  "Delete": "حذف",
+  "AddNewMachine": "إضافة جهاز جديد",
+  "AddNewStudent": "إضافة طالب جديد",
+  "All": "الكل",
+  "Male": "ذكر",
+  "Female": "أنثى",
+  "Others": "آخرون",
+  "FirstName": "الاسم الأول",
+  "LastName": "الاسم الأخير",
+  "Email": "البريد الإلكتروني",
+  "MobileNumber": "رقم الجوال",   
+  "JoiningDate": "تاريخ الانضمام",
+  "Cancel": "إلغاء",
+  "CreateStudent": "إنشاء طالب",
+  "EditStudent": "تحرير الطالب",
+  "Select": "---اختر---",
+  "Required": "هذا الحقل مطلوب",
+  "InvalidEmail": "عنوان البريد الإلكتروني غير صالح",
+  "MobileNumberRequired": "رقم الجوال مطلوب",
+  "InvalidMobileNumber": "يجب أن يتكون رقم الجوال من 10 أرقام",
+  "GenderRequired": "هذا الحقل مطلوب",
+  "MachineNumberRequired": "هذا الحقل مطلوب",
+  "BatchTimmingRequired": "هذا الحقل مطلوب",
+  "DateRequired": "التاريخ مطلوب", 
+  "ThisFieldIsRequired": "هذا الحقل مطلوب", 
+  "CreateMachine": "إنشاء جهاز جديد",
+  "EditMachine": "تحرير الجهاز",   
+  "AreYouSureDelete": "هل أنت متأكد أنك تريد حذف",
+  "Permanently": "بشكل دائم",
+  "ThisActionCannotBeUndone": "لا يمكن التراجع عن هذا الإجراء" ,
+  "Details": "التفاصيل",
+  "Showing": "عرض",
+  "to": "إلى",
+  "of": "من",
+  "results": "النتائج",
+  "Previous": "السابق",
+  "Next": "التالي",
+  "DateFormat":"{{value, datetime}}",
+  "Profile Detail": "تفاصيل الملف الشخصي",   
+  "Full Name": "الاسم الكامل",
+  "Company": "الشركة",
+  "Contact Phone": "هاتف الاتصال",
+  "Verified": "تم التحقق",
+  "Country": "الدولة",
+  "UserName": "اسم المستخدم",
+  "CompanyName": "اسم الشركة", 
+  "State": "حالة", 
+  "Role": "الدور", 
+  "Submit": "إرسال", 
+  "CountryIsRequired": "البلد مطلوب",
+  "InvalidMobileNumberFormat": "تنسيق رقم الجوال غير صالح",
+  "InvalidEmailFormat": "تنسيق البريد الإلكتروني غير صالح",
+  "Admin": "المدير",
+  "Manager": "مدير",
+  "Profile":"الملف الشخصي",
+  "Overview": "نظرة عامة", 
+  "Security": "الأمان",
+  "Old Password": "كلمة السر القديمة",
+  "New Password": "كلمة السر الجديدة",
+  "Confirm Password": "تأكيد كلمة السر",
+  "Old password is required": "كلمة السر القديمة مطلوبة",
+  "New password is required": "كلمة السر الجديدة مطلوبة",
+  "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character": "يجب أن تحتوي كلمة السر على حرف كبير واحد وحرف صغير واحد ورقم واحد وحرف خاص",
+  "Confirm password is required": "تأكيد كلمة السر مطلوب",
+  "Passwords do not match": "كلمات السر غير متطابقة",
+  "Update Password": "تحديث كلمة السر"
+}

@@ -1,7 +1,9 @@
-import styled from "styled-components"; 
+import styled from "styled-components";
 import ButtonIcon from "./ButtonIcon";
-import { HiOutlineUser } from "react-icons/hi2"; 
- 
+import { HiOutlineUser } from "react-icons/hi2";
+import DarkModeToggle from "../ui/DarkModeToggle";
+import Logout from "../authentication/Logout"; 
+
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -9,16 +11,23 @@ const StyledHeaderMenu = styled.ul`
 `;
 
 function HeaderMenu() {
- 
+
 
   return (
-    <StyledHeaderMenu>
+    <StyledHeaderMenu> 
       <li>
         <ButtonIcon>
           <HiOutlineUser />
         </ButtonIcon>
       </li>
-      
+      <li>
+        <DarkModeToggle />
+      </li>
+
+      <li>
+        <Logout />
+      </li>
+
     </StyledHeaderMenu>
   );
 }

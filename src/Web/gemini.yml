@@ -1,0 +1,100 @@
+﻿trigger:
+- main
+
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    exclude:
+    - '.scripts/**'
+    - .gitignore
+    - CODE_OF_CONDUCT.md
+    - LICENSE
+    - README.md
+
+variables:
+  solution: '**/*.sln'  # Wildcard to match all solution files
+  buildPlatform: 'anycpu'  # Convert to lowercase for Azure DevOps compatibility
+  buildConfiguration: 'Release'
+  artifactsPath: '$(System.DefaultWorkingDirectory)/src/Web/publish'
+  efBundlePath: '$(System.DefaultWorkingDirectory)/efbundle.zip'
+
+jobs:
+- job: Build
+  pool:
+    vmImage: 'ubuntu-latest'  # Azure DevOps pool with Ubuntu image
+  steps:
+  - task: NuGetToolInstaller@1  # Same task for installing NuGet tool
+
+  - task: NuGetCommand@2  # Same task for NuGet restore
+    inputs:
+      restoreSolution: '$(solution)'
+
+  - task: Cache@2  # Similar task for caching NuGet packages
+    inputs:
+      key: 'nuget | $(Build.SourcesDirectory)'
+      restoreKeys: |
+        nuget
+        nuget | $(Build.SourcesDirectory)
+
+  - task: NodeTool@0  # Same task for installing Node.js
+
+  - script: |  # Similar script for installing npm packages
+      npm install
+      npm ci --only=production
+    displayName: 'Install npm packages'
+
+  - task: dotnetcli@2  # Use dotnetcli task for .NET Core commands
+    inputs:
+      command: 'tool-install'
+      custom: '--tool-path $(System.DefaultWorkingDirectory)/tools --add-source https://pkgs.dev.azure.com/dnceng/public/download/dotnet/index.json'
+
+  - task: dotnetcli@2  # Use dotnetcli task for tool restore
+    inputs:
+      command: 'tool-restore'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/tools'
+
+  - task: dotnetcli@2  # Use dotnetcli task for NuGet restore
+    inputs:
+      command: 'restore'
+      projectFile: '$(solution)'
+
+  - task: dotnetcli@2  # Use dotnetcli task for build
+    inputs:
+      command: 'build'
+      projectFile: '$(solution)'
+      arguments: '--no-restore --configuration $(buildConfiguration)'
+
+  - task: dotnetcli@2  # Use dotnetcli task for tests (excluding acceptance tests)
+    inputs:
+      command: 'test'
+      projectFile: '$(solution)'
+      arguments: '--no-build --configuration $(buildConfiguration) --filter "FullyQualifiedName!~AcceptanceTests"'
+
+  - task: dotnetcli@2  # Use dotnetcli task for publish
+    inputs:
+      command: 'publish'
+      projectFile: 'src/Web/Web.csproj'
+      arguments: '--configuration $(buildConfiguration) --runtime win-x86 --self-contained --output $(artifactsPath)'
+      zipAfterPublish: true
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))
+
+  - task: PublishBuildArtifacts@1  # Same task for publishing build artifacts
+    inputs:
+      pathtoPublish: '$(artifactsPath)'
+      artifactName: 'website'
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))
+
+  - script: |  # Similar script for creating EF Core migrations bundle
+      dotnet tool install --global dotnet-ef
+      dotnet ef migrations bundle --configuration $(buildConfiguration) -p ./src/Infrastructure/ -s ./src/Web/ -o efbundle.exe
+      zip -r $(efBundlePath) efbundle.exe
+    displayName: 'Create EF Core migrations bundle'
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))
+
+  - task: PublishBuildArtifacts@1  # Same task for publishing EF bundle artifact
+    inputs:
+      pathtoPublish: '$(efBundlePath)'
+      artifactName: 'efbundle'
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))

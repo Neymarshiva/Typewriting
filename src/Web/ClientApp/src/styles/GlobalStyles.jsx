@@ -40,10 +40,17 @@ const GlobalStyles = createGlobalStyle`
 
     --image-grayscale: 0;
   --image-opacity: 100%;
+  --bs-text-gray-800:#1B84FF!important;
+  --bs-text-gray-900:#071437;
+  --bs-card-border-color:#F1F1F4 !important;
+  --bs-card-background-color:#ffffff;
+  --bs-body-color: #071437;
+  --bs-text-gray-600:#78829D;
+  --bs-text-primary:#1B84FF;
   }
   
   &.dark-mode {
-    --color-grey-0: #18212f;
+--color-grey-0: #18212f;
 --color-grey-50: #111827;
 --color-grey-100: #1f2937;
 --color-grey-200: #374151;
@@ -78,6 +85,12 @@ const GlobalStyles = createGlobalStyle`
 
 --image-grayscale: 10%;
 --image-opacity: 90%;
+--bs-text-gray-600:#808290;
+--bs-text-gray-800:#1B84FF!important;
+--bs-text-gray-900:#F5F5F5;
+--bs-card-border-color:##1E2027 !important;
+--bs-card-background-color:#18212f;
+--bs-text-primary:#1B84FF;
   }
   
   /* Indigo */
@@ -95,7 +108,12 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-md: 7px;
   --border-radius-lg: 9px;
 
-
+  --color-nav-grey-0: #18212f;
+  --color-nav-800: #f3f4f6;
+  --color-nav-50: #111827;
+  --color-nav-600: #d1d5db;
+  --color-brand-nav-600: #4f46e5;
+  
 }
 
 *,
@@ -183,6 +201,11 @@ img {
 
   /* For dark mode */
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+}
+
+.text-hover-primary:hover {
+    transition: color .2s ease;
+    color: var(--bs-text-primary)!important;
 }
 
 `;

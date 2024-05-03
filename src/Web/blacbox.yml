@@ -1,0 +1,107 @@
+﻿trigger:
+- main
+
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    exclude:
+    - '.scripts/**'
+    - .gitignore
+    - CODE_OF_CONDUCT.md
+    - LICENSE
+    - README.md
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  artifactsPath: '$(System.DefaultWorkingDirectory)/src/Web/publish'
+  efBundlePath: '$(System.DefaultWorkingDirectory)/efbundle.zip'
+
+jobs:
+- job: Build
+  displayName: Build
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - task: NuGetToolInstaller@1
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '$(solution)'
+
+  - task: Cache@2
+    inputs:
+      key: 'nuget | $$(Build.SourcesDirectory)'
+      restoreKeys: |
+        nuget
+        nuget | $$(Build.SourcesDirectory)
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+      checkLatest: true
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install
+      npm ci --only=production
+    displayName: 'Install npm packages'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'custom'
+      custom: 'tool-install'
+      arguments: '--tool-path $(System.DefaultWorkingDirectory)/tools --add-source https://pkgs.dev.azure.com/dnceng/public/download/dotnet/index.json'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'custom'
+      custom: 'tool-restore'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/tools'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projectFile: '$(solution)'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      projectFile: '$(solution)'
+      arguments: '--no-restore --configuration $(buildConfiguration)'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'test'
+      projectFile: '$(solution)'
+      arguments: '--no-build --configuration $(buildConfiguration) --filter "FullyQualifiedName!~AcceptanceTests"'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      projectFile: 'src/Web/Web.csproj'
+      arguments: '--configuration $(buildConfiguration) --runtime win-x86 --self-contained --output $(artifactsPath)'
+      zipAfterPublish: true
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(artifactsPath)'
+      artifactName: 'website'
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))
+
+  - script: |
+      dotnet tool install --global dotnet-ef
+      dotnet ef migrations bundle --configuration $(buildConfiguration) -p ./src/Infrastructure/ -s ./src/Web/ -o efbundle.exe
+      zip -r $(efBundlePath) efbundle.exe
+    displayName: 'Create EF Core migrations bundle'
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(efBundlePath)'
+      artifactName: 'efbundle'
+    condition: and(succeeded(), eq(variables['build-artifacts'], 'true'))

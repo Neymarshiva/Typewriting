@@ -1,4 +1,5 @@
-﻿using TypeWriting.Application.Common.Interfaces;
+﻿using Microsoft.Extensions.Logging;
+using TypeWriting.Application.Common.Interfaces;
 using TypeWriting.Application.Common.Mappings;
 using TypeWriting.Application.Common.Models;
 using TypeWriting.Application.TodoItems.Queries.GetTodoItemsWithPagination;
@@ -10,17 +11,22 @@ public class GetMachinesQueryHandler : IRequestHandler<GetMachinesQuery, List<Ma
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
+    private readonly ILogger<GetMachinesQueryHandler> _logger;
 
-    public GetMachinesQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetMachinesQueryHandler(IApplicationDbContext context, IMapper mapper, ILogger<GetMachinesQueryHandler> logger)
     {
         _context = context;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<List<MachinesDto>> Handle(GetMachinesQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Machines 
-           .ProjectTo<MachinesDto>(_mapper.ConfigurationProvider).ToListAsync(); 
+        _logger.LogInformation("Get Machine Details ");
+        return await _context.Machines
+            .Include(x => x.Languages)
+            .AsNoTracking()
+            .ProjectTo<MachinesDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }
 }
 

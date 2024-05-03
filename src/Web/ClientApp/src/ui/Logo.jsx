@@ -12,6 +12,7 @@ const Img = styled.img`
 function Logo() {   
 
   const src = "/logo-light.png";
+  //const src = "/typeWriting.png";
 
   return (
     <StyledLogo>
